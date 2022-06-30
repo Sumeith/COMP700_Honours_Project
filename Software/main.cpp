@@ -1,8 +1,7 @@
-/*
 #include "SFML/Graphics.hpp"
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(800,800), "Test");
+	sf::RenderWindow window(sf::VideoMode(800,800), "Test GUI");
 	sf::Event e;
 
 	while (window.isOpen()) {
@@ -13,4 +12,3 @@ int main() {
 	}
 	return 0;
 }
-*/
