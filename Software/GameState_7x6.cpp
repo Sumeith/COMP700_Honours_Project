@@ -279,7 +279,7 @@ void GameState_7x6::HandleInput()
 
 			if (sf::Keyboard::N == event.key.code)
 			{
-				this->_data->machine.AddState(StateRef(new GameMenuState(_data)), false);
+				this->_data->machine.AddState(StateRef(new GameMenuState(_data)), true);
 			}
 		}
 	}
@@ -291,7 +291,7 @@ void GameState_7x6::Update(float dt)
 	{
 		if (this->_clock.getElapsedTime().asSeconds() > TRANSITION_TIME)
 		{
-			this->_data->machine.AddState(StateRef(new GameMenuState(_data)), false);
+			this->_data->machine.AddState(StateRef(new GameMenuState(_data)), true);
 		}
 	}
 }

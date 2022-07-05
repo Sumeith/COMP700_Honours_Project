@@ -16,12 +16,11 @@
 //void GameState_21x18::Init()
 //{
 //	_turn = PLAYER_ONE_DISC;
-//	gameState = IN_PROGRESS;
 //	this->_data->assets.LoadTexture("Game BOARD", GAME_BOARD_PATH);
 //
-//	this->_data->assets.LoadTexture("Player One Disc", PLAYER_ONE_DISC_SMALL_PATH);
+//	this->_data->assets.LoadTexture("Player One Disc", PLAYER_ONE_DISC_PATH);
 //	this->_data->assets.LoadTexture("Player Two Disc", PLAYER_TWO_DISC_SMALL_PATH);
-//	this->_data->assets.LoadTexture("Empty Disc", EMPTY_DISC_SMALL_PATH);
+//	this->_data->assets.LoadTexture("Empty Disc", EMPTY_DISC_PATH);
 //	this->_data->assets.LoadTexture("Game Board", GAME_BOARD_PATH);
 //
 //	this->_data->window.create(sf::VideoMode(1050, 900), "Connet 4 on a 4x4 board", sf::Style::Close | sf::Style::Titlebar);
@@ -54,7 +53,7 @@
 //	}
 //}
 //
-//void GameState_21x18::CheckAndPlacePiece()
+//void GameState_21x18::dropDisc()
 //{
 //	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
 //	int column = 0;
@@ -163,7 +162,7 @@
 //
 //		if (sf::Event::MouseButtonPressed == event.type)
 //		{
-//			this->CheckAndPlacePiece();
+//			this->dropDisc();
 //			this->printBoard();
 //		}
 //	}
@@ -171,7 +170,7 @@
 //
 //void GameState_21x18::Update(float dt)
 //{
-//	if (gameState == GAME_OVER)
+//	if (_gameOver)
 //	{
 //		if (this->_clock.getElapsedTime().asSeconds() > TRANSITION_TIME)
 //		{

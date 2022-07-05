@@ -6,7 +6,7 @@
 #include "DEFINITIONS.hpp"
 
 
-class GameState
+class GameState : public State
 {
 private:
 	virtual std::string Colour(int colour, std::string message) = 0;
@@ -18,7 +18,7 @@ private:
 
 ///////////////////////////////////////////////////////////
 
-class GameState_7x6 : public GameState, public State
+class GameState_7x6 : public GameState
 {
 public:
 	GameState_7x6(GameDataRef data);
@@ -47,37 +47,40 @@ private:
 	Discs _turn;
 };
 
-///////////////////////////////////////////////////////////
-//
-//class GameState_4x4 : public GameState, public State
-//{
-//public:
-//	GameState_4x4(GameDataRef data);
-//	void Init();
-//	void HandleInput();
-//	void Update(float dt);
-//	void Draw(float dt);
-//	std::string Colour(int colour, std::string message);
-//private:
-//	GameDataRef _data;
-//	sf::Sprite _background;
-//	sf::Clock _clock;
-//	Board_4x4 _board;
-//
-//	void InitGridPieces();
-//	void CheckAndPlacePiece();
-//	void printBoard();
-//	int gameEvaluation();
-//	const int _height = 4;
-//	const int _width = 4;
-//	sf::Sprite _boardPieces[4][4];
-//	Discs _turn;
-//	int gameState;
-//};
-//
-/////////////////////////////////////////////////////////////
-//
-//class GameState_21x18 : public GameState, public State
+/////////////////////////////////////////////////////////
+
+class GameState_4x4 : public GameState
+{
+public:
+	GameState_4x4(GameDataRef data);
+	void Init();
+	void HandleInput();
+	void Update(float dt);
+	void Draw(float dt);
+
+private:
+	GameDataRef _data;
+	sf::Sprite _background;
+	sf::Clock _clock;
+	Board_7x6 _board;
+
+	void InitGridPieces();
+	void dropDisc();
+	void printBoard();
+	std::string Colour(int colour, std::string message);
+	void checkWinner();
+	int gameEvaluation();
+
+	const int _height = HEIGHT_4x4;
+	const int _width = WIDTH_4x4;
+	sf::Sprite _boardPieces[HEIGHT_4x4][WIDTH_4x4];
+	bool _gameOver;
+	Discs _turn;
+};
+
+/////////////////////////////////////////////////////////
+
+//class GameState_21x18 : public State
 //{
 //public:
 //	GameState_21x18(GameDataRef data);
@@ -85,20 +88,23 @@ private:
 //	void HandleInput();
 //	void Update(float dt);
 //	void Draw(float dt);
-//	std::string Colour(int colour, std::string message);
+//
 //private:
 //	GameDataRef _data;
 //	sf::Sprite _background;
 //	sf::Clock _clock;
-//	Board_21x18 _board;
+//	Board_7x6 _board;
 //
 //	void InitGridPieces();
-//	void CheckAndPlacePiece();
+//	void dropDisc();
 //	void printBoard();
+//	std::string Colour(int colour, std::string message);
+//	void checkWinner();
 //	int gameEvaluation();
-//	const int _height = 18;
-//	const int _width = 21;
-//	sf::Sprite _boardPieces[18][21];
+//
+//	const int _height = HEIGHT_21x18;
+//	const int _width = WIDTH_21x18;
+//	sf::Sprite _boardPieces[HEIGHT_21x18][WIDTH_21x18];
+//	bool _gameOver;
 //	Discs _turn;
-//	int gameState;
 //};
