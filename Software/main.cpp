@@ -1,14 +1,7 @@
-#include "SFML/Graphics.hpp"
+#include <iostream>
+#include "GameManager.hpp"
+#include "DEFINITIONS.hpp"
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(800,800), "Test GUI");
-	sf::Event e;
-
-	while (window.isOpen()) {
-		while (window.pollEvent(e)) {
-			if (e.type == sf::Event::Closed)
-				window.close();
-		}
-	}
-	return 0;
+	GameManager var = GameManager(SCREEN_WIDTH_MENU, SCREEN_HEIGHT_MENU, TITLE_MENU);
 }
