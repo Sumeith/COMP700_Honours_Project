@@ -39,6 +39,13 @@ private:
 	std::string Colour(int colour, std::string message);
 	void checkWinner();
 	int gameEvaluation();
+	bool checkConditionHorizontal(int col);
+	bool checkConditionVertical(int row);
+	bool checkConditionPosDiag(int row, int col);
+	bool checkConditionNegDiag(int row, int col);
+	void checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
+	void checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
+	void checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
 
 	const int _height = HEIGHT_7x6;
 	const int _width = WIDTH_7x6;

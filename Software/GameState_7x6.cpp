@@ -5,6 +5,7 @@
 #include "GameMenuState.hpp"
 #include <iostream>
 #include <windows.h>
+#include <stdlib.h>
 
 GameState_7x6::GameState_7x6(GameDataRef data) : _data(data)
 {
@@ -154,6 +155,11 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Red Player Wins" << std::endl;
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row][col + 1].setScale(1.1f, 1.1f);
+				_boardPieces[row][col + 2].setScale(1.1f, 1.1f);
+				_boardPieces[row][col + 3].setScale(1.1f, 1.1f);
+				return;
 			}
 
 			if (_board._grid[row][col] == PLAYER_TWO_DISC &&
@@ -163,6 +169,11 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Blue Player Wins" << std::endl;
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row][col + 1].setScale(1.1f, 1.1f);
+				_boardPieces[row][col + 2].setScale(1.1f, 1.1f);
+				_boardPieces[row][col + 3].setScale(1.1f, 1.1f);
+				return;
 			}
 		}
 	}
@@ -179,6 +190,12 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Red Player Wins" << std::endl;
+
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 1][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 2][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 3][col].setScale(1.1f, 1.1f);
+				return;
 			}
 
 			if (_board._grid[row][col] == PLAYER_TWO_DISC &&
@@ -188,6 +205,12 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Blue Player Wins" << std::endl;
+
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 1][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 2][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 3][col].setScale(1.1f, 1.1f);
+				return;
 			}
 		}
 	}
@@ -204,6 +227,12 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Red Player Wins" << std::endl;
+
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 1][col + 1].setScale(1.1f, 1.1f);
+				_boardPieces[row + 2][col + 2].setScale(1.1f, 1.1f);
+				_boardPieces[row + 3][col + 3].setScale(1.1f, 1.1f);
+				return;
 			}
 
 			if (_board._grid[row][col] == PLAYER_TWO_DISC &&
@@ -213,6 +242,12 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Blue Player Wins" << std::endl;
+
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 1][col + 1].setScale(1.1f, 1.1f);
+				_boardPieces[row + 2][col + 2].setScale(1.1f, 1.1f);
+				_boardPieces[row + 3][col + 3].setScale(1.1f, 1.1f);
+				return;
 			}
 		}
 	}
@@ -229,6 +264,12 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Red Player Wins" << std::endl;
+
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row - 1][col + 1].setScale(1.1f, 1.1f);
+				_boardPieces[row - 2][col + 2].setScale(1.1f, 1.1f);
+				_boardPieces[row - 3][col + 3].setScale(1.1f, 1.1f);
+				return;
 			}
 
 			if (_board._grid[row][col] == PLAYER_TWO_DISC &&
@@ -238,17 +279,448 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Blue Player Wins" << std::endl;
+
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row - 1][col + 1].setScale(1.1f, 1.1f);
+				_boardPieces[row - 2][col + 2].setScale(1.1f, 1.1f);
+				_boardPieces[row - 3][col + 3].setScale(1.1f, 1.1f);
+				return;
 			}
 		}
 	}
 }
-
-/*
-* The evaluation 
-*/
 int GameState_7x6::gameEvaluation()
-{	
-	return 0;
+{
+	int evalArr[6] = { 0,0,0,0,0,0 };
+	for (int col = 0; col < _width; col++)
+	{
+		for (int row = 0; row < _height; row++)
+		{
+			//check Horizontal
+			if (checkConditionHorizontal(col)) {
+				//check four in a row
+				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+					_board._grid[row][col + 1] == PLAYER_ONE_DISC &&
+					_board._grid[row][col + 2] == PLAYER_ONE_DISC &&
+					_board._grid[row][col + 3] == PLAYER_ONE_DISC)
+				{
+					return INT_MAX;
+				}
+				else if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+					_board._grid[row][col + 1] == PLAYER_TWO_DISC &&
+					_board._grid[row][col + 2] == PLAYER_TWO_DISC &&
+					_board._grid[row][col + 3] == PLAYER_TWO_DISC)
+				{
+					return INT_MIN;
+				}
+
+				checkThreeInARow(_board._grid[row][col], 
+					_board._grid[row][col + 1],
+					_board._grid[row][col + 2],
+					_board._grid[row][col + 3],
+					evalArr);
+
+				checkTwoInARow(_board._grid[row][col],
+					_board._grid[row][col + 1],
+					_board._grid[row][col + 2],
+					_board._grid[row][col + 3],
+					evalArr);
+
+				checkOneInARow(_board._grid[row][col],
+					_board._grid[row][col + 1],
+					_board._grid[row][col + 2],
+					_board._grid[row][col + 3],
+					evalArr);
+			}
+
+			if (checkConditionVertical(row))
+			{
+				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+					_board._grid[row + 1][col] == PLAYER_ONE_DISC &&
+					_board._grid[row + 2][col] == PLAYER_ONE_DISC &&
+					_board._grid[row + 3][col] == PLAYER_ONE_DISC)
+				{
+					return INT_MAX;
+				}
+
+				else if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+					_board._grid[row + 1][col] == PLAYER_TWO_DISC &&
+					_board._grid[row + 2][col] == PLAYER_TWO_DISC &&
+					_board._grid[row + 3][col] == PLAYER_TWO_DISC)
+				{
+					return INT_MIN;
+				}
+
+				checkThreeInARow(_board._grid[row][col],
+					_board._grid[row + 1][col],
+					_board._grid[row + 2][col],
+					_board._grid[row + 3][col],
+					evalArr);
+
+				checkTwoInARow(_board._grid[row][col],
+					_board._grid[row + 1][col],
+					_board._grid[row + 2][col],
+					_board._grid[row + 3][col],
+					evalArr);
+
+				checkOneInARow(_board._grid[row][col],
+					_board._grid[row + 1][col],
+					_board._grid[row + 2][col],
+					_board._grid[row + 3][col],
+					evalArr);
+			}
+
+			if (checkConditionPosDiag(row, col))
+			{
+				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+					_board._grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
+					_board._grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
+					_board._grid[row + 3][col + 3] == PLAYER_ONE_DISC)
+				{
+					return INT_MAX;
+				}
+
+				else if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+					_board._grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
+					_board._grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
+					_board._grid[row + 3][col + 3] == PLAYER_TWO_DISC)
+				{
+					return INT_MIN;
+				}
+
+				checkThreeInARow(_board._grid[row][col],
+					_board._grid[row + 1][col + 1],
+					_board._grid[row + 2][col + 2],
+					_board._grid[row + 3][col + 3],
+					evalArr);
+
+				checkTwoInARow(_board._grid[row][col],
+					_board._grid[row + 1][col + 1],
+					_board._grid[row + 2][col + 2],
+					_board._grid[row + 3][col + 3],
+					evalArr);
+
+				checkOneInARow(_board._grid[row][col],
+					_board._grid[row + 1][col + 1],
+					_board._grid[row + 2][col + 2],
+					_board._grid[row + 3][col + 3],
+					evalArr);
+			}
+
+			if (checkConditionNegDiag(row, col))
+			{
+				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+					_board._grid[row - 1][col + 1] == PLAYER_ONE_DISC &&
+					_board._grid[row - 2][col + 2] == PLAYER_ONE_DISC &&
+					_board._grid[row - 3][col + 3] == PLAYER_ONE_DISC)
+				{
+					return INT_MAX;
+				}
+
+				else if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+					_board._grid[row - 1][col + 1] == PLAYER_TWO_DISC &&
+					_board._grid[row - 2][col + 2] == PLAYER_TWO_DISC &&
+					_board._grid[row - 3][col + 3] == PLAYER_TWO_DISC)
+				{
+					return INT_MIN;
+				}
+
+				checkThreeInARow(_board._grid[row][col],
+					_board._grid[row - 1][col + 1],
+					_board._grid[row - 2][col + 2],
+					_board._grid[row - 3][col + 3],
+					evalArr);
+
+				checkTwoInARow(_board._grid[row][col],
+					_board._grid[row - 1][col + 1],
+					_board._grid[row - 2][col + 2],
+					_board._grid[row - 3][col + 3],
+					evalArr);
+
+				checkOneInARow(_board._grid[row][col],
+					_board._grid[row - 1][col + 1],
+					_board._grid[row - 2][col + 2],
+					_board._grid[row - 3][col + 3],
+					evalArr);
+			}
+		}
+	}
+	return THREE_IN_A_ROW_VALUE * evalArr[0] + TWO_IN_A_ROW_VALUE * evalArr [1] + evalArr[2] - 
+		THREE_IN_A_ROW_VALUE * evalArr[5] - TWO_IN_A_ROW_VALUE * evalArr[4] - evalArr[3];
+}
+
+bool GameState_7x6::checkConditionHorizontal(int col)
+{
+	return col < (_width - 3);
+}
+
+bool GameState_7x6::checkConditionVertical(int row)
+{
+	return row < (_height - 3);
+}
+
+bool GameState_7x6::checkConditionPosDiag(int row, int col)
+{
+	return col < (_width - 3) && row < (_height - 3);
+}
+
+bool GameState_7x6::checkConditionNegDiag(int row, int col)
+{
+	return row >= 3 && col < (_width - 3);
+}
+
+void GameState_7x6::checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[])
+{
+	//Disc Disc Disc _
+	if (boardDisc1 == PLAYER_ONE_DISC &&
+		boardDisc2 == PLAYER_ONE_DISC &&
+		boardDisc3 == PLAYER_ONE_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[0]++;
+	}
+	//Disc Disc Disc _
+	else if (boardDisc1 == PLAYER_TWO_DISC &&
+		boardDisc2 == PLAYER_TWO_DISC &&
+		boardDisc3 == PLAYER_TWO_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[5]++;
+	}
+
+	//Disc Disc _ Disc
+	if (boardDisc1 == PLAYER_ONE_DISC &&
+		boardDisc2 == PLAYER_ONE_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == PLAYER_ONE_DISC)
+	{
+		evalArr[0]++;
+	}
+	//Disc Disc _ Disc
+	else if (boardDisc1 == PLAYER_TWO_DISC &&
+		boardDisc2 == PLAYER_TWO_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == PLAYER_TWO_DISC)
+	{
+		evalArr[5]++;
+	}
+
+	//Disc _ Disc Disc
+	if (boardDisc1 == PLAYER_ONE_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == PLAYER_ONE_DISC &&
+		boardDisc4 == PLAYER_ONE_DISC)
+	{
+		evalArr[0]++;
+	}
+	//Disc _ Disc Disc
+	else if (boardDisc1 == PLAYER_TWO_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == PLAYER_TWO_DISC &&
+		boardDisc4 == PLAYER_TWO_DISC)
+	{
+		evalArr[5]++;
+	}
+
+	//_ Disc Disc Disc
+	if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == PLAYER_ONE_DISC &&
+		boardDisc3 == PLAYER_ONE_DISC &&
+		boardDisc4 == PLAYER_ONE_DISC)
+	{
+		evalArr[0]++;
+	}
+	//_ Disc Disc Disc
+	else if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == PLAYER_TWO_DISC &&
+		boardDisc3 == PLAYER_TWO_DISC &&
+		boardDisc4 == PLAYER_TWO_DISC)
+	{
+		evalArr[5]++;
+	}
+}
+
+void GameState_7x6::checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[])
+{
+	//Disc Disc _ _
+	if (boardDisc1 == PLAYER_ONE_DISC &&
+		boardDisc2 == PLAYER_ONE_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[1]++;
+	}
+
+	//Disc Disc _ _
+	else if (boardDisc1 == PLAYER_TWO_DISC &&
+		boardDisc2 == PLAYER_TWO_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[4]++;
+	}
+
+	//Disc _ Disc _
+	if (boardDisc1 == PLAYER_ONE_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == PLAYER_ONE_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[1]++;
+	}
+
+	//Disc _ Disc _
+	else if (boardDisc1 == PLAYER_TWO_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == PLAYER_TWO_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[4]++;
+	}
+
+	//Disc _ _ Disc
+	if (boardDisc1 == PLAYER_ONE_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == PLAYER_ONE_DISC)
+	{
+		evalArr[1]++;
+	}
+
+	//Disc _ _ Disc
+	else if (boardDisc1 == PLAYER_TWO_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == PLAYER_TWO_DISC)
+	{
+		evalArr[4]++;
+	}
+
+	//_ Disc Disc _
+	if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == PLAYER_ONE_DISC &&
+		boardDisc3 == PLAYER_ONE_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[1]++;
+	}
+
+	//_ Disc Disc _
+	else if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == PLAYER_TWO_DISC &&
+		boardDisc3 == PLAYER_TWO_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[4]++;
+	}
+
+	//_ Disc _ Disc
+	if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == PLAYER_ONE_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == PLAYER_ONE_DISC)
+	{
+		evalArr[1]++;
+	}
+
+	//_ Disc _ Disc
+	else if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == PLAYER_TWO_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == PLAYER_TWO_DISC)
+	{
+		evalArr[4]++;
+	}
+
+	//_ _ Disc Disc
+	if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == PLAYER_ONE_DISC &&
+		boardDisc4 == PLAYER_ONE_DISC)
+	{
+		evalArr[1]++;
+	}
+
+	//_ _ Disc Disc
+	else if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == PLAYER_TWO_DISC &&
+		boardDisc4 == PLAYER_TWO_DISC)
+	{
+		evalArr[4]++;
+	}
+}
+
+void GameState_7x6::checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[])
+{
+	//Disc _ _ _
+	if (boardDisc1 == PLAYER_ONE_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[2]++;
+	}
+	//Disc _ _ _
+	else if (boardDisc1 == PLAYER_TWO_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[3]++;
+	}
+
+	//_ Disc _ _
+	if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == PLAYER_ONE_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[2]++;
+	}
+	//_ Disc _ _
+	else if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == PLAYER_TWO_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[3]++;
+	}
+
+	//_ _ Disc _
+	if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == PLAYER_ONE_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[2]++;
+	}
+	//_ _ Disc _
+	else if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == PLAYER_TWO_DISC &&
+		boardDisc4 == EMPTY_DISC)
+	{
+		evalArr[3]++;
+	}
+
+	//_ _ _ Disc
+	if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == PLAYER_ONE_DISC)
+	{
+		evalArr[2]++;
+	}
+	//_ _ _ Disc
+	else if (boardDisc1 == EMPTY_DISC &&
+		boardDisc2 == EMPTY_DISC &&
+		boardDisc3 == EMPTY_DISC &&
+		boardDisc4 == PLAYER_TWO_DISC)
+	{
+		evalArr[3]++;
+	}
+
 }
 
 void GameState_7x6::HandleInput()
@@ -268,6 +740,7 @@ void GameState_7x6::HandleInput()
 			dropDisc();
 			printBoard();
 			checkWinner();
+			std::cout << "eval: " << gameEvaluation() << std::endl;
 		}
 
 		if (sf::Event::KeyPressed == event.type)
@@ -310,3 +783,1132 @@ void GameState_7x6::Draw(float dt)
 	}
 	this->_data->window.display();
 }
+
+
+
+///*
+//* The evaluation 
+//* 
+//* 
+//*/
+//int GameState_7x6::gameEvaluation()
+//{	
+//	int evalArr[6] = { 0,0,0,0,0,0 };
+//
+//	for (int col = 0; col < _width; col++)
+//	{
+//		for (int row = 0; row < _height; row++)
+//		{
+//			//check Horizontal
+//			if (checkConditionHorizontal(col, 3)) {
+//				//Check 4-in-a-row
+//				//Disc Disc Disc Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row][col + 1] == PLAYER_ONE_DISC &&
+//					_board._grid[row][col + 2] == PLAYER_ONE_DISC &&
+//					_board._grid[row][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					return INT_MAX;
+//				}
+//
+//				//Disc Disc Disc Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row][col + 1] == PLAYER_TWO_DISC &&
+//					_board._grid[row][col + 2] == PLAYER_TWO_DISC &&
+//					_board._grid[row][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					return INT_MIN;
+//				}
+//				///////////////////////////////////////////////////////////////////////////////////////////
+//				//3-in-a-row
+//				//Disc Disc Disc _ 
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row][col + 1] == PLAYER_ONE_DISC &&
+//					_board._grid[row][col + 2] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[0]++;
+//				}
+//				//Disc Disc Disc _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row][col + 1] == PLAYER_TWO_DISC &&
+//					_board._grid[row][col + 2] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[5]++;
+//				}
+//
+//				//Disc Disc _ Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row][col + 1] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_ONE_DISC) &&
+//					_board._grid[row][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[0]++;
+//				}
+//				//Disc Disc _ Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row][col + 1] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_TWO_DISC) &&
+//					_board._grid[row][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[5]++;
+//				}
+//
+//				//Disc _ Disc Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row][col + 1], PLAYER_ONE_DISC) &&
+//					_board._grid[row][col + 2] == PLAYER_ONE_DISC &&
+//					_board._grid[row][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[0]++;
+//				}
+//
+//				//Disc _ Disc Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row][col + 1], PLAYER_TWO_DISC) &&
+//					_board._grid[row][col + 2] == PLAYER_TWO_DISC &&
+//					_board._grid[row][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[5]++;
+//				}
+//
+//				//_ Disc Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row][col + 1] == PLAYER_ONE_DISC &&
+//					_board._grid[row][col + 2] == PLAYER_ONE_DISC &&
+//					_board._grid[row][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[0]++;
+//				}
+//				//_ Disc Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row][col + 1] == PLAYER_TWO_DISC &&
+//					_board._grid[row][col + 2] == PLAYER_TWO_DISC &&
+//					_board._grid[row][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[5]++;
+//				}
+//				///////////////////////////////////////////////////////////////////////////////////////////
+//				//check 2-in-a-row
+//				//Disc Disc _ _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row][col + 1] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row][col + 2],PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//Disc Disc _ _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row][col + 1] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//Disc _ Disc _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row][col + 1], PLAYER_ONE_DISC) &&
+//					_board._grid[row][col + 2] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//Disc _ Disc _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row][col + 1], PLAYER_TWO_DISC) &&
+//					_board._grid[row][col + 2] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//Disc _ _ Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row][col + 1], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_ONE_DISC) &&
+//					_board._grid[row][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row][col + 1], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_TWO_DISC) &&
+//					_board._grid[row][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//_ Disc Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row][col + 1] == PLAYER_ONE_DISC &&
+//					_board._grid[row][col + 2] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//_ Disc Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row][col + 1] == PLAYER_TWO_DISC &&
+//					_board._grid[row][col + 2] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//_ Disc _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row][col + 1] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_ONE_DISC) &&
+//					_board._grid[row][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//_ Disc _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row][col + 1] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_TWO_DISC) &&
+//					_board._grid[row][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				// _ _ Disc Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row][col + 1] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				// _ _ Disc Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row][col + 1] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[4]++;
+//				}
+//				///////////////////////////////////////////////////////////////////////////////////////////
+//				//Check 1 In a row
+//				//Disc _ _ _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row][col + 1], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[2]++;
+//				}
+//
+//				//Disc _ _ _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row][col + 1], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[3]++;
+//				}
+//
+//				//_ Disc _ _
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row][col + 1] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row][col + 3],  PLAYER_ONE_DISC))
+//				{
+//					evalArr[2]++;
+//				}
+//
+//				//_ Disc _ _
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row][col + 1] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[3]++;
+//				}
+//
+//				//_ _ Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row][col + 1], PLAYER_ONE_DISC) &&
+//					_board._grid[row][col + 2] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[2]++;
+//				}
+//
+//				//_ _ Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row][col + 1], PLAYER_TWO_DISC) &&
+//					_board._grid[row][col + 2] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[3]++;
+//				}
+//
+//				//_ _ _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row][col + 1], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_ONE_DISC) &&
+//					_board._grid[row][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[2]++;
+//				}
+//
+//				//_ _ _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row][col + 1], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row][col + 2], PLAYER_TWO_DISC) &&
+//					_board._grid[row][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[3]++;
+//				}
+//			}
+//
+//			//check Vertical
+//			if (checkConditionVertical(row,3))
+//			{
+//				//Check 4-in-a-row
+//				//Disc Disc Disc Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 1][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 2][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 3][col] == PLAYER_ONE_DISC)
+//				{
+//					return INT_MAX;
+//				}
+//
+//				//Disc Disc Disc Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 1][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 2][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 3][col] == PLAYER_TWO_DISC)
+//				{
+//					return INT_MIN;
+//				}
+//			
+//				//Check 3-in-a-row
+//				//Disc Disc Disc _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 1][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 2][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_ONE_DISC))
+//				{
+//					evalArr[0]++;
+//				}
+//
+//				//Disc Disc Disc _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 1][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 2][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_TWO_DISC))
+//				{
+//					evalArr[5]++;
+//				}
+//
+//				//Disc Disc _ Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 1][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 3][col] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[0]++;
+//				}
+//
+//				//Disc Disc _ Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 1][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 3][col] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[5]++;
+//				}
+//				
+//				//Disc _ Disc Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 2][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 3][col] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[0]++;
+//				}
+//
+//				//Disc _ Disc Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 2][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 3][col] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[5]++;
+//				}
+//				
+//				//_ Disc Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 1][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 2][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 3][col] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[0]++;
+//				}
+//
+//				//_ Disc Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 1][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 2][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 3][col] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[5]++;
+//				}
+//			
+//				//Check 2-in-a-row
+//				//Disc Disc _ _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 1][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_ONE_DISC))
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//Disc Disc _ _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 1][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_TWO_DISC))
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//Disc _ Disc _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 2][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_ONE_DISC))
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//Disc _ Disc _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 2][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_TWO_DISC))
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//Disc _ _ Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 3][col] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//Disc _ _ Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 3][col] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//_ Disc Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 1][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 2][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_ONE_DISC))
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//_ Disc Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 1][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 2][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_TWO_DISC))
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//_ Disc _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 1][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 3][col] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//_ Disc _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 1][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 3][col] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//_ _ Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 2][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 3][col] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//_ _ Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 2][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 3][col] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//1 in a row
+//				//Disc _ _ _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_ONE_DISC))
+//				{
+//					evalArr[2]++;
+//				}
+//
+//				//Disc _ _ _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_TWO_DISC))
+//				{
+//					evalArr[3]++;
+//				}
+//
+//				//_ Disc _ _
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 1][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_ONE_DISC))
+//				{
+//					evalArr[2]++;
+//				}
+//				//_ Disc _ _
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 1][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_TWO_DISC))
+//				{
+//					evalArr[3]++;
+//				}
+//
+//				//_ _ Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 2][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_ONE_DISC))
+//				{
+//					evalArr[2]++;
+//				}
+//				//_ _ Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 2][col], PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 3][col], PLAYER_TWO_DISC))
+//				{
+//					evalArr[3]++;
+//				}
+//
+//				//_ _ _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 3][col] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[2]++;
+//				}
+//				//_ _ _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 1][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 2][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 3][col] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[3]++;
+//				}
+//
+//				//Check Positive Diagonal
+//				//Check 4-in-a-row
+//				//Disc Disc Disc Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					return INT_MAX;
+//				}
+//
+//				//Disc Disc Disc Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					return INT_MIN;
+//				}
+//			
+//				//Check 3-in-a-row
+//				//Disc Disc Disc _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[0]++;
+//				}
+//
+//				//Disc Disc Disc _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[5]++;
+//				}
+//
+//
+//				//Disc Disc _ Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[0]++;
+//				}
+//
+//				//Disc Disc _ Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[5]++;
+//				}
+//
+//				//Disc _ Disc Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[0]++;
+//				}
+//
+//				//Disc _ Disc Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[5]++;
+//				}
+//
+//				//_ Disc Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[0]++;
+//				}
+//
+//				//_ Disc Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[5]++;
+//				}
+//			
+//				//Check 2-in-a-row
+//				//Disc Disc _ _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//Disc Disc _ _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//Disc _ Disc _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//Disc _ Disc _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//Disc _ _ Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//Disc _ _ Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//_ Disc Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//_ Disc Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//_ Disc _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//_ Disc _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//_ _ Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
+//					_board._grid[row + 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//_ _ Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
+//					_board._grid[row + 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[4]++;
+//				}
+//
+//
+//				//Check 1-in-a-row
+//				//Disc _ _ _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[2]++;
+//				}
+//
+//				//Disc _ _ _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[3]++;
+//				}
+//
+//				//_ Disc _ _
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[2]++;
+//				}
+//
+//				//_ Disc _ _
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[3]++;
+//				}
+//
+//				//_ _ Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[2]++;
+//				}
+//
+//				//_ _ Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row + 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[3]++;
+//				}
+//
+//				//_ _ _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_ONE_DISC) &&
+//					_board._grid[row + 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[2]++;
+//				}
+//
+//				//_ _ _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 1][col + 1], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row + 2][col + 2], PLAYER_TWO_DISC) &&
+//					_board._grid[row + 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[3]++;
+//				}
+//
+//			}
+//
+//			//Check Negative Diagonal
+//			if (checkConditionNegDiag(row, col, 3))
+//			{
+//				//Check 4-in-a-row
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row - 1][col + 1] == PLAYER_ONE_DISC &&
+//					_board._grid[row - 2][col + 2] == PLAYER_ONE_DISC &&
+//					_board._grid[row - 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					return INT_MAX;
+//				}
+//
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row - 1][col + 1] == PLAYER_TWO_DISC &&
+//					_board._grid[row - 2][col + 2] == PLAYER_TWO_DISC &&
+//					_board._grid[row - 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					return INT_MIN;
+//				}
+//
+//				//3-in-a-row
+//				//Disc Disc Disc _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row - 1][col + 1] == PLAYER_ONE_DISC &&
+//					_board._grid[row - 2][col + 2] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[0]++;
+//				}
+//
+//				//Disc Disc Disc _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row - 1][col + 1] == PLAYER_TWO_DISC &&
+//					_board._grid[row - 2][col + 2] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[5]++;
+//				}
+//
+//				//Disc Disc _ Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row - 1][col + 1] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_ONE_DISC) &&
+//					_board._grid[row - 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[0]++;
+//				}
+//
+//				//Disc Disc _ Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row - 1][col + 1] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_TWO_DISC) &&
+//					_board._grid[row - 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[5]++;
+//				}
+//
+//				//Disc _ Disc Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_ONE_DISC) &&
+//					_board._grid[row - 2][col + 2] == PLAYER_ONE_DISC &&
+//					_board._grid[row - 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[0]++;
+//				}
+//
+//				//Disc _ Disc Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_TWO_DISC) &&
+//					_board._grid[row - 2][col + 2] == PLAYER_TWO_DISC &&
+//					_board._grid[row - 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[5]++;
+//				}
+//
+//				//_ Disc Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row - 1][col + 1] == PLAYER_ONE_DISC &&
+//					_board._grid[row - 2][col + 2] == PLAYER_ONE_DISC &&
+//					_board._grid[row - 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[0]++;
+//				}
+//
+//				//_ Disc Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row - 1][col + 1] == PLAYER_TWO_DISC &&
+//					_board._grid[row - 2][col + 2] == PLAYER_TWO_DISC &&
+//					_board._grid[row - 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[5]++;
+//				}
+//
+//				//Check 2-in-a-row
+//				//Disc Disc _ _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					_board._grid[row - 1][col + 1] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//Disc Disc _ _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					_board._grid[row - 1][col + 1] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//Disc _ Disc _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_ONE_DISC) &&
+//					_board._grid[row - 2][col + 2] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//Disc _ Disc _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_TWO_DISC) &&
+//					_board._grid[row - 2][col + 2] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//Disc _ _ Disc
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_ONE_DISC) &&
+//					_board._grid[row - 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//Disc _ _ Disc
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_TWO_DISC) &&
+//					_board._grid[row - 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//_ Disc Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row - 1][col + 1] == PLAYER_ONE_DISC &&
+//					_board._grid[row - 2][col + 2] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//_ Disc Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row - 1][col + 1] == PLAYER_TWO_DISC &&
+//					_board._grid[row - 2][col + 2] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//_ Disc _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row - 1][col + 1] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_ONE_DISC) &&
+//					_board._grid[row - 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//_ Disc _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row - 1][col + 1] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_TWO_DISC) &&
+//					_board._grid[row - 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//_ _ Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_ONE_DISC) &&
+//					_board._grid[row - 2][col + 2] == PLAYER_ONE_DISC &&
+//					_board._grid[row - 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[1]++;
+//				}
+//
+//				//_ _ Disc Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_TWO_DISC) &&
+//					_board._grid[row - 2][col + 2] == PLAYER_TWO_DISC &&
+//					_board._grid[row - 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[4]++;
+//				}
+//
+//				//1-in-a-row
+//
+//				//Disc _ _ _
+//				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[2]++;
+//				}
+//
+//				//Disc _ _ _
+//				if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[3]++;
+//				}
+//
+//				//_ Disc _ _
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					_board._grid[row - 1][col + 1] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[2]++;
+//				}
+//
+//				//_ Disc _ _
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					_board._grid[row - 1][col + 1] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[3]++;
+//				}
+//
+//
+//				//_ _ Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_ONE_DISC) &&
+//					_board._grid[row - 2][col + 2] == PLAYER_ONE_DISC &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_ONE_DISC))
+//				{
+//					evalArr[2]++;
+//				}
+//
+//				//_ _ Disc _
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_TWO_DISC) &&
+//					_board._grid[row - 2][col + 2] == PLAYER_TWO_DISC &&
+//					checkDisc(_board._grid[row - 3][col + 3], PLAYER_TWO_DISC))
+//				{
+//					evalArr[3]++;
+//				}
+//
+//				//_ _ _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_ONE_DISC) &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_ONE_DISC) &&
+//					_board._grid[row - 3][col + 3] == PLAYER_ONE_DISC)
+//				{
+//					evalArr[2]++;
+//				}
+//
+//				//_ _ _ Disc
+//				if (checkDisc(_board._grid[row][col], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row - 1][col + 1], PLAYER_TWO_DISC) &&
+//					checkDisc(_board._grid[row - 2][col + 2], PLAYER_TWO_DISC) &&
+//					_board._grid[row - 3][col + 3] == PLAYER_TWO_DISC)
+//				{
+//					evalArr[3]++;
+//				}
+//			}
+//		}
+//	}
+//	return evalArr[0];
+//}
+
+//bool GameState_7x6::checkDisc(Discs boardDisc, Discs playerDisc)
+//{
+//	return boardDisc == EMPTY_DISC;
+//}
+

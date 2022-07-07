@@ -16,7 +16,7 @@
 #define SCREEN_HEIGHT_21x18 900
 #define TITLE_21x18 "Connet 4 on a 21x18 board"
 
-#define TRANSITION_TIME 10
+#define TRANSITION_TIME 100
 
 #define MAIN_MENU_BACKGROUND_PATH "Resourses\\grid.png"
 #define GAME_BOARD_PATH "Resourses\\grid.png"
@@ -32,6 +32,9 @@
 
 #define IN_PROGRESS 200
 #define GAME_OVER - IN_PROGRESS
+
+#define THREE_IN_A_ROW_VALUE 9000
+#define TWO_IN_A_ROW_VALUE 5000
 
 enum Discs
 {

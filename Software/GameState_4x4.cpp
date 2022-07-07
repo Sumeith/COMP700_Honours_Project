@@ -154,6 +154,11 @@ void GameState_4x4::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Red Player Wins" << std::endl;
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row][col + 1].setScale(1.1f, 1.1f);
+				_boardPieces[row][col + 2].setScale(1.1f, 1.1f);
+				_boardPieces[row][col + 3].setScale(1.1f, 1.1f);
+				return;
 			}
 
 			if (_board._grid[row][col] == PLAYER_TWO_DISC &&
@@ -163,6 +168,11 @@ void GameState_4x4::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Blue Player Wins" << std::endl;
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row][col + 1].setScale(1.1f, 1.1f);
+				_boardPieces[row][col + 2].setScale(1.1f, 1.1f);
+				_boardPieces[row][col + 3].setScale(1.1f, 1.1f);
+				return;
 			}
 		}
 	}
@@ -179,6 +189,12 @@ void GameState_4x4::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Red Player Wins" << std::endl;
+
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 1][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 2][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 3][col].setScale(1.1f, 1.1f);
+				return;
 			}
 
 			if (_board._grid[row][col] == PLAYER_TWO_DISC &&
@@ -188,6 +204,12 @@ void GameState_4x4::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Blue Player Wins" << std::endl;
+
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 1][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 2][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 3][col].setScale(1.1f, 1.1f);
+				return;
 			}
 		}
 	}
@@ -204,6 +226,12 @@ void GameState_4x4::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Red Player Wins" << std::endl;
+
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 1][col + 1].setScale(1.1f, 1.1f);
+				_boardPieces[row + 2][col + 2].setScale(1.1f, 1.1f);
+				_boardPieces[row + 3][col + 3].setScale(1.1f, 1.1f);
+				return;
 			}
 
 			if (_board._grid[row][col] == PLAYER_TWO_DISC &&
@@ -213,6 +241,12 @@ void GameState_4x4::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Blue Player Wins" << std::endl;
+
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row + 1][col + 1].setScale(1.1f, 1.1f);
+				_boardPieces[row + 2][col + 2].setScale(1.1f, 1.1f);
+				_boardPieces[row + 3][col + 3].setScale(1.1f, 1.1f);
+				return;
 			}
 		}
 	}
@@ -229,6 +263,12 @@ void GameState_4x4::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Red Player Wins" << std::endl;
+
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row - 1][col + 1].setScale(1.1f, 1.1f);
+				_boardPieces[row - 2][col + 2].setScale(1.1f, 1.1f);
+				_boardPieces[row - 3][col + 3].setScale(1.1f, 1.1f);
+				return;
 			}
 
 			if (_board._grid[row][col] == PLAYER_TWO_DISC &&
@@ -238,6 +278,12 @@ void GameState_4x4::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Blue Player Wins" << std::endl;
+
+				_boardPieces[row][col].setScale(1.1f, 1.1f);
+				_boardPieces[row - 1][col + 1].setScale(1.1f, 1.1f);
+				_boardPieces[row - 2][col + 2].setScale(1.1f, 1.1f);
+				_boardPieces[row - 3][col + 3].setScale(1.1f, 1.1f);
+				return;
 			}
 		}
 	}
