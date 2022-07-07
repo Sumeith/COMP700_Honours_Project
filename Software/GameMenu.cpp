@@ -41,7 +41,7 @@ void GameMenuState::Update(float dt)
 {
 	if (this->_clock.getElapsedTime().asSeconds() > 1)
 	{
-		this->_data->machine.AddState(StateRef(new GameState_7x6(_data)), true);
+		this->_data->machine.AddState(StateRef(new GameState_14x12(_data)), true);
 	}
 }
 

@@ -7,26 +7,26 @@
 #include <windows.h>
 #include <stdlib.h>
 
-GameState_4x4::GameState_4x4(GameDataRef data) : _data(data)
+GameState_14x12::GameState_14x12(GameDataRef data) : _data(data)
 {
 
 }
 
-void GameState_4x4::Init()
+void GameState_14x12::Init()
 {
 	_turn = PLAYER_ONE_DISC;
 	_gameOver = false;
 	this->_data->assets.LoadTexture("Game BOARD", GAME_BOARD_PATH);
 
-	this->_data->assets.LoadTexture("Player One Disc", PLAYER_ONE_DISC_PATH);
-	this->_data->assets.LoadTexture("Player Two Disc", PLAYER_TWO_DISC_PATH);
-	this->_data->assets.LoadTexture("Player One Win Disc", PLAYER_ONE_WIN_DISC_PATH);
-	this->_data->assets.LoadTexture("Player Two Win Disc", PLAYER_TWO_WIN_DISC_PATH);
+	this->_data->assets.LoadTexture("Player One Disc", PLAYER_ONE_DISC_SMALL_PATH);
+	this->_data->assets.LoadTexture("Player Two Disc", PLAYER_TWO_DISC_SMALL_PATH);
+	this->_data->assets.LoadTexture("Player One Win Disc", PLAYER_ONE_WIN_DISC_SMALL_PATH);
+	this->_data->assets.LoadTexture("Player Two Win Disc", PLAYER_TWO_WIN_DISC_SMALL_PATH);
 
-	this->_data->assets.LoadTexture("Empty Disc", EMPTY_DISC_PATH);
+	this->_data->assets.LoadTexture("Empty Disc", EMPTY_DISC_SMALL_PATH);
 	this->_data->assets.LoadTexture("Game Board", GAME_BOARD_PATH);
 
-	this->_data->window.create(sf::VideoMode(SCREEN_WIDTH_4x4, SCREEN_HEIGHT_4x4), TITLE_4x4, sf::Style::Close | sf::Style::Titlebar);
+	this->_data->window.create(sf::VideoMode(SCREEN_WIDTH_14x12, SCREEN_HEIGHT_14x12), TITLE_14x12, sf::Style::Close | sf::Style::Titlebar);
 
 	this->_background.setTexture(this->_data->assets.GetTexture("Game BOARD"));
 
@@ -42,7 +42,7 @@ void GameState_4x4::Init()
 	InitGridPieces();
 }
 
-void GameState_4x4::InitGridPieces()
+void GameState_14x12::InitGridPieces()
 {
 	sf::Vector2u tempDiscSize = this->_data->assets.GetTexture("Empty Disc").getSize();
 
@@ -56,7 +56,7 @@ void GameState_4x4::InitGridPieces()
 	}
 }
 
-void GameState_4x4::dropDisc()
+void GameState_14x12::dropDisc()
 {
 	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
 	int column = 0;
@@ -104,13 +104,13 @@ void GameState_4x4::dropDisc()
 	}
 }
 
-std::string GameState_4x4::Colour(int colour = 7, std::string message = " ")
+std::string GameState_14x12::Colour(int colour = 7, std::string message = " ")
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colour);
 	return message;
 }
 
-void GameState_4x4::printBoard()
+void GameState_14x12::printBoard()
 {
 	for (int i = 1; i <= _width; i++)
 	{
@@ -144,7 +144,7 @@ void GameState_4x4::printBoard()
 	std::cout << std::endl;
 }
 
-void GameState_4x4::checkWinner()
+void GameState_14x12::checkWinner()
 {
 	//check Horizontally
 	for (int col = 0; col < (_width - 3); col++)
@@ -286,7 +286,7 @@ void GameState_4x4::checkWinner()
 		}
 	}
 }
-int GameState_4x4::gameEvaluation()
+int GameState_14x12::gameEvaluation()
 {
 	int evalArr[6] = { 0,0,0,0,0,0 };
 	for (int col = 0; col < _width; col++)
@@ -446,27 +446,27 @@ int GameState_4x4::gameEvaluation()
 		THREE_IN_A_ROW_VALUE * evalArr[5] - TWO_IN_A_ROW_VALUE * evalArr[4] - evalArr[3];
 }
 
-bool GameState_4x4::checkConditionHorizontal(int col)
+bool GameState_14x12::checkConditionHorizontal(int col)
 {
 	return col < (_width - 3);
 }
 
-bool GameState_4x4::checkConditionVertical(int row)
+bool GameState_14x12::checkConditionVertical(int row)
 {
 	return row < (_height - 3);
 }
 
-bool GameState_4x4::checkConditionPosDiag(int row, int col)
+bool GameState_14x12::checkConditionPosDiag(int row, int col)
 {
 	return row >= 3 && col < (_width - 3);
 }
 
-bool GameState_4x4::checkConditionNegDiag(int row, int col)
+bool GameState_14x12::checkConditionNegDiag(int row, int col)
 {
 	return col < (_width - 3) && row < (_height - 3);
 }
 
-void GameState_4x4::checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[])
+void GameState_14x12::checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[])
 {
 	//Disc Disc Disc _
 	if (boardDisc1 == PLAYER_ONE_DISC &&
@@ -537,7 +537,7 @@ void GameState_4x4::checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs b
 	}
 }
 
-void GameState_4x4::checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[])
+void GameState_14x12::checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[])
 {
 	//Disc Disc _ _
 	if (boardDisc1 == PLAYER_ONE_DISC &&
@@ -648,7 +648,7 @@ void GameState_4x4::checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boa
 	}
 }
 
-void GameState_4x4::checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[])
+void GameState_14x12::checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[])
 {
 	//Disc _ _ _
 	if (boardDisc1 == PLAYER_ONE_DISC &&
@@ -720,7 +720,7 @@ void GameState_4x4::checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boa
 
 }
 
-void GameState_4x4::HandleInput()
+void GameState_14x12::HandleInput()
 {
 	sf::Event event;
 	sf::Vector2i pos;
@@ -755,7 +755,7 @@ void GameState_4x4::HandleInput()
 	}
 }
 
-void GameState_4x4::Update(float dt)
+void GameState_14x12::Update(float dt)
 {
 	if (_gameOver)
 	{
@@ -766,7 +766,7 @@ void GameState_4x4::Update(float dt)
 	}
 }
 
-void GameState_4x4::Draw(float dt)
+void GameState_14x12::Draw(float dt)
 {
 	this->_data->window.clear(sf::Color::White);
 	//this->_data->window.draw(this->_background);

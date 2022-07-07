@@ -28,6 +28,9 @@
     <ClCompile Include="GameState_21x18.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameState_14x12.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -86,6 +89,18 @@
       <Filter>Resource</Filter>
     </Image>
     <Image Include="Resourses\empty_small_disc.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resourses\blue_win_disc.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resourses\blue_win_disc_small.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resourses\red_win_disc.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="Resourses\red_win_disc_small.png">
       <Filter>Resource</Filter>
     </Image>
   </ItemGroup>

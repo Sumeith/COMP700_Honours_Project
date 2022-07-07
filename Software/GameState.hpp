@@ -77,6 +77,13 @@ private:
 	std::string Colour(int colour, std::string message);
 	void checkWinner();
 	int gameEvaluation();
+	bool checkConditionHorizontal(int col);
+	bool checkConditionVertical(int row);
+	bool checkConditionPosDiag(int row, int col);
+	bool checkConditionNegDiag(int row, int col);
+	void checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
+	void checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
+	void checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
 
 	const int _height = HEIGHT_4x4;
 	const int _width = WIDTH_4x4;
@@ -87,7 +94,45 @@ private:
 
 /////////////////////////////////////////////////////////
 
-//class GameState_21x18 : public State
+class GameState_14x12 : public GameState
+{
+public:
+	GameState_14x12(GameDataRef data);
+	void Init();
+	void HandleInput();
+	void Update(float dt);
+	void Draw(float dt);
+
+private:
+	GameDataRef _data;
+	sf::Sprite _background;
+	sf::Clock _clock;
+	Board_14x12 _board;
+
+	void InitGridPieces();
+	void dropDisc();
+	void printBoard();
+	std::string Colour(int colour, std::string message);
+	void checkWinner();
+	int gameEvaluation();
+	bool checkConditionHorizontal(int col);
+	bool checkConditionVertical(int row);
+	bool checkConditionPosDiag(int row, int col);
+	bool checkConditionNegDiag(int row, int col);
+	void checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
+	void checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
+	void checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
+
+	const int _height = HEIGHT_14x12;
+	const int _width = WIDTH_14x12;
+	sf::Sprite _boardPieces[HEIGHT_14x12][WIDTH_14x12];
+	bool _gameOver;
+	Discs _turn;
+};
+
+/////////////////////////////////////////////////////////
+
+//class GameState_21x18 : public GameState
 //{
 //public:
 //	GameState_21x18(GameDataRef data);
@@ -108,6 +153,13 @@ private:
 //	std::string Colour(int colour, std::string message);
 //	void checkWinner();
 //	int gameEvaluation();
+//	bool checkConditionHorizontal(int col);
+//	bool checkConditionVertical(int row);
+//	bool checkConditionPosDiag(int row, int col);
+//	bool checkConditionNegDiag(int row, int col);
+//	void checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
+//	void checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
+//	void checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
 //
 //	const int _height = HEIGHT_21x18;
 //	const int _width = WIDTH_21x18;

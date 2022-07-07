@@ -87,6 +87,7 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameMenu.cpp" />
+    <ClCompile Include="GameState_14x12.cpp" />
     <ClCompile Include="GameState_21x18.cpp" />
     <ClCompile Include="GameState_7x6.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -107,11 +108,15 @@
   <ItemGroup>
     <Image Include="Resourses\blue_disc.png" />
     <Image Include="Resourses\blue_disc_small.png" />
+    <Image Include="Resourses\blue_win_disc.png" />
+    <Image Include="Resourses\blue_win_disc_small.png" />
     <Image Include="Resourses\empty_small_disc.png" />
     <Image Include="Resourses\grid.png" />
     <Image Include="Resourses\empty_disc.png" />
     <Image Include="Resourses\red_disc.png" />
     <Image Include="Resourses\red_disc_small.png" />
+    <Image Include="Resourses\red_win_disc.png" />
+    <Image Include="Resourses\red_win_disc_small.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

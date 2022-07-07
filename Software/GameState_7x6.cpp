@@ -20,6 +20,9 @@ void GameState_7x6::Init()
 	
 	this->_data->assets.LoadTexture("Player One Disc", PLAYER_ONE_DISC_PATH);
 	this->_data->assets.LoadTexture("Player Two Disc", PLAYER_TWO_DISC_PATH);
+	this->_data->assets.LoadTexture("Player One Win Disc", PLAYER_ONE_WIN_DISC_PATH);
+	this->_data->assets.LoadTexture("Player Two Win Disc", PLAYER_TWO_WIN_DISC_PATH);
+
 	this->_data->assets.LoadTexture("Empty Disc", EMPTY_DISC_PATH);
 	this->_data->assets.LoadTexture("Game Board", GAME_BOARD_PATH);
 
@@ -155,10 +158,10 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Red Player Wins" << std::endl;
-				_boardPieces[row][col].setScale(1.1f, 1.1f);
-				_boardPieces[row][col + 1].setScale(1.1f, 1.1f);
-				_boardPieces[row][col + 2].setScale(1.1f, 1.1f);
-				_boardPieces[row][col + 3].setScale(1.1f, 1.1f);
+				_boardPieces[row][col].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				_boardPieces[row][col + 1].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				_boardPieces[row][col + 2].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				_boardPieces[row][col + 3].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
 				return;
 			}
 
@@ -169,10 +172,10 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Blue Player Wins" << std::endl;
-				_boardPieces[row][col].setScale(1.1f, 1.1f);
-				_boardPieces[row][col + 1].setScale(1.1f, 1.1f);
-				_boardPieces[row][col + 2].setScale(1.1f, 1.1f);
-				_boardPieces[row][col + 3].setScale(1.1f, 1.1f);
+				_boardPieces[row][col].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				_boardPieces[row][col + 1].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				_boardPieces[row][col + 2].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				_boardPieces[row][col + 3].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
 				return;
 			}
 		}
@@ -190,11 +193,10 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Red Player Wins" << std::endl;
-
-				_boardPieces[row][col].setScale(1.1f, 1.1f);
-				_boardPieces[row + 1][col].setScale(1.1f, 1.1f);
-				_boardPieces[row + 2][col].setScale(1.1f, 1.1f);
-				_boardPieces[row + 3][col].setScale(1.1f, 1.1f);
+				_boardPieces[row][col].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				_boardPieces[row + 1][col].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				_boardPieces[row + 2][col].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				_boardPieces[row + 3][col].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
 				return;
 			}
 
@@ -205,54 +207,16 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Blue Player Wins" << std::endl;
-
-				_boardPieces[row][col].setScale(1.1f, 1.1f);
-				_boardPieces[row + 1][col].setScale(1.1f, 1.1f);
-				_boardPieces[row + 2][col].setScale(1.1f, 1.1f);
-				_boardPieces[row + 3][col].setScale(1.1f, 1.1f);
+				_boardPieces[row][col].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				_boardPieces[row + 1][col].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				_boardPieces[row + 2][col].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				_boardPieces[row + 3][col].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
 				return;
 			}
 		}
 	}
 
 	//check (positive) Diagonal 
-	for (int col = 0; col < (_width - 3); col++)
-	{
-		for (int row = 0; row < (_height - 3); row++)
-		{
-			if (_board._grid[row][col] == PLAYER_ONE_DISC &&
-				_board._grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
-				_board._grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
-				_board._grid[row + 3][col + 3] == PLAYER_ONE_DISC)
-			{
-				_gameOver = true;
-				std::cout << "Red Player Wins" << std::endl;
-
-				_boardPieces[row][col].setScale(1.1f, 1.1f);
-				_boardPieces[row + 1][col + 1].setScale(1.1f, 1.1f);
-				_boardPieces[row + 2][col + 2].setScale(1.1f, 1.1f);
-				_boardPieces[row + 3][col + 3].setScale(1.1f, 1.1f);
-				return;
-			}
-
-			if (_board._grid[row][col] == PLAYER_TWO_DISC &&
-				_board._grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
-				_board._grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
-				_board._grid[row + 3][col + 3] == PLAYER_TWO_DISC)
-			{
-				_gameOver = true;
-				std::cout << "Blue Player Wins" << std::endl;
-
-				_boardPieces[row][col].setScale(1.1f, 1.1f);
-				_boardPieces[row + 1][col + 1].setScale(1.1f, 1.1f);
-				_boardPieces[row + 2][col + 2].setScale(1.1f, 1.1f);
-				_boardPieces[row + 3][col + 3].setScale(1.1f, 1.1f);
-				return;
-			}
-		}
-	}
-
-	//check (negative) Diagonal 
 	for (int col = 0; col < (_width - 3); col++)
 	{
 		for (int row = 3; row < _height; row++)
@@ -264,11 +228,10 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Red Player Wins" << std::endl;
-
-				_boardPieces[row][col].setScale(1.1f, 1.1f);
-				_boardPieces[row - 1][col + 1].setScale(1.1f, 1.1f);
-				_boardPieces[row - 2][col + 2].setScale(1.1f, 1.1f);
-				_boardPieces[row - 3][col + 3].setScale(1.1f, 1.1f);
+				_boardPieces[row][col].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				_boardPieces[row - 1][col + 1].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				_boardPieces[row - 2][col + 2].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				_boardPieces[row - 3][col + 3].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
 				return;
 			}
 
@@ -279,11 +242,45 @@ void GameState_7x6::checkWinner()
 			{
 				_gameOver = true;
 				std::cout << "Blue Player Wins" << std::endl;
+				_boardPieces[row][col].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				_boardPieces[row - 1][col + 1].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				_boardPieces[row - 2][col + 2].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				_boardPieces[row - 3][col + 3].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				return;
+			}
+		}
+	}
 
-				_boardPieces[row][col].setScale(1.1f, 1.1f);
-				_boardPieces[row - 1][col + 1].setScale(1.1f, 1.1f);
-				_boardPieces[row - 2][col + 2].setScale(1.1f, 1.1f);
-				_boardPieces[row - 3][col + 3].setScale(1.1f, 1.1f);
+	//check (negative) Diagonal 
+	for (int col = 0; col < (_width - 3); col++)
+	{
+		for (int row = 0; row < (_height - 3); row++)
+		{
+			if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+				_board._grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
+				_board._grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
+				_board._grid[row + 3][col + 3] == PLAYER_ONE_DISC)
+			{
+				_gameOver = true;
+				std::cout << "Red Player Wins" << std::endl;
+				_boardPieces[row][col].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				_boardPieces[row + 1][col + 1].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				_boardPieces[row + 2][col + 2].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				_boardPieces[row + 3][col + 3].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				return;
+			}
+
+			if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+				_board._grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
+				_board._grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
+				_board._grid[row + 3][col + 3] == PLAYER_TWO_DISC)
+			{
+				_gameOver = true;
+				std::cout << "Blue Player Wins" << std::endl;
+				_boardPieces[row][col].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				_boardPieces[row + 1][col + 1].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				_boardPieces[row + 2][col + 2].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				_boardPieces[row + 3][col + 3].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
 				return;
 			}
 		}
@@ -373,43 +370,6 @@ int GameState_7x6::gameEvaluation()
 			if (checkConditionPosDiag(row, col))
 			{
 				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
-					_board._grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
-					_board._grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
-					_board._grid[row + 3][col + 3] == PLAYER_ONE_DISC)
-				{
-					return INT_MAX;
-				}
-
-				else if (_board._grid[row][col] == PLAYER_TWO_DISC &&
-					_board._grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
-					_board._grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
-					_board._grid[row + 3][col + 3] == PLAYER_TWO_DISC)
-				{
-					return INT_MIN;
-				}
-
-				checkThreeInARow(_board._grid[row][col],
-					_board._grid[row + 1][col + 1],
-					_board._grid[row + 2][col + 2],
-					_board._grid[row + 3][col + 3],
-					evalArr);
-
-				checkTwoInARow(_board._grid[row][col],
-					_board._grid[row + 1][col + 1],
-					_board._grid[row + 2][col + 2],
-					_board._grid[row + 3][col + 3],
-					evalArr);
-
-				checkOneInARow(_board._grid[row][col],
-					_board._grid[row + 1][col + 1],
-					_board._grid[row + 2][col + 2],
-					_board._grid[row + 3][col + 3],
-					evalArr);
-			}
-
-			if (checkConditionNegDiag(row, col))
-			{
-				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
 					_board._grid[row - 1][col + 1] == PLAYER_ONE_DISC &&
 					_board._grid[row - 2][col + 2] == PLAYER_ONE_DISC &&
 					_board._grid[row - 3][col + 3] == PLAYER_ONE_DISC)
@@ -443,6 +403,43 @@ int GameState_7x6::gameEvaluation()
 					_board._grid[row - 3][col + 3],
 					evalArr);
 			}
+
+			if (checkConditionNegDiag(row, col))
+			{
+				if (_board._grid[row][col] == PLAYER_ONE_DISC &&
+					_board._grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
+					_board._grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
+					_board._grid[row + 3][col + 3] == PLAYER_ONE_DISC)
+				{
+					return INT_MAX;
+				}
+
+				else if (_board._grid[row][col] == PLAYER_TWO_DISC &&
+					_board._grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
+					_board._grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
+					_board._grid[row + 3][col + 3] == PLAYER_TWO_DISC)
+				{
+					return INT_MIN;
+				}
+
+				checkThreeInARow(_board._grid[row][col],
+					_board._grid[row + 1][col + 1],
+					_board._grid[row + 2][col + 2],
+					_board._grid[row + 3][col + 3],
+					evalArr);
+
+				checkTwoInARow(_board._grid[row][col],
+					_board._grid[row + 1][col + 1],
+					_board._grid[row + 2][col + 2],
+					_board._grid[row + 3][col + 3],
+					evalArr);
+
+				checkOneInARow(_board._grid[row][col],
+					_board._grid[row + 1][col + 1],
+					_board._grid[row + 2][col + 2],
+					_board._grid[row + 3][col + 3],
+					evalArr);
+			}
 		}
 	}
 	return THREE_IN_A_ROW_VALUE * evalArr[0] + TWO_IN_A_ROW_VALUE * evalArr [1] + evalArr[2] - 
@@ -461,12 +458,12 @@ bool GameState_7x6::checkConditionVertical(int row)
 
 bool GameState_7x6::checkConditionPosDiag(int row, int col)
 {
-	return col < (_width - 3) && row < (_height - 3);
+	return row >= 3 && col < (_width - 3);
 }
 
 bool GameState_7x6::checkConditionNegDiag(int row, int col)
 {
-	return row >= 3 && col < (_width - 3);
+	return col < (_width - 3) && row < (_height - 3);
 }
 
 void GameState_7x6::checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[])
