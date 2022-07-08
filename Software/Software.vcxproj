@@ -93,6 +93,8 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameState_4x4.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerUser.cpp" />
     <ClCompile Include="StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +104,8 @@
     <ClInclude Include="GameMenuState.hpp" />
     <ClInclude Include="GameState.hpp" />
     <ClInclude Include="InputManager.hpp" />
+    <ClInclude Include="Player.hpp" />
+    <ClInclude Include="PlayerUser.hpp" />
     <ClInclude Include="StateMachine.hpp" />
     <ClInclude Include="State.hpp" />
   </ItemGroup>

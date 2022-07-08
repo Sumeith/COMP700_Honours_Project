@@ -44,6 +44,9 @@
 #define THREE_IN_A_ROW_VALUE 9000
 #define TWO_IN_A_ROW_VALUE 5000
 
+#define PLAYER_ONE 1
+#define PLAYER_TWO -PLAYER_ONE
+
 enum Discs
 {
 	PLAYER_ONE_DISC = 1,

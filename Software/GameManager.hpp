@@ -6,15 +6,22 @@
 #include "StateMachine.hpp"
 #include "AssetManager.hpp"
 #include "InputManager.hpp"
+#include "Player.hpp"
+
 struct GameData
 {
 	StateMachine machine;
 	sf::RenderWindow window;
 	AssetManager assets;
 	InputManager input;
+	std::unique_ptr<Player> player1;
+	std::unique_ptr<Player> player2;
+	bool _gameOver;
+	int _turn;
 };
 
 typedef std::shared_ptr<GameData> GameDataRef;
+
 
 class GameManager
 {

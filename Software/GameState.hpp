@@ -9,11 +9,11 @@
 class GameState : public State
 {
 private:
-	virtual std::string Colour(int colour, std::string message) = 0;
+	//virtual std::string Colour(int colour, std::string message) = 0;
 	virtual void InitGridPieces() = 0;
-	virtual void dropDisc() = 0;
-	virtual void printBoard() = 0;
-	virtual int gameEvaluation() = 0;
+	//virtual void dropDisc() = 0;
+	//virtual void printBoard() = 0;
+	//virtual int gameEvaluation() = 0;
 };
 
 ///////////////////////////////////////////////////////////
@@ -69,21 +69,21 @@ private:
 	GameDataRef _data;
 	sf::Sprite _background;
 	sf::Clock _clock;
-	Board_7x6 _board;
+	Board_4x4 _board;
 
 	void InitGridPieces();
-	void dropDisc();
-	void printBoard();
-	std::string Colour(int colour, std::string message);
+	//void dropDisc();
+	//void printBoard();
+	//std::string Colour(int colour, std::string message);
 	void checkWinner();
-	int gameEvaluation();
+	/*int gameEvaluation();
 	bool checkConditionHorizontal(int col);
 	bool checkConditionVertical(int row);
 	bool checkConditionPosDiag(int row, int col);
 	bool checkConditionNegDiag(int row, int col);
 	void checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
 	void checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
-	void checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
+	void checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);*/
 
 	const int _height = HEIGHT_4x4;
 	const int _width = WIDTH_4x4;
