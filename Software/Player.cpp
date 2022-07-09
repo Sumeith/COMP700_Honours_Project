@@ -1,57 +1,8 @@
 #include "Player.hpp"
 
-
-std::string Player::Colour(int colour = 7, std::string message = " ")
+int Player::getEvaluation()
 {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colour);
-	return message;
-}
-
-void Player::printBoard(Board_4x4* board)
-{
-	int width = WIDTH_4x4;
-	int height = HEIGHT_4x4;
-	for (int i = 1; i <= width; i++)
-	{
-		std::cout << Colour(20, std::to_string(i)) << " ";
-	}
-	Colour(7, " ");
-	std::cout << std::endl;
-	for (int x = 0; x < height; x++)
-	{
-
-		for (int y = 0; y < width; y++)
-		{
-			if (board->_grid[x][y] == PLAYER_ONE_DISC)
-			{
-				std::cout << Colour(12, "O") << " ";
-			}
-			else if (board->_grid[x][y] == PLAYER_TWO_DISC)
-			{
-				std::cout << Colour(11, "O") << " ";
-			}
-			else
-			{
-				Colour(7, " ");
-				std::cout << "O" << " ";
-			}
-		}
-		Colour(7, " ");
-		std::cout << std::endl;
-	}
-	Colour(7, " ");
-	std::cout << std::endl;
-	std::cout << "The evaluation is : " << eval << std::endl;
-}
-
-void Player::printBoard(Board_7x6* board)
-{
-
-}
-
-void Player::printBoard(Board_14x12* board)
-{
-
+	return eval;
 }
 
 bool Player::checkConditionHorizontal(int col , int width)
@@ -69,11 +20,24 @@ bool Player::checkConditionPosDiag(int row, int col, int width)
 	return row >= 3 && col < (width - 3);
 }
 
-bool Player::checkConditionNegDiag(int row, int col, int width, int height)
+bool Player::checkConditionNegDiag(int row, int col, int height, int width)
 {
 	return col < (width - 3) && row < (height - 3);
 }
 
+/*
+* This function checks if there are 3 Discs in a winning position for a player
+* and updates the evlauation array accordingly.
+* 
+* Procided that:	Disc	: Represents a player disc
+*					_		: Represents an empty position 
+* 
+* This function looks for the following combinations:
+* Disc Disc Disc _
+* Disc Disc _ Disc
+* Disc _ Disc Disc
+* _ Disc Disc Disc
+*/
 void Player::checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[])
 {
 	//Disc Disc Disc _
@@ -145,6 +109,21 @@ void Player::checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDis
 	}
 }
 
+/*
+* This function checks if there are 2 Discs in a winning position for a player
+* and updates the evlauation array accordingly.
+*
+* Procided that:	Disc	: Represents a player disc
+*					_		: Represents an empty position
+*
+* This function looks for the following combinations:
+* Disc Disc _ _
+* Disc _ Disc _
+* Disc _ _ Disc
+* _ Disc Disc _
+* _ Disc _ Disc
+* _ _ Disc Disc
+*/
 void Player::checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[])
 {
 	//Disc Disc _ _
@@ -256,6 +235,19 @@ void Player::checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3
 	}
 }
 
+/*
+* This function checks if there are 1 Disc in a winning position for a player
+* and updates the evlauation array accordingly.
+*
+* Procided that:	Disc	: Represents a player disc
+*					_		: Represents an empty position
+*
+* This function looks for the following combinations:
+* Disc _ _ _
+* _ Disc _ _
+* _ _ Disc _
+* _ _ _ Disc
+*/
 void Player::checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[])
 {
 	//Disc _ _ _
@@ -325,5 +317,4 @@ void Player::checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3
 	{
 		evalArr[3]++;
 	}
-
 }

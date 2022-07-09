@@ -1,15 +1,15 @@
-#include <sstream>
+//#include <sstream>
 #include <iostream>
 #include "GameState.hpp"
 #include "DEFINITIONS.hpp"
 #include "GameMenuState.hpp"
 #include <iostream>
 #include <windows.h>
-
+#include "PlayerUser.hpp"
 
 GameState_4x4::GameState_4x4(GameDataRef data) : _data(data)
 {
-
+	eval = 0;
 }
 
 void GameState_4x4::Init()
@@ -109,7 +109,7 @@ void GameState_4x4::InitGridPieces()
 //	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colour);
 //	return message;
 //}
-
+//
 //void GameState_4x4::printBoard()
 //{
 //	for (int i = 1; i <= _width; i++)
@@ -724,7 +724,7 @@ void GameState_4x4::HandleInput()
 {
 	sf::Event event;
 	sf::Vector2i pos;
-
+	
 	while (this->_data->window.pollEvent(event))
 	{
 		if (sf::Event::Closed == event.type)
@@ -734,18 +734,20 @@ void GameState_4x4::HandleInput()
 
 		if (sf::Event::MouseButtonPressed == event.type && !this->_data->_gameOver)
 		{
-			if (this->_data->_turn == PLAYER_ONE)
+			if (this->_data->_turn == PLAYER_ONE && typeid(*this->_data->player1) == typeid(PlayerUser))
 			{
 				this->_data->player1->nextMove(&_board, _boardPieces);
+				eval = this->_data->player1->getEvaluation();
 				this->_data->_turn = PLAYER_TWO;
 			}
-			else if (this->_data->_turn == PLAYER_TWO)
+			else if (this->_data->_turn == PLAYER_TWO && typeid(*this->_data->player2) == typeid(PlayerUser))
 			{
 				this->_data->player2->nextMove(&_board, _boardPieces);
+				eval = this->_data->player2->getEvaluation();
 				this->_data->_turn = PLAYER_ONE;
 			}
 			//dropDisc();
-			//printBoard();
+			printBoard(&_board);
 			checkWinner();
 			//std::cout << "eval: " << gameEvaluation() << std::endl;
 		}
@@ -767,12 +769,34 @@ void GameState_4x4::HandleInput()
 
 void GameState_4x4::Update(float dt)
 {
-	if (_gameOver)
+	if (!_gameOver &&
+		!(typeid(*this->_data->player1) == typeid(PlayerUser)) ||
+		!(typeid(*this->_data->player2) == typeid(PlayerUser)))
 	{
-		if (this->_clock.getElapsedTime().asSeconds() > TRANSITION_TIME)
+		if (this->_data->_turn == PLAYER_ONE && !(typeid(*this->_data->player1) == typeid(PlayerUser)))
 		{
-			this->_data->machine.AddState(StateRef(new GameMenuState(_data)), true);
+			this->_data->player1->nextMove(&_board, _boardPieces);
+			eval = this->_data->player1->getEvaluation();
+			this->_data->_turn = PLAYER_TWO;
 		}
+		else if (this->_data->_turn == PLAYER_TWO && !(typeid(*this->_data->player2) == typeid(PlayerUser)))
+		{
+			this->_data->player2->nextMove(&_board, _boardPieces);
+			eval = this->_data->player2->getEvaluation();
+			this->_data->_turn = PLAYER_ONE;
+		}
+		
+		else
+		{
+			if (this->_clock.getElapsedTime().asSeconds() > TRANSITION_TIME)
+			{
+				this->_data->machine.AddState(StateRef(new GameMenuState(_data)), true);
+			}
+		}
+			
+
+		printBoard(&_board);
+		checkWinner();
 	}
 }
 

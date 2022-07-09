@@ -87,6 +87,7 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameMenu.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameState_14x12.cpp" />
     <ClCompile Include="GameState_21x18.cpp" />
     <ClCompile Include="GameState_7x6.cpp" />

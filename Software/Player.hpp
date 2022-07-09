@@ -13,20 +13,15 @@ public:
 	virtual void nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6]) = 0;
 	virtual void nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12]) = 0;
 
-	virtual int getEvaluation(Board_4x4* board) = 0;
-	virtual int getEvaluation(Board_7x6* board) = 0;
-	virtual int getEvaluation(Board_14x12* board) = 0;
+	virtual int calcEvaluation(Board_4x4* board) = 0;
+	virtual int calcEvaluation(Board_7x6* board) = 0;
+	virtual int calcEvaluation(Board_14x12* board) = 0;
 
 	virtual void updateGameState(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4]) = 0;
 	virtual void updateGameState(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6]) = 0;
 	virtual void updateGameState(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12]) = 0;
 
-	std::string Colour(int colour, std::string message);
-
-	void printBoard(Board_4x4* board);
-	void printBoard(Board_7x6* board);
-	void printBoard(Board_14x12* board);
-
+	int getEvaluation();
 	bool checkConditionHorizontal(int col, int width);
 	bool checkConditionVertical(int row, int height);
 	bool checkConditionPosDiag(int row, int col, int width);

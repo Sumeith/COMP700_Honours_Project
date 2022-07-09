@@ -8,12 +8,22 @@
 
 class GameState : public State
 {
-private:
+protected:
 	//virtual std::string Colour(int colour, std::string message) = 0;
 	virtual void InitGridPieces() = 0;
 	//virtual void dropDisc() = 0;
 	//virtual void printBoard() = 0;
 	//virtual int gameEvaluation() = 0;
+
+	std::string Colour(int colour, std::string message);
+
+	void printBoard(Board_4x4* board);
+	void printBoard(Board_7x6* board);
+	void printBoard(Board_14x12* board);
+
+	bool _gameOver;
+	Discs _turn;
+	int eval;
 };
 
 ///////////////////////////////////////////////////////////
@@ -34,24 +44,22 @@ private:
 	Board_7x6 _board;
 
 	void InitGridPieces();
-	void dropDisc();
+	/*void dropDisc();
 	void printBoard();
-	std::string Colour(int colour, std::string message);
+	std::string Colour(int colour, std::string message);*/
 	void checkWinner();
-	int gameEvaluation();
+	/*int gameEvaluation();
 	bool checkConditionHorizontal(int col);
 	bool checkConditionVertical(int row);
 	bool checkConditionPosDiag(int row, int col);
 	bool checkConditionNegDiag(int row, int col);
 	void checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
 	void checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
-	void checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
+	void checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);*/
 
 	const int _height = HEIGHT_7x6;
 	const int _width = WIDTH_7x6;
 	sf::Sprite _boardPieces[HEIGHT_7x6][WIDTH_7x6];
-	bool _gameOver;
-	Discs _turn;
 };
 
 /////////////////////////////////////////////////////////
@@ -73,8 +81,8 @@ private:
 
 	void InitGridPieces();
 	//void dropDisc();
-	//void printBoard();
-	//std::string Colour(int colour, std::string message);
+	/*void printBoard();
+	std::string Colour(int colour, std::string message);*/
 	void checkWinner();
 	/*int gameEvaluation();
 	bool checkConditionHorizontal(int col);
@@ -88,8 +96,6 @@ private:
 	const int _height = HEIGHT_4x4;
 	const int _width = WIDTH_4x4;
 	sf::Sprite _boardPieces[HEIGHT_4x4][WIDTH_4x4];
-	bool _gameOver;
-	Discs _turn;
 };
 
 /////////////////////////////////////////////////////////
@@ -110,24 +116,22 @@ private:
 	Board_14x12 _board;
 
 	void InitGridPieces();
-	void dropDisc();
+	/*void dropDisc();
 	void printBoard();
-	std::string Colour(int colour, std::string message);
+	std::string Colour(int colour, std::string message);*/
 	void checkWinner();
-	int gameEvaluation();
+	/*int gameEvaluation();
 	bool checkConditionHorizontal(int col);
 	bool checkConditionVertical(int row);
 	bool checkConditionPosDiag(int row, int col);
 	bool checkConditionNegDiag(int row, int col);
 	void checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
 	void checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
-	void checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
+	void checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);*/
 
 	const int _height = HEIGHT_14x12;
 	const int _width = WIDTH_14x12;
 	sf::Sprite _boardPieces[HEIGHT_14x12][WIDTH_14x12];
-	bool _gameOver;
-	Discs _turn;
 };
 
 /////////////////////////////////////////////////////////

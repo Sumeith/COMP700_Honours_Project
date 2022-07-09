@@ -20,7 +20,7 @@
 #define SCREEN_HEIGHT_21x18 900
 #define TITLE_21x18 "Connet 4 on a 21x18 board"
 
-#define TRANSITION_TIME 100
+#define TRANSITION_TIME 5
 
 #define MAIN_MENU_BACKGROUND_PATH "Resourses\\grid.png"
 #define GAME_BOARD_PATH "Resourses\\grid.png"
@@ -35,11 +35,8 @@
 #define EMPTY_DISC_PATH "Resourses\\empty_disc.png"
 #define EMPTY_DISC_SMALL_PATH "Resourses\\empty_small_disc.png"
 
-#define PLAYER_ONE_WINS 1000
-#define PLAYER_TWO_WINS - PLAYER_ONE_WINS
-
-#define IN_PROGRESS 200
-#define GAME_OVER - IN_PROGRESS
+#define PLAYER_ONE_WINS INT_MAX
+#define PLAYER_TWO_WINS INT_MIN
 
 #define THREE_IN_A_ROW_VALUE 9000
 #define TWO_IN_A_ROW_VALUE 5000
