@@ -256,12 +256,19 @@ void GameState_7x6::Update(float dt)
 		{
 			this->_data->player1->nextMove(&_board, _boardPieces);
 			eval = this->_data->player1->getEvaluation();
+
+			printBoard(&_board);
+			checkWinner();
+
 			this->_data->_turn = PLAYER_TWO;
 		}
 		else if (this->_data->_turn == PLAYER_TWO && !(typeid(*this->_data->player2) == typeid(PlayerUser)))
 		{
 			this->_data->player2->nextMove(&_board, _boardPieces);
 			eval = this->_data->player2->getEvaluation();
+
+			printBoard(&_board);
+			checkWinner();
 			this->_data->_turn = PLAYER_ONE;
 		}
 
@@ -272,10 +279,6 @@ void GameState_7x6::Update(float dt)
 				this->_data->machine.AddState(StateRef(new GameMenuState(_data)), true);
 			}
 		}
-
-
-		printBoard(&_board);
-		checkWinner();
 	}
 
 	if (this->_data->_gameOver)

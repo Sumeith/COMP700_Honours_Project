@@ -95,7 +95,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameState_4x4.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerRandom.cpp" />
     <ClCompile Include="PlayerUser.cpp" />
+    <ClCompile Include="RandomMoveInC.c" />
     <ClCompile Include="StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -106,7 +108,9 @@
     <ClInclude Include="GameState.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Player.hpp" />
+    <ClInclude Include="PlayerRandom.hpp" />
     <ClInclude Include="PlayerUser.hpp" />
+    <ClInclude Include="RandomMoveinC.h" />
     <ClInclude Include="StateMachine.hpp" />
     <ClInclude Include="State.hpp" />
   </ItemGroup>

@@ -20,7 +20,7 @@
 #define SCREEN_HEIGHT_21x18 900
 #define TITLE_21x18 "Connet 4 on a 21x18 board"
 
-#define TRANSITION_TIME 5
+#define TRANSITION_TIME 10000
 
 #define MAIN_MENU_BACKGROUND_PATH "Resourses\\grid.png"
 #define GAME_BOARD_PATH "Resourses\\grid.png"
@@ -44,33 +44,33 @@
 #define PLAYER_ONE 1
 #define PLAYER_TWO -PLAYER_ONE
 
-enum Discs
+typedef enum
 {
-	PLAYER_ONE_DISC = 1,
-	PLAYER_TWO_DISC = -1,
-	EMPTY_DISC = 0
-};
+	PLAYER_ONE_DISC,
+	PLAYER_TWO_DISC,
+	EMPTY_DISC
+}Discs;
 
 #define HEIGHT_7x6 6
 #define WIDTH_7x6 7
 
-typedef struct Board_7x6 {
+typedef struct {
 	Discs _grid[HEIGHT_7x6][WIDTH_7x6];
-};
+}Board_7x6;
 
 #define HEIGHT_4x4 4
 #define WIDTH_4x4 4
 
-typedef struct Board_4x4 {
+typedef struct {
 	Discs _grid[HEIGHT_4x4][WIDTH_4x4];
-};
+}Board_4x4;
 
 #define HEIGHT_14x12 12
 #define WIDTH_14x12 14
 
-typedef struct Board_14x12 {
+typedef struct {
 	Discs _grid[HEIGHT_14x12][WIDTH_14x12];
-};
+}Board_14x12;
 
 #define HEIGHT_21x18 18
 #define WIDTH_21x18 21

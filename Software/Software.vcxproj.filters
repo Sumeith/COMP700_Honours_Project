@@ -1,44 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Source Files\Game Engine Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files\Game Engine Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AssetManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState_7x6.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Engine Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Engine Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameState_4x4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState_21x18.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState_14x12.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerUser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>Source Files\Game Engine Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Gameplay Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_4x4.cpp">
+      <Filter>Source Files\Gameplay Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_7x6.cpp">
+      <Filter>Source Files\Gameplay Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_14x12.cpp">
+      <Filter>Source Files\Gameplay Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_21x18.cpp">
+      <Filter>Source Files\Gameplay Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Gameplay Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUser.cpp">
+      <Filter>Source Files\Gameplay Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomMoveInC.c">
+      <Filter>Source Files\Gameplay Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRandom.cpp">
+      <Filter>Source Files\Gameplay Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,37 +57,55 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{66832c9e-5a62-46a5-86c3-eeae39463d11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game Engine Header Files">
+      <UniqueIdentifier>{fbded4d0-b2f5-4250-9730-65f34fc9af9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Gameplay Header FIles">
+      <UniqueIdentifier>{03200721-fedb-4867-93a9-944d2a521d48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Engine Source Files">
+      <UniqueIdentifier>{73b66449-9b6b-4390-98e2-0edb0e87676e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Gameplay Source Files">
+      <UniqueIdentifier>{42d2c4b2-f8be-4f1f-8106-619c5d9fee32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameManager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="State.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateMachine.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameMenuState.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AssetManager.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game Engine Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DEFINITIONS.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game Engine Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.hpp">
+      <Filter>Header Files\Game Engine Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.hpp">
+      <Filter>Header Files\Game Engine Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="State.hpp">
+      <Filter>Header Files\Game Engine Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMenuState.hpp">
+      <Filter>Header Files\Game Engine Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game Engine Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.hpp">
+      <Filter>Header Files\Gameplay Header FIles</Filter>
     </ClInclude>
     <ClInclude Include="Player.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Gameplay Header FIles</Filter>
     </ClInclude>
     <ClInclude Include="PlayerUser.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Gameplay Header FIles</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomMoveinC.h">
+      <Filter>Header Files\Gameplay Header FIles</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRandom.hpp">
+      <Filter>Header Files\Gameplay Header FIles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -121,7 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="kernel.cu">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Gameplay Source Files</Filter>
     </CudaCompile>
   </ItemGroup>
 </Project>
