@@ -46,6 +46,12 @@
     <ClCompile Include="PlayerRandom.cpp">
       <Filter>Source Files\Gameplay Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SymmetricMoveInC.c">
+      <Filter>Source Files\Gameplay Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSymmetric.cpp">
+      <Filter>Source Files\Gameplay Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -105,6 +111,12 @@
       <Filter>Header Files\Gameplay Header FIles</Filter>
     </ClInclude>
     <ClInclude Include="PlayerRandom.hpp">
+      <Filter>Header Files\Gameplay Header FIles</Filter>
+    </ClInclude>
+    <ClInclude Include="SymmetricMoveinC.h">
+      <Filter>Header Files\Gameplay Header FIles</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSymmetric.hpp">
       <Filter>Header Files\Gameplay Header FIles</Filter>
     </ClInclude>
   </ItemGroup>

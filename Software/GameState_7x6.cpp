@@ -10,10 +10,12 @@
 GameState_7x6::GameState_7x6(GameDataRef data) : _data(data)
 {
 	eval = 0;
+	prevCol = -1;
 }
 
 void GameState_7x6::Init()
 {
+	prevCol = -1;
 	this->_data->_turn = PLAYER_ONE;
 	this->_data->_gameOver = false;
 	this->_data->assets.LoadTexture("Game BOARD", GAME_BOARD_PATH);

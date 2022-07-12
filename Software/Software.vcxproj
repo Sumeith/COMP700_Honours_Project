@@ -96,9 +96,11 @@
     <ClCompile Include="GameState_4x4.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerRandom.cpp" />
+    <ClCompile Include="PlayerSymmetric.cpp" />
     <ClCompile Include="PlayerUser.cpp" />
     <ClCompile Include="RandomMoveInC.c" />
     <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="SymmetricMoveInC.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.hpp" />
@@ -106,6 +108,8 @@
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="GameMenuState.hpp" />
     <ClInclude Include="GameState.hpp" />
+    <ClInclude Include="PlayerSymmetric.hpp" />
+    <ClInclude Include="SymmetricMoveinC.h" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PlayerRandom.hpp" />

@@ -12,7 +12,7 @@ int getRandomColumn_4x4(Board_4x4 *board)
 	while (!foundColumn)
 	{
 		colPlacement = rand() % (WIDTH_4x4 + 1);
-		if (board->_grid[0][colPlacement] != EMPTY_DISC)
+		if (board->_grid[0][colPlacement] == EMPTY_DISC)
 		{
 			foundColumn = true;
 		}
@@ -44,7 +44,7 @@ int getRandomColumn_14x12(Board_14x12 *board)
 	while (!foundColumn)
 	{
 		colPlacement = rand() % (WIDTH_14x12 + 1);
-		if (board->_grid[0][colPlacement] != EMPTY_DISC)
+		if (board->_grid[0][colPlacement] == EMPTY_DISC)
 		{
 			foundColumn = true;
 		}
