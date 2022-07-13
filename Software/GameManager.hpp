@@ -18,6 +18,7 @@ struct GameData
 	std::unique_ptr<Player> player2;
 	bool _gameOver;
 	int _turn;
+	int _prevCol;
 };
 
 typedef std::shared_ptr<GameData> GameDataRef;

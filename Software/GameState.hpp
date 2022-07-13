@@ -24,7 +24,6 @@ protected:
 	bool _gameOver;
 	Discs _turn;
 	int eval;
-	int prevCol;
 };
 
 ///////////////////////////////////////////////////////////

@@ -10,13 +10,15 @@
 GameState_4x4::GameState_4x4(GameDataRef data) : _data(data)
 {
 	eval = 0;
-	prevCol = -1;
+	
 }
 
 void GameState_4x4::Init()
 {
 	this->_data->_turn = PLAYER_ONE;
 	this->_data->_gameOver = false;
+	this->_data->_prevCol= -1;
+
 	this->_data->assets.LoadTexture("Game BOARD", GAME_BOARD_PATH);
 
 	this->_data->assets.LoadTexture("Player One Disc", PLAYER_ONE_DISC_PATH);

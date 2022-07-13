@@ -31,6 +31,7 @@ void PlayerUser::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][W
 			if (board->_grid[row][column] == EMPTY_DISC)
 			{
 				board->_grid[row][column] = _playerDisc;
+				this->_data->_prevCol = column;
 
 				if (_playerDisc == PLAYER_ONE_DISC)
 				{
@@ -88,6 +89,7 @@ void PlayerUser::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][W
 			if (board->_grid[row][column] == EMPTY_DISC)
 			{
 				board->_grid[row][column] = _playerDisc;
+				this->_data->_prevCol = column;
 
 				if (_playerDisc == PLAYER_ONE_DISC)
 				{
@@ -145,6 +147,7 @@ void PlayerUser::nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x1
 			if (board->_grid[row][column] == EMPTY_DISC)
 			{
 				board->_grid[row][column] = _playerDisc;
+				this->_data->_prevCol = column;
 
 				if (_playerDisc == PLAYER_ONE_DISC)
 				{

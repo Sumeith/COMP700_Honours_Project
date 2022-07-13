@@ -9,6 +9,7 @@ PlayerRandom::PlayerRandom(GameDataRef data, Discs playerDisc) : _data{ data }, 
 void PlayerRandom::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4])
 {
 	int colPlacement = getRandomColumn_4x4(board);
+	this->_data->_prevCol = colPlacement;
 
 	int width = WIDTH_7x6;
 	int height = HEIGHT_7x6;
@@ -49,6 +50,8 @@ void PlayerRandom::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4]
 void PlayerRandom::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6])
 {
 	int colPlacement = getRandomColumn_7x6(board);
+	this->_data->_prevCol = colPlacement;
+
 
 	int width = WIDTH_7x6;
 	int height = HEIGHT_7x6;
@@ -90,6 +93,7 @@ void PlayerRandom::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6]
 void PlayerRandom::nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12])
 {
 	int colPlacement = getRandomColumn_14x12(board);
+	this->_data->_prevCol = colPlacement;
 
 	int width = WIDTH_14x12;
 	int height = HEIGHT_14x12;
