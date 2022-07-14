@@ -5,6 +5,8 @@
 #include "PlayerUser.hpp"
 #include "PlayerRandom.hpp"
 #include "PlayerSymmetric.hpp"
+#include "PlayerCopy.hpp"
+
 GameMenuState::GameMenuState(GameDataRef data): _data(data)
 {
 
@@ -45,7 +47,7 @@ void GameMenuState::Update(float dt)
 	{
 		this->_data->player1 = std::make_unique<PlayerUser>(this->_data , PLAYER_ONE_DISC);
 		this->_data->player2 = std::make_unique<PlayerUser>(this->_data, PLAYER_TWO_DISC);
-		//PlayerRandom PlayerSymmetric PlayerUser
+		//PlayerRandom PlayerSymmetric PlayerCopy PlayerUser 
 		this->_data->machine.AddState(StateRef(new GameState_7x6(_data)), true);
 	}
 }

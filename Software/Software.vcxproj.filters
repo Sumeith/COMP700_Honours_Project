@@ -52,6 +52,12 @@
     <ClCompile Include="PlayerSymmetric.cpp">
       <Filter>Source Files\Gameplay Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SameColumnMoveInC.c">
+      <Filter>Source Files\Gameplay Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCopy.cpp">
+      <Filter>Source Files\Gameplay Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -117,6 +123,12 @@
       <Filter>Header Files\Gameplay Header FIles</Filter>
     </ClInclude>
     <ClInclude Include="PlayerSymmetric.hpp">
+      <Filter>Header Files\Gameplay Header FIles</Filter>
+    </ClInclude>
+    <ClInclude Include="SameColumnMoveInC.h">
+      <Filter>Header Files\Gameplay Header FIles</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCopy.hpp">
       <Filter>Header Files\Gameplay Header FIles</Filter>
     </ClInclude>
   </ItemGroup>
