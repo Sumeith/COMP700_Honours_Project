@@ -99,9 +99,11 @@
     <ClCompile Include="PlayerCopy.cpp" />
     <ClCompile Include="PlayerLeft.cpp" />
     <ClCompile Include="PlayerRandom.cpp" />
+    <ClCompile Include="PlayerRight.cpp" />
     <ClCompile Include="PlayerSymmetric.cpp" />
     <ClCompile Include="PlayerUser.cpp" />
     <ClCompile Include="RandomMoveInC.c" />
+    <ClCompile Include="RightMoveInC.c" />
     <ClCompile Include="SameColumnMoveInC.c" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="SymmetricMoveInC.c" />
@@ -115,7 +117,9 @@
     <ClInclude Include="LeftMoveInC.h" />
     <ClInclude Include="PlayerCopy.hpp" />
     <ClInclude Include="PlayerLeft.hpp" />
+    <ClInclude Include="PlayerRight.hpp" />
     <ClInclude Include="PlayerSymmetric.hpp" />
+    <ClInclude Include="RightMoveInC.h" />
     <ClInclude Include="SameColumnMoveInC.h" />
     <ClInclude Include="SymmetricMoveinC.h" />
     <ClInclude Include="InputManager.hpp" />
