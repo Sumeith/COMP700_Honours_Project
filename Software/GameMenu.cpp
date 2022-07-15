@@ -6,6 +6,7 @@
 #include "PlayerRandom.hpp"
 #include "PlayerSymmetric.hpp"
 #include "PlayerCopy.hpp"
+#include "PlayerLeft.hpp"
 
 GameMenuState::GameMenuState(GameDataRef data): _data(data)
 {
@@ -46,9 +47,9 @@ void GameMenuState::Update(float dt)
 	if (this->_clock.getElapsedTime().asSeconds() > 1)
 	{
 		this->_data->player1 = std::make_unique<PlayerUser>(this->_data , PLAYER_ONE_DISC);
-		this->_data->player2 = std::make_unique<PlayerUser>(this->_data, PLAYER_TWO_DISC);
-		//PlayerRandom PlayerSymmetric PlayerCopy PlayerUser 
-		this->_data->machine.AddState(StateRef(new GameState_7x6(_data)), true);
+		this->_data->player2 = std::make_unique<PlayerLeft>(this->_data, PLAYER_TWO_DISC);
+		//PlayerRandom PlayerSymmetric PlayerCopy PlayerUser PlayerLeft
+		this->_data->machine.AddState(StateRef(new GameState_14x12(_data)), true);
 	}
 }
 

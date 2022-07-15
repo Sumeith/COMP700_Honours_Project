@@ -92,10 +92,12 @@
     <ClCompile Include="GameState_21x18.cpp" />
     <ClCompile Include="GameState_7x6.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LeftMoveInC.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameState_4x4.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCopy.cpp" />
+    <ClCompile Include="PlayerLeft.cpp" />
     <ClCompile Include="PlayerRandom.cpp" />
     <ClCompile Include="PlayerSymmetric.cpp" />
     <ClCompile Include="PlayerUser.cpp" />
@@ -110,7 +112,9 @@
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="GameMenuState.hpp" />
     <ClInclude Include="GameState.hpp" />
+    <ClInclude Include="LeftMoveInC.h" />
     <ClInclude Include="PlayerCopy.hpp" />
+    <ClInclude Include="PlayerLeft.hpp" />
     <ClInclude Include="PlayerSymmetric.hpp" />
     <ClInclude Include="SameColumnMoveInC.h" />
     <ClInclude Include="SymmetricMoveinC.h" />
