@@ -8,7 +8,7 @@ int getRandomColumn_4x4(Board_4x4 *board)
 {
 	bool foundColumn = false;
 	int colPlacement;
-	srand(time(0));
+	//srand(time(0));
 	while (!foundColumn)
 	{
 		colPlacement = rand() % (WIDTH_4x4 + 1);
@@ -24,7 +24,7 @@ int getRandomColumn_7x6(Board_7x6 *board)
 {
 	bool foundColumn = false;
 	int colPlacement;
-	srand(time(0));
+	//srand(time(0));
 	while (!foundColumn)
 	{
 		colPlacement = rand() % (WIDTH_7x6);
@@ -40,7 +40,7 @@ int getRandomColumn_14x12(Board_14x12 *board)
 {
 	bool foundColumn = false;
 	int colPlacement;
-	srand(time(0));
+	//srand(time(0));
 	while (!foundColumn)
 	{
 		colPlacement = rand() % (WIDTH_14x12 + 1);
