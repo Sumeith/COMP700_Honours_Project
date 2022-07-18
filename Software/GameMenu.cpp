@@ -50,7 +50,7 @@ void GameMenuState::Update(float dt)
 		this->_data->player1 = std::make_unique<PlayerUser>(this->_data , PLAYER_ONE_DISC);
 		this->_data->player2 = std::make_unique<PlayerUser>(this->_data, PLAYER_TWO_DISC);
 		//PlayerRandom PlayerSymmetric PlayerCopy PlayerUser PlayerLeft PlayerRight
-		this->_data->machine.AddState(StateRef(new GameState_7x6(_data)), true);
+		this->_data->machine.AddState(StateRef(new GameState_4x4(_data)), true);
 	}
 }
 

@@ -22,13 +22,6 @@ public:
 	virtual void updateGameState(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12]) = 0;
 
 	int getEvaluation();
-	bool checkConditionHorizontal(int col, int width);
-	bool checkConditionVertical(int row, int height);
-	bool checkConditionPosDiag(int row, int col, int width);
-	bool checkConditionNegDiag(int row, int col, int height, int width);
-	void checkThreeInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
-	void checkTwoInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
-	void checkOneInARow(Discs boardDisc1, Discs boardDisc2, Discs boardDisc3, Discs boardDisc4, int evalArr[]);
 
 protected:
 	int eval;

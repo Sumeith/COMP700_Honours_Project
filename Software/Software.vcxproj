@@ -104,6 +104,7 @@
     <ClCompile Include="PlayerUser.cpp" />
     <ClCompile Include="RandomMoveInC.c" />
     <ClCompile Include="RightMoveInC.c" />
+    <ClCompile Include="RowEvalInC.c" />
     <ClCompile Include="SameColumnMoveInC.c" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="SymmetricMoveInC.c" />
@@ -120,6 +121,7 @@
     <ClInclude Include="PlayerRight.hpp" />
     <ClInclude Include="PlayerSymmetric.hpp" />
     <ClInclude Include="RightMoveInC.h" />
+    <ClInclude Include="RowEvalInC.h" />
     <ClInclude Include="SameColumnMoveInC.h" />
     <ClInclude Include="SymmetricMoveinC.h" />
     <ClInclude Include="InputManager.hpp" />

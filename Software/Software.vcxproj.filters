@@ -70,6 +70,9 @@
     <ClCompile Include="PlayerRight.cpp">
       <Filter>Source Files\Gameplay Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RowEvalInC.c">
+      <Filter>Source Files\Gameplay Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -153,6 +156,9 @@
       <Filter>Header Files\Gameplay Header FIles</Filter>
     </ClInclude>
     <ClInclude Include="PlayerRight.hpp">
+      <Filter>Header Files\Gameplay Header FIles</Filter>
+    </ClInclude>
+    <ClInclude Include="RowEvalInC.h">
       <Filter>Header Files\Gameplay Header FIles</Filter>
     </ClInclude>
   </ItemGroup>

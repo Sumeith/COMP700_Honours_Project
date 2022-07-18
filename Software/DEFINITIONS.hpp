@@ -44,6 +44,9 @@
 #define PLAYER_ONE 1
 #define PLAYER_TWO -PLAYER_ONE
 
+#define POS_INF INT_MAX
+#define NEG_INF INT_MIN
+
 typedef enum
 {
 	PLAYER_ONE_DISC,
