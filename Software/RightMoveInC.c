@@ -18,7 +18,7 @@ int getRightColumn_4x4(Board_4x4* board, int prevCol)
 		{
 			while (true)
 			{
-				int colPlacement = rand() % (WIDTH_4x4 - prevCol) + prevCol;
+				int colPlacement = rand() % (WIDTH_4x4 - prevCol - 1) + prevCol + 1;
 				if (board->_grid[0][colPlacement] == EMPTY_DISC)
 				{
 					return colPlacement;
@@ -43,7 +43,7 @@ int getRightColumn_7x6(Board_7x6* board, int prevCol)
 		{
 			while (true)
 			{
-				int colPlacement = rand() % (WIDTH_7x6 - prevCol) + prevCol;
+				int colPlacement = rand() % (WIDTH_7x6 - prevCol - 1) + prevCol + 1;
 				if (board->_grid[0][colPlacement] == EMPTY_DISC)
 				{
 					return colPlacement;
@@ -68,7 +68,7 @@ int getRightColumn_14x12(Board_14x12* board, int prevCol)
 		{
 			while (true)
 			{
-				int colPlacement = rand() % (WIDTH_14x12 - prevCol) + prevCol;
+				int colPlacement = rand() % (WIDTH_14x12 - prevCol - 1) + prevCol + 1;
 				if (board->_grid[0][colPlacement] == EMPTY_DISC)
 				{
 					return colPlacement;

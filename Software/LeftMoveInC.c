@@ -18,7 +18,7 @@ int getLeftColumn_4x4(Board_4x4* board, int prevCol)
 		{
 			while (true)
 			{
-				int colPlacement = rand() % (prevCol + 1);
+				int colPlacement = rand() % prevCol;
 				if (board->_grid[0][colPlacement] == EMPTY_DISC)
 				{
 					return colPlacement;
