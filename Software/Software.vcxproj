@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="GameFuncInC.c" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="GameState.cpp" />
@@ -95,9 +96,13 @@
     <ClCompile Include="LeftMoveInC.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameState_4x4.cpp" />
+    <ClCompile Include="MiniMaxRowEvalInC.c" />
+    <ClCompile Include="NaiveRowEvalMoveInC.c" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCopy.cpp" />
     <ClCompile Include="PlayerLeft.cpp" />
+    <ClCompile Include="PlayerMiniMaxRowEval.cpp" />
+    <ClCompile Include="PlayerNaiveRowEval.cpp" />
     <ClCompile Include="PlayerRandom.cpp" />
     <ClCompile Include="PlayerRight.cpp" />
     <ClCompile Include="PlayerSymmetric.cpp" />
@@ -112,12 +117,16 @@
   <ItemGroup>
     <ClInclude Include="AssetManager.hpp" />
     <ClInclude Include="DEFINITIONS.hpp" />
+    <ClInclude Include="GameFuncInC.h" />
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="GameMenuState.hpp" />
     <ClInclude Include="GameState.hpp" />
     <ClInclude Include="LeftMoveInC.h" />
+    <ClInclude Include="NaiveRowEvalMoveInC.h" />
     <ClInclude Include="PlayerCopy.hpp" />
     <ClInclude Include="PlayerLeft.hpp" />
+    <ClInclude Include="PlayerMiniMaxRowEval.hpp" />
+    <ClInclude Include="PlayerNaiveRowEval.hpp" />
     <ClInclude Include="PlayerRight.hpp" />
     <ClInclude Include="PlayerSymmetric.hpp" />
     <ClInclude Include="RightMoveInC.h" />

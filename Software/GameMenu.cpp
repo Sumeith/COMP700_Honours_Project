@@ -8,6 +8,7 @@
 #include "PlayerCopy.hpp"
 #include "PlayerLeft.hpp"
 #include "PlayerRight.hpp"
+#include "PlayerNaiveRowEval.hpp"
 
 GameMenuState::GameMenuState(GameDataRef data): _data(data)
 {
@@ -47,10 +48,11 @@ void GameMenuState::Update(float dt)
 {
 	if (this->_clock.getElapsedTime().asSeconds() > 1)
 	{
-		this->_data->player1 = std::make_unique<PlayerUser>(this->_data , PLAYER_ONE_DISC);
-		this->_data->player2 = std::make_unique<PlayerUser>(this->_data, PLAYER_TWO_DISC);
+		this->_data->player1 = std::make_unique<PlayerNaiveRowEval>(this->_data , PLAYER_ONE_DISC);
+		this->_data->player2 = std::make_unique<PlayerNaiveRowEval>(this->_data, PLAYER_TWO_DISC);
 		//PlayerRandom PlayerSymmetric PlayerCopy PlayerUser PlayerLeft PlayerRight
-		this->_data->machine.AddState(StateRef(new GameState_4x4(_data)), true);
+		//PlayerNaiveRowEval
+		this->_data->machine.AddState(StateRef(new GameState_14x12(_data)), true);
 	}
 }
 
