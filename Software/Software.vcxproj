@@ -122,6 +122,7 @@
     <ClInclude Include="GameMenuState.hpp" />
     <ClInclude Include="GameState.hpp" />
     <ClInclude Include="LeftMoveInC.h" />
+    <ClInclude Include="MiniMaxRowEvalInC.h" />
     <ClInclude Include="NaiveRowEvalMoveInC.h" />
     <ClInclude Include="PlayerCopy.hpp" />
     <ClInclude Include="PlayerLeft.hpp" />

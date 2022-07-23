@@ -200,6 +200,9 @@
     <ClInclude Include="NaiveRowEvalMoveInC.h">
       <Filter>Header Files\Gameplay Header FIles\C Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MiniMaxRowEvalInC.h">
+      <Filter>Header Files\Gameplay Header FIles\C Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resourses\grid.png">
