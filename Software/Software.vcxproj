@@ -102,6 +102,8 @@
     <ClCompile Include="PlayerCopy.cpp" />
     <ClCompile Include="PlayerLeft.cpp" />
     <ClCompile Include="PlayerMiniMaxRowEval.cpp" />
+    <ClCompile Include="PlayerMiniMaxRowEvalDepth10.cpp" />
+    <ClCompile Include="PlayerMiniMaxRowEvalDepth5.cpp" />
     <ClCompile Include="PlayerNaiveRowEval.cpp" />
     <ClCompile Include="PlayerRandom.cpp" />
     <ClCompile Include="PlayerRight.cpp" />
@@ -127,6 +129,8 @@
     <ClInclude Include="PlayerCopy.hpp" />
     <ClInclude Include="PlayerLeft.hpp" />
     <ClInclude Include="PlayerMiniMaxRowEval.hpp" />
+    <ClInclude Include="PlayerMiniMaxRowEvalDepth10.hpp" />
+    <ClInclude Include="PlayerMiniMaxRowEvalDepth5.hpp" />
     <ClInclude Include="PlayerNaiveRowEval.hpp" />
     <ClInclude Include="PlayerRight.hpp" />
     <ClInclude Include="PlayerSymmetric.hpp" />
