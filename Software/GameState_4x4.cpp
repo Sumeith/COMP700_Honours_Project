@@ -288,6 +288,7 @@ void GameState_4x4::checkWinner()
 			}
 		}
 	}
+	this->_data->_gameOver = numDiscs == totalDiscs;
 }
 //int GameState_4x4::gameEvaluation()
 //{
@@ -742,12 +743,14 @@ void GameState_4x4::HandleInput()
 				this->_data->player1->nextMove(&_board, _boardPieces);
 				eval = this->_data->player1->getEvaluation();
 				this->_data->_turn = PLAYER_TWO;
+				numDiscs++;
 			}
 			else if (this->_data->_turn == PLAYER_TWO && typeid(*this->_data->player2) == typeid(PlayerUser))
 			{
 				this->_data->player2->nextMove(&_board, _boardPieces);
 				eval = this->_data->player2->getEvaluation();
 				this->_data->_turn = PLAYER_ONE;
+				numDiscs++;
 			}
 			//dropDisc();
 			printBoard(&_board);
@@ -780,7 +783,7 @@ void GameState_4x4::Update(float dt)
 		{
 			this->_data->player1->nextMove(&_board, _boardPieces);
 			eval = this->_data->player1->getEvaluation();
-
+			numDiscs++;
 			printBoard(&_board);
 			checkWinner();
 
@@ -790,7 +793,7 @@ void GameState_4x4::Update(float dt)
 		{
 			this->_data->player2->nextMove(&_board, _boardPieces);
 			eval = this->_data->player2->getEvaluation();
-
+			numDiscs++;
 			printBoard(&_board);
 			checkWinner();
 			this->_data->_turn = PLAYER_ONE;

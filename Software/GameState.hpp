@@ -59,6 +59,8 @@ private:
 
 	const int _height = HEIGHT_7x6;
 	const int _width = WIDTH_7x6;
+	const int totalDiscs = HEIGHT_7x6 * WIDTH_7x6;
+	int numDiscs = 0;
 	sf::Sprite _boardPieces[HEIGHT_7x6][WIDTH_7x6];
 };
 
@@ -95,6 +97,8 @@ private:
 
 	const int _height = HEIGHT_4x4;
 	const int _width = WIDTH_4x4;
+	const int totalDiscs = HEIGHT_4x4 * WIDTH_4x4;
+	int numDiscs = 0;
 	sf::Sprite _boardPieces[HEIGHT_4x4][WIDTH_4x4];
 };
 
@@ -131,6 +135,8 @@ private:
 
 	const int _height = HEIGHT_14x12;
 	const int _width = WIDTH_14x12;
+	const int totalDiscs = HEIGHT_14x12 * WIDTH_14x12;
+	int numDiscs = 0;
 	sf::Sprite _boardPieces[HEIGHT_14x12][WIDTH_14x12];
 };
 

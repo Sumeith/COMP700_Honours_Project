@@ -96,11 +96,13 @@
     <ClCompile Include="LeftMoveInC.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameState_4x4.cpp" />
+    <ClCompile Include="MiniMaxABRowEvalInC.c" />
     <ClCompile Include="MiniMaxRowEvalInC.c" />
     <ClCompile Include="NaiveRowEvalMoveInC.c" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCopy.cpp" />
     <ClCompile Include="PlayerLeft.cpp" />
+    <ClCompile Include="PlayerMiniMaxABRowEval.cpp" />
     <ClCompile Include="PlayerMiniMaxRowEval.cpp" />
     <ClCompile Include="PlayerMiniMaxRowEvalDepth10.cpp" />
     <ClCompile Include="PlayerMiniMaxRowEvalDepth5.cpp" />
@@ -124,10 +126,12 @@
     <ClInclude Include="GameMenuState.hpp" />
     <ClInclude Include="GameState.hpp" />
     <ClInclude Include="LeftMoveInC.h" />
+    <ClInclude Include="MiniMaxABRowEvalInC.h" />
     <ClInclude Include="MiniMaxRowEvalInC.h" />
     <ClInclude Include="NaiveRowEvalMoveInC.h" />
     <ClInclude Include="PlayerCopy.hpp" />
     <ClInclude Include="PlayerLeft.hpp" />
+    <ClInclude Include="PlayerMiniMaxABRowEval.hpp" />
     <ClInclude Include="PlayerMiniMaxRowEval.hpp" />
     <ClInclude Include="PlayerMiniMaxRowEvalDepth10.hpp" />
     <ClInclude Include="PlayerMiniMaxRowEvalDepth5.hpp" />
