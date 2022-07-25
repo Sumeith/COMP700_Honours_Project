@@ -13,6 +13,9 @@
 #include "PlayerMiniMaxRowEvalDepth5.hpp"
 #include "PlayerMiniMaxRowEvalDepth10.hpp"
 #include "PlayerMiniMaxABRowEval.hpp"
+#include "PlayerMiniMaxABRowEvalDepth5.hpp"
+#include "PlayerMiniMaxABRowEvalDepth10.hpp"
+
 GameMenuState::GameMenuState(GameDataRef data): _data(data)
 {
 
@@ -51,13 +54,13 @@ void GameMenuState::Update(float dt)
 {
 	if (this->_clock.getElapsedTime().asSeconds() > 1)
 	{
-		this->_data->player1 = std::make_unique<PlayerMiniMaxABRowEval>(this->_data , PLAYER_ONE_DISC);
+		this->_data->player1 = std::make_unique<PlayerUser>(this->_data , PLAYER_ONE_DISC);
 		this->_data->player2 = std::make_unique<PlayerMiniMaxABRowEval>(this->_data, PLAYER_TWO_DISC);
 		//PlayerUser
 		//PlayerRandom PlayerSymmetric PlayerCopy PlayerLeft PlayerRight
 		//PlayerNaiveRowEval 
 		// PlayerMiniMaxRowEval PlayerMiniMaxRowEvalDepth5	PlayerMiniMaxRowEvalDepth10
-		// PlayerMiniMaxABRowEval
+		// PlayerMiniMaxABRowEval PlayerMiniMaxABRowEvalDepth5	PlayerMiniMaxABRowEvalDepth10
 		this->_data->machine.AddState(StateRef(new GameState_7x6(_data)), true);
 	}
 }
