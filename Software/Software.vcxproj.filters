@@ -106,6 +106,12 @@
     <ClCompile Include="PlayerMiniMaxABRowEvalDepth10.cpp">
       <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NegaMaxRowEvalInC.c">
+      <Filter>Source Files\Gameplay Source Files\C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerNegaMaxRowEval.cpp">
+      <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -237,6 +243,12 @@
       <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerMiniMaxABRowEvalDepth10.hpp">
+      <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NegaMaxRowEvalInC.h">
+      <Filter>Header Files\Gameplay Header FIles\C Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerNegaMaxRowEval.hpp">
       <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
     </ClInclude>
   </ItemGroup>

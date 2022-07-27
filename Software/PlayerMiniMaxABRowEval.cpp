@@ -51,7 +51,7 @@ void PlayerMiniMaxABRowEval::nextMove(Board_4x4* board, sf::Sprite boardPieces[H
 void PlayerMiniMaxABRowEval::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6])
 {
 	int colPlacement;
-	int depth = 6;
+	int depth = 7;
 	eval = minimaxABRowEval_7x6(board, depth, INT_MIN, INT_MAX, _playerDisc, &colPlacement);
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_7x6;
