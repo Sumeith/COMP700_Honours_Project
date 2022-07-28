@@ -77,6 +77,7 @@ void GameState_14x12::checkWinner()
 				_boardPieces[row][col + 1].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
 				_boardPieces[row][col + 2].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
 				_boardPieces[row][col + 3].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				this->_data->_gameOver = true;
 				return;
 			}
 
@@ -91,6 +92,7 @@ void GameState_14x12::checkWinner()
 				_boardPieces[row][col + 1].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
 				_boardPieces[row][col + 2].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
 				_boardPieces[row][col + 3].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				this->_data->_gameOver = true;
 				return;
 			}
 		}
@@ -112,6 +114,7 @@ void GameState_14x12::checkWinner()
 				_boardPieces[row + 1][col].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
 				_boardPieces[row + 2][col].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
 				_boardPieces[row + 3][col].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				this->_data->_gameOver = true;
 				return;
 			}
 
@@ -126,6 +129,7 @@ void GameState_14x12::checkWinner()
 				_boardPieces[row + 1][col].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
 				_boardPieces[row + 2][col].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
 				_boardPieces[row + 3][col].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				this->_data->_gameOver = true;
 				return;
 			}
 		}
@@ -147,6 +151,7 @@ void GameState_14x12::checkWinner()
 				_boardPieces[row - 1][col + 1].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
 				_boardPieces[row - 2][col + 2].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
 				_boardPieces[row - 3][col + 3].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				this->_data->_gameOver = true;
 				return;
 			}
 
@@ -161,6 +166,7 @@ void GameState_14x12::checkWinner()
 				_boardPieces[row - 1][col + 1].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
 				_boardPieces[row - 2][col + 2].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
 				_boardPieces[row - 3][col + 3].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				this->_data->_gameOver = true;
 				return;
 			}
 		}
@@ -182,6 +188,7 @@ void GameState_14x12::checkWinner()
 				_boardPieces[row + 1][col + 1].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
 				_boardPieces[row + 2][col + 2].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
 				_boardPieces[row + 3][col + 3].setTexture(this->_data->assets.GetTexture("Player One Win Disc"));
+				this->_data->_gameOver = true;
 				return;
 			}
 
@@ -196,6 +203,7 @@ void GameState_14x12::checkWinner()
 				_boardPieces[row + 1][col + 1].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
 				_boardPieces[row + 2][col + 2].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
 				_boardPieces[row + 3][col + 3].setTexture(this->_data->assets.GetTexture("Player Two Win Disc"));
+				this->_data->_gameOver = true;
 				return;
 			}
 		}

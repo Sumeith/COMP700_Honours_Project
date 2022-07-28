@@ -49,9 +49,9 @@
 
 typedef enum
 {
-	PLAYER_ONE_DISC,
-	PLAYER_TWO_DISC,
-	EMPTY_DISC
+	PLAYER_ONE_DISC = 1,
+	PLAYER_TWO_DISC = -1,
+	EMPTY_DISC = 0
 }Discs;
 
 #define HEIGHT_7x6 6

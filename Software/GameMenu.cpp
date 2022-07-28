@@ -55,7 +55,7 @@ void GameMenuState::Update(float dt)
 	if (this->_clock.getElapsedTime().asSeconds() > 1)
 	{
 		this->_data->player1 = std::make_unique<PlayerUser>(this->_data , PLAYER_ONE_DISC);
-		this->_data->player2 = std::make_unique<PlayerRight>(this->_data, PLAYER_TWO_DISC);
+		this->_data->player2 = std::make_unique<PlayerUser>(this->_data, PLAYER_TWO_DISC);
 		//PlayerUser
 		//PlayerRandom PlayerSymmetric PlayerCopy PlayerLeft PlayerRight
 		// PlayerNaiveRowEval 
