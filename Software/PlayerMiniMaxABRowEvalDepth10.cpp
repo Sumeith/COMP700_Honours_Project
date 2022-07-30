@@ -1,5 +1,11 @@
 #include "PlayerMiniMaxABRowEvalDepth10.hpp"
 #include "RowEvalInC.h"
+#include "Weight1EvalInC.h"
+#include "Weight2EvalInC.h"
+#include "Weight3EvalInC.h"
+#include "RowWithWeight1Eval.h"
+#include "RowWithWeight2Eval.h"
+#include "RowWithWeight3Eval.h"
 
 PlayerMiniMaxABRowEvalDepth10::PlayerMiniMaxABRowEvalDepth10(GameDataRef data, Discs playerDisc) : _data{ data }, _playerDisc{ playerDisc }
 {

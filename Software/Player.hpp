@@ -26,6 +26,9 @@ public:
 	int getWeight1Evaluation();
 	int getWeight2Evaluation();
 	int getWeight3Evaluation();
+	int getRowWeight1Eval();
+	int getRowWeight2Eval();
+	int getRowWeight3Eval();
 
 protected:
 	int eval;
@@ -33,4 +36,7 @@ protected:
 	int weight1Eval;
 	int weight2Eval;
 	int weight3Eval;
+	int rowWeight1Eval;
+	int rowWeight2Eval;
+	int rowWeight3Eval;
 };

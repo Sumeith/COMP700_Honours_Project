@@ -1,6 +1,5 @@
 #include "Weight1EvalInC.h"
 #include "HeuristicsWeights.h"
-
 int weight1Eval_4x4(Board_4x4* board)
 {
 	int eval = 0;

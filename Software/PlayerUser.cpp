@@ -2,6 +2,12 @@
 #include "PlayerUser.hpp"
 #include "RowEvalInC.h"
 #include "Weight1EvalInC.h"
+#include "Weight2EvalInC.h"
+#include "Weight3EvalInC.h"
+#include "RowWithWeight1Eval.h"
+#include "RowWithWeight2Eval.h"
+#include "RowWithWeight3Eval.h"
+
 PlayerUser::PlayerUser(GameDataRef data, Discs playerDisc) : _data{ data }, _playerDisc { playerDisc }
 {
 	
@@ -190,7 +196,7 @@ int PlayerUser::calcEvaluation(Board_4x4* board)
 int PlayerUser::calcEvaluation(Board_7x6* board)
 {
 	//eval = rowEval_7x6(board);
-	eval = weight1Eval_7x6(board);
+	//eval = weight1Eval_7x6(board);
 	return eval;
 }
 

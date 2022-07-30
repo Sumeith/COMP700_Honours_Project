@@ -13,7 +13,6 @@ extern "C" {
 
 	int checkConditionHorizontal(int col, int width);
 
-
 	int checkConditionVertical(int row, int height);
 
 	int checkConditionPosDiag(int row, int col, int width);

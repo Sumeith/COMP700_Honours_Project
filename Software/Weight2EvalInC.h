@@ -1,6 +1,6 @@
 #pragma once
 #include "DEFINITIONS.hpp"
-#include "HeuristicsWeights.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif // __cplusplus

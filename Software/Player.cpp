@@ -24,3 +24,18 @@ int Player::getWeight3Evaluation()
 {
 	return weight3Eval;
 }
+
+int Player::getRowWeight1Eval()
+{
+	return rowWeight1Eval;
+}
+
+int Player::getRowWeight2Eval()
+{
+	return rowWeight2Eval;
+}
+
+int Player::getRowWeight3Eval()
+{
+	return rowWeight3Eval;
+}
