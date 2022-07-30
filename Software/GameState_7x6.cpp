@@ -18,7 +18,7 @@ void GameState_7x6::Init()
 	this->_data->_gameOver = false;
 	this->_data->_prevCol = -1;
 
-	this->_data->assets.LoadTexture("Game BOARD", GAME_BOARD_PATH);
+	//this->_data->assets.LoadTexture("Game BOARD", GAME_BOARD_PATH);
 
 	this->_data->assets.LoadTexture("Player One Disc", PLAYER_ONE_DISC_PATH);
 	this->_data->assets.LoadTexture("Player Two Disc", PLAYER_TWO_DISC_PATH);
@@ -26,11 +26,11 @@ void GameState_7x6::Init()
 	this->_data->assets.LoadTexture("Player Two Win Disc", PLAYER_TWO_WIN_DISC_PATH);
 
 	this->_data->assets.LoadTexture("Empty Disc", EMPTY_DISC_PATH);
-	this->_data->assets.LoadTexture("Game Board", GAME_BOARD_PATH);
+	//this->_data->assets.LoadTexture("Game Board", GAME_BOARD_PATH);
 
 	this->_data->window.create(sf::VideoMode(SCREEN_WIDTH_7x6, SCREEN_HEIGHT_7x6), TITLE_7x6, sf::Style::Close | sf::Style::Titlebar);
 
-	this->_background.setTexture(this->_data->assets.GetTexture("Game BOARD"));
+	//this->_background.setTexture(this->_data->assets.GetTexture("Game BOARD"));
 
 	for (int x = 0; x < _height; x++)
 	{

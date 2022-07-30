@@ -22,8 +22,8 @@
 
 #define TRANSITION_TIME 10000
 
-#define MAIN_MENU_BACKGROUND_PATH "Resourses\\grid.png"
-#define GAME_BOARD_PATH "Resourses\\grid.png"
+//#define MAIN_MENU_BACKGROUND_PATH "Resourses\\grid.png"
+//#define GAME_BOARD_PATH "Resourses\\grid.png"
 #define PLAYER_ONE_DISC_PATH "Resourses\\red_disc.png"
 #define PLAYER_ONE_DISC_SMALL_PATH "Resourses\\red_disc_small.png"
 #define PLAYER_ONE_WIN_DISC_PATH "Resourses\\red_win_disc.png"

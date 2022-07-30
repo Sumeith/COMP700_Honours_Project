@@ -173,7 +173,6 @@
     <Image Include="Resourses\blue_win_disc.png" />
     <Image Include="Resourses\blue_win_disc_small.png" />
     <Image Include="Resourses\empty_small_disc.png" />
-    <Image Include="Resourses\grid.png" />
     <Image Include="Resourses\empty_disc.png" />
     <Image Include="Resourses\red_disc.png" />
     <Image Include="Resourses\red_disc_small.png" />

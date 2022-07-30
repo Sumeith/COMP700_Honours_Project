@@ -280,9 +280,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resourses\grid.png">
-      <Filter>Resource</Filter>
-    </Image>
     <Image Include="Resourses\blue_disc.png">
       <Filter>Resource</Filter>
     </Image>

@@ -22,7 +22,15 @@ public:
 	virtual void updateGameState(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12]) = 0;
 
 	int getEvaluation();
+	int getRowEvaluation();
+	int getWeight1Evaluation();
+	int getWeight2Evaluation();
+	int getWeight3Evaluation();
 
 protected:
 	int eval;
+	int rowEval;
+	int weight1Eval;
+	int weight2Eval;
+	int weight3Eval;
 };

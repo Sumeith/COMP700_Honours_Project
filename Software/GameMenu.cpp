@@ -23,8 +23,8 @@ GameMenuState::GameMenuState(GameDataRef data): _data(data)
 
 void GameMenuState::Init()
 {
-	this->_data->assets.LoadTexture("Game Menu Background", "Resourses\\grid.png");
-	_background.setTexture(this -> _data -> assets.GetTexture("Game Menu Background"));
+	//this->_data->assets.LoadTexture("Game Menu Background", "Resourses\\grid.png");
+	//_background.setTexture(this -> _data -> assets.GetTexture("Game Menu Background"));
 }
 
 void GameMenuState::HandleInput()
@@ -63,7 +63,7 @@ void GameMenuState::Update(float dt)
 		// PlayerMiniMaxABRowEval PlayerMiniMaxABRowEvalDepth5	PlayerMiniMaxABRowEvalDepth10
 		// 
 		// PlayerNegaMaxRowEval
-		this->_data->machine.AddState(StateRef(new GameState_7x6(_data)), true);
+		this->_data->machine.AddState(StateRef(new GameState_14x12(_data)), true);
 	}
 }
 
