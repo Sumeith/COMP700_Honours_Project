@@ -16,7 +16,8 @@ void PlayerMiniMaxRowEval::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEI
 {
 	int colPlacement;
 	int depth = INT_MAX;
-	eval = minimaxRowEval_4x4(board, depth, _playerDisc, &colPlacement);
+	int eval; 
+	minimaxRowEval_4x4(board, depth, _playerDisc, &colPlacement, &eval);
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_4x4;
 	int height = HEIGHT_4x4;
@@ -58,7 +59,8 @@ void PlayerMiniMaxRowEval::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEI
 {
 	int colPlacement;
 	int depth = 6;
-	eval = minimaxRowEval_7x6(board, depth, _playerDisc, &colPlacement);
+	int eval;
+	minimaxRowEval_7x6(board, depth, _playerDisc, &colPlacement, &eval);
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_7x6;
 	int height = HEIGHT_7x6;
@@ -100,7 +102,8 @@ void PlayerMiniMaxRowEval::nextMove(Board_14x12* board, sf::Sprite boardPieces[H
 {
 	int colPlacement;
 	int depth = INT_MAX;
-	eval = minimaxRowEval_14x12(board, depth, _playerDisc, &colPlacement);
+	int eval;
+	minimaxRowEval_14x12(board, depth, _playerDisc, &colPlacement, &eval);
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_14x12;
 	int height = HEIGHT_14x12;

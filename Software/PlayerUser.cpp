@@ -73,6 +73,13 @@ void PlayerUser::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][W
 
 void PlayerUser::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6])
 {
+	rowEval = rowEval_7x6(board);
+	weight1Eval = weight1Eval_7x6(board);
+	weight2Eval = weight2Eval_7x6(board);
+	weight3Eval = weight3Eval_7x6(board);
+	rowWeight1Eval = rowWeight1_7x6(board);
+	rowWeight2Eval = rowWeight2_7x6(board);
+	rowWeight3Eval = rowWeight3_7x6(board);
 	int width = WIDTH_7x6;
 	int height = HEIGHT_7x6;
 	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
@@ -119,14 +126,21 @@ void PlayerUser::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][W
 		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
 	}
 	calcEvaluation(board);
-	if (eval == PLAYER_ONE_WINS)
-	{
-		this->_data->_gameOver = true;
-	}
-	if (eval == PLAYER_TWO_WINS)
-	{
-		this->_data->_gameOver = true;
-	}
+	rowEval = rowEval_7x6(board);
+	weight1Eval = weight1Eval_7x6(board);
+	weight2Eval = weight2Eval_7x6(board);
+	weight3Eval = weight3Eval_7x6(board);
+	rowWeight1Eval = rowWeight1_7x6(board);
+	rowWeight2Eval = rowWeight2_7x6(board);
+	rowWeight3Eval = rowWeight3_7x6(board);
+	
+	std::cout << "rowEval: " << rowEval << std::endl;
+	std::cout << "weight1Eval: " << weight1Eval << std::endl;
+	std::cout << "weight2Eval: " << weight2Eval << std::endl;
+	std::cout << "weight3Eval: " << weight3Eval << std::endl;
+	std::cout << "rowWeight1Eval: " << rowWeight1Eval << std::endl;
+	std::cout << "rowWeight2Eval: " << rowWeight2Eval << std::endl;
+	std::cout << "rowWeight3Eval: " << rowWeight3Eval << std::endl;
 }
 
 void PlayerUser::nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12])
@@ -195,8 +209,13 @@ int PlayerUser::calcEvaluation(Board_4x4* board)
 
 int PlayerUser::calcEvaluation(Board_7x6* board)
 {
-	//eval = rowEval_7x6(board);
-	//eval = weight1Eval_7x6(board);
+	rowEval = rowEval_7x6(board);
+	weight1Eval = weight1Eval_7x6(board);
+	weight2Eval = weight2Eval_7x6(board);
+	weight3Eval = weight3Eval_7x6(board);
+	rowWeight1Eval = rowWeight1_7x6(board);
+	rowWeight2Eval = rowWeight2_7x6(board);
+	rowWeight3Eval = rowWeight3_7x6(board);
 	return eval;
 }
 

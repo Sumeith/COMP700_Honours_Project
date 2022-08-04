@@ -113,3 +113,39 @@ bool isValidLoc_14x12(Board_14x12* board, int col)
 {
 	return board->_grid[0][col] == EMPTY_DISC;
 }
+
+bool isGameOver_4x4(Board_4x4* board)
+{
+	for (int col = 0; col < WIDTH_4x4; col++)
+	{
+		if (board->_grid[0][col] == EMPTY_DISC)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool isGameOver_7x6(Board_7x6* board)
+{
+	for (int col = 0; col < WIDTH_7x6; col++)
+	{
+		if (board->_grid[0][col] == EMPTY_DISC)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool isGameOver_14x12(Board_14x12* board)
+{
+	for (int col = 0; col < WIDTH_14x12; col++)
+	{
+		if (board->_grid[0][col] == EMPTY_DISC)
+		{
+			return false;
+		}
+	}
+	return true;
+}

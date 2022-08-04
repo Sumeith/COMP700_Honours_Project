@@ -23,6 +23,11 @@ extern "C" {
 	
 	bool isValidLoc_14x12(Board_14x12* board, int col);
 
+	bool isGameOver_4x4(Board_4x4* board);
+
+	bool isGameOver_7x6(Board_7x6* board);
+	
+	bool isGameOver_14x12(Board_14x12* board);
 #ifdef __cplusplus
 }
 #endif // __cplusplus

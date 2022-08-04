@@ -100,6 +100,7 @@
     <ClCompile Include="MiniMaxABRowEvalInC.c" />
     <ClCompile Include="MiniMaxRowEvalInC.c" />
     <ClCompile Include="NaiveRowEvalMoveInC.c" />
+    <ClCompile Include="NaiveWeight1EvalMoveInC.c" />
     <ClCompile Include="NegaMaxRowEvalInC.c" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCopy.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="GameMenuState.hpp" />
     <ClInclude Include="GameState.hpp" />
+    <ClInclude Include="NaiveWeight1EvalMoveInC.h" />
     <ClInclude Include="RowWithWeight3Eval.h" />
     <ClInclude Include="HeuristicsWeights.h" />
     <ClInclude Include="LeftMoveInC.h" />
