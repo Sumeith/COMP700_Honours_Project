@@ -3,15 +3,20 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <windows.h>
-
 #include "DEFINITIONS.hpp"
+#include <string>
 
 class Player
 {
 public:
 	virtual void nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4]) = 0;
+	virtual void nextMove(Board_7x4* board, sf::Sprite boardPieces[HEIGHT_7x4][WIDTH_7x4]) = 0;
+	virtual void nextMove(Board_4x7* board, sf::Sprite boardPieces[HEIGHT_4x7][WIDTH_4x7]) = 0;
 	virtual void nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6]) = 0;
+	virtual void nextMove(Board_6x7* board, sf::Sprite boardPieces[HEIGHT_6x7][WIDTH_6x7]) = 0;
+	virtual void nextMove(Board_8x8* board, sf::Sprite boardPieces[HEIGHT_8x8][WIDTH_8x8]) = 0;
 	virtual void nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12]) = 0;
+	virtual void nextMove(Board_12x14* board, sf::Sprite boardPieces[HEIGHT_12x14][WIDTH_12x14]) = 0;
 
 	virtual int calcEvaluation(Board_4x4* board) = 0;
 	virtual int calcEvaluation(Board_7x6* board) = 0;
@@ -31,6 +36,7 @@ public:
 	int getRowWeight3Eval();
 
 protected:
+	std::string playerName;
 	int eval;
 	int rowEval;
 	int weight1Eval;

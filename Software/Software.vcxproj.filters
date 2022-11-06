@@ -136,6 +136,33 @@
     <ClCompile Include="NaiveWeight1EvalMoveInC.c">
       <Filter>Source Files\Gameplay Source Files\C Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NegaMaxABRowEvalInC.c">
+      <Filter>Source Files\Gameplay Source Files\C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerNegaMaxABRowEval.cpp">
+      <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMaxOpenMPRowEvalInC.c">
+      <Filter>Source Files\Gameplay Source Files\C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameFuncInOpenMP.c">
+      <Filter>Source Files\Gameplay Source Files\C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_8x8.cpp">
+      <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_7x4.cpp">
+      <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_4x7.cpp">
+      <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_6x7.cpp">
+      <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_12x14.cpp">
+      <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -297,6 +324,15 @@
       <Filter>Header Files\Gameplay Header FIles\C Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NaiveWeight1EvalMoveInC.h">
+      <Filter>Header Files\Gameplay Header FIles\C Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NegaMaxABRowEvalInC.h">
+      <Filter>Header Files\Gameplay Header FIles\C Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerNegaMaxABRowEval.hpp">
+      <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameFuncInOpenMP.h">
       <Filter>Header Files\Gameplay Header FIles\C Header Files</Filter>
     </ClInclude>
   </ItemGroup>

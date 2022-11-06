@@ -48,6 +48,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;WIN64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -86,21 +87,29 @@
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="GameFuncInC.c" />
+    <ClCompile Include="GameFuncInOpenMP.c" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="GameState_12x14.cpp" />
     <ClCompile Include="GameState_14x12.cpp" />
     <ClCompile Include="GameState_21x18.cpp" />
+    <ClCompile Include="GameState_4x7.cpp" />
+    <ClCompile Include="GameState_6x7.cpp" />
+    <ClCompile Include="GameState_7x4.cpp" />
     <ClCompile Include="GameState_7x6.cpp" />
+    <ClCompile Include="GameState_8x8.cpp" />
     <ClCompile Include="HeuristicsWeights.c" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="LeftMoveInC.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameState_4x4.cpp" />
     <ClCompile Include="MiniMaxABRowEvalInC.c" />
+    <ClCompile Include="MiniMaxOpenMPRowEvalInC.c" />
     <ClCompile Include="MiniMaxRowEvalInC.c" />
     <ClCompile Include="NaiveRowEvalMoveInC.c" />
     <ClCompile Include="NaiveWeight1EvalMoveInC.c" />
+    <ClCompile Include="NegaMaxABRowEvalInC.c" />
     <ClCompile Include="NegaMaxRowEvalInC.c" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCopy.cpp" />
@@ -112,6 +121,7 @@
     <ClCompile Include="PlayerMiniMaxRowEvalDepth10.cpp" />
     <ClCompile Include="PlayerMiniMaxRowEvalDepth5.cpp" />
     <ClCompile Include="PlayerNaiveRowEval.cpp" />
+    <ClCompile Include="PlayerNegaMaxABRowEval.cpp" />
     <ClCompile Include="PlayerNegaMaxRowEval.cpp" />
     <ClCompile Include="PlayerRandom.cpp" />
     <ClCompile Include="PlayerRight.cpp" />
@@ -134,10 +144,13 @@
     <ClInclude Include="AssetManager.hpp" />
     <ClInclude Include="DEFINITIONS.hpp" />
     <ClInclude Include="GameFuncInC.h" />
+    <ClInclude Include="GameFuncInOpenMP.h" />
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="GameMenuState.hpp" />
     <ClInclude Include="GameState.hpp" />
     <ClInclude Include="NaiveWeight1EvalMoveInC.h" />
+    <ClInclude Include="NegaMaxABRowEvalInC.h" />
+    <ClInclude Include="PlayerNegaMaxABRowEval.hpp" />
     <ClInclude Include="RowWithWeight3Eval.h" />
     <ClInclude Include="HeuristicsWeights.h" />
     <ClInclude Include="LeftMoveInC.h" />

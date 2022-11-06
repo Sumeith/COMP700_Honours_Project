@@ -1,6 +1,6 @@
 #pragma once
-#include <stdbool.h>
-#include <stdlib.h>
+//#include <stdbool.h>
+//#include <stdlib.h>
 #include "DEFINITIONS.hpp" 
 #include "RowEvalInC.h"
 #include "GameFuncInC.h"

@@ -1,4 +1,5 @@
 #include <sstream>
+#include <string>
 #include <iostream>
 #include "GameMenuState.hpp"
 #include "GameState.hpp"
@@ -16,7 +17,7 @@
 #include "PlayerMiniMaxABRowEvalDepth5.hpp"
 #include "PlayerMiniMaxABRowEvalDepth10.hpp"
 #include "PlayerNegaMaxRowEval.hpp"
-
+#include "PlayerNegaMaxABRowEval.hpp"
 GameMenuState::GameMenuState(GameDataRef data): _data(data)
 {
 
@@ -24,6 +25,7 @@ GameMenuState::GameMenuState(GameDataRef data): _data(data)
 
 void GameMenuState::Init()
 {
+	playerSet = false;
 	//this->_data->assets.LoadTexture("Game Menu Background", "Resourses\\grid.png");
 	//_background.setTexture(this -> _data -> assets.GetTexture("Game Menu Background"));
 }
@@ -53,18 +55,70 @@ void GameMenuState::HandleInput()
 
 void GameMenuState::Update(float dt)
 {
-	if (this->_clock.getElapsedTime().asSeconds() > 1)
+
+	this->_data->player1 = std::make_unique<PlayerRandom>(this->_data, PLAYER_ONE_DISC);
+	this->_data->player2 = std::make_unique<PlayerRandom>(this->_data, PLAYER_TWO_DISC);
+
+	this->_data->machine.AddState(StateRef(new GameState_12x14(_data)), true);
+	//for (int i = 0; i < 2; i++)
+	//{
+
+
+	//	if (!playerSet)
+	//	{
+	//		int player1_choice = 0;
+	//		int player2_choice = 0;
+
+	//		std::cout << "Welcome to Connect 4" << std::endl;
+	//		std::cout << "Please select 1 of the following players: " << std::endl;
+	//		std::cout << "[1] Player User" << std::endl;
+	//		std::cin >> player1_choice;
+	//		std::cin >> player2_choice;
+	//		playerSet = true;
+	//		/*this->_data->player1 = std::make_unique<PlayerUser>(this->_data , PLAYER_ONE_DISC);
+	//		this->_data->player2 = std::make_unique<PlayerUser>(this->_data, PLAYER_TWO_DISC);*/
+
+	//		//PlayerUser
+	//		//PlayerRandom PlayerSymmetric PlayerCopy PlayerLeft PlayerRight
+	//		// PlayerNaiveRowEval 
+	//		// PlayerMiniMaxRowEval PlayerMiniMaxRowEvalDepth5	PlayerMiniMaxRowEvalDepth10
+	//		// PlayerMiniMaxABRowEval PlayerMiniMaxABRowEvalDepth5	PlayerMiniMaxABRowEvalDepth10
+	//		// 
+	//		// PlayerNegaMaxRowEval
+
+	//		//PlayerNegaMaxABRowEval
+
+	//		setPlayer(1, player1_choice);
+	//		setPlayer(2, player2_choice);
+	//		this->_data->machine.AddState(StateRef(new GameState_7x6(_data)), true);
+
+	//	}
+	//}
+}
+
+void GameMenuState::setPlayer(int playerNum, int choice)
+{
+	switch (playerNum)
 	{
-		this->_data->player1 = std::make_unique<PlayerNegaMaxRowEval>(this->_data , PLAYER_ONE_DISC);
-		this->_data->player2 = std::make_unique<PlayerNegaMaxRowEval>(this->_data, PLAYER_TWO_DISC);
-		//PlayerUser
-		//PlayerRandom PlayerSymmetric PlayerCopy PlayerLeft PlayerRight
-		// PlayerNaiveRowEval 
-		// PlayerMiniMaxRowEval PlayerMiniMaxRowEvalDepth5	PlayerMiniMaxRowEvalDepth10
-		// PlayerMiniMaxABRowEval PlayerMiniMaxABRowEvalDepth5	PlayerMiniMaxABRowEvalDepth10
-		// 
-		// PlayerNegaMaxRowEval
-		this->_data->machine.AddState(StateRef(new GameState_7x6(_data)), true);
+	case 1:
+		switch (choice)
+		{
+		case 1:
+			this->_data->player1 = std::make_unique<PlayerUser>(this->_data, PLAYER_ONE_DISC);
+		default:
+			break;
+		}
+		break;
+	case 2:
+		switch (choice)
+		{
+		case 1:
+			this->_data->player2 = std::make_unique<PlayerUser>(this->_data, PLAYER_TWO_DISC);
+		default:
+			break;
+		}
+	default:
+		break;
 	}
 }
 
