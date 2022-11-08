@@ -24,6 +24,45 @@ int getLeftColumn_4x4(Board_4x4* board, int prevCol)
 	return getRandomColumn_4x4(board);
 }
 
+int getLeftColumn_7x4(Board_7x4* board, int prevCol)
+{
+	//if statement to determine if the prevColomn is invalid
+	if (prevCol <= 0 || prevCol >= WIDTH_7x4)
+	{
+		return getRandomColumn_7x4(board);
+	}
+
+	int colPlacement = prevCol - 1;
+
+	//if statement to determine if the left move is available
+	if (board->_grid[0][colPlacement] == EMPTY_DISC)
+	{
+		return colPlacement;
+	}
+
+	return getRandomColumn_7x4(board);
+}
+
+int getLeftColumn_4x7(Board_4x7* board, int prevCol)
+{
+	//if statement to determine if the prevColomn is invalid
+	if (prevCol <= 0 || prevCol >= WIDTH_4x7)
+	{
+		return getRandomColumn_4x7(board);
+	}
+
+
+	int colPlacement = prevCol - 1;
+
+	//if statement to determine if the left move is available
+	if (board->_grid[0][colPlacement] == EMPTY_DISC)
+	{
+		return colPlacement;
+	}
+
+	return getRandomColumn_4x7(board);
+}
+
 int getLeftColumn_7x6(Board_7x6* board, int prevCol)
 {
 	//if statement to determine if the prevColomn is invalid
@@ -44,6 +83,45 @@ int getLeftColumn_7x6(Board_7x6* board, int prevCol)
 	return getRandomColumn_7x6(board);
 }
 
+int getLeftColumn_6x7(Board_6x7* board, int prevCol)
+{
+	//if statement to determine if the prevColomn is invalid
+	if (prevCol <= 0 || prevCol >= WIDTH_6x7)
+	{
+		return getRandomColumn_6x7(board);
+	}
+
+
+	int colPlacement = prevCol - 1;
+
+	//if statement to determine if the left move is available
+	if (board->_grid[0][colPlacement] == EMPTY_DISC)
+	{
+		return colPlacement;
+	}
+
+	return getRandomColumn_6x7(board);
+}
+
+int getLeftColumn_8x8(Board_8x8* board, int prevCol)
+{
+	//if statement to determine if the prevColomn is invalid
+	if (prevCol <= 0 || prevCol >= WIDTH_8x8)
+	{
+		return getRandomColumn_8x8(board);
+	}
+
+	int colPlacement = prevCol - 1;
+
+	//if statement to determine if the left move is available
+	if (board->_grid[0][colPlacement] == EMPTY_DISC)
+	{
+		return colPlacement;
+	}
+
+	return getRandomColumn_8x8(board);
+}
+
 int getLeftColumn_14x12(Board_14x12* board, int prevCol)
 {
 	//if statement to determine if the prevColomn is invalid
@@ -62,4 +140,24 @@ int getLeftColumn_14x12(Board_14x12* board, int prevCol)
 	}
 
 	return getRandomColumn_14x12(board);
+}
+
+int getLeftColumn_12x14(Board_12x14* board, int prevCol)
+{
+	//if statement to determine if the prevColomn is invalid
+	if (prevCol <= 0 || prevCol >= WIDTH_12x14)
+	{
+		return getRandomColumn_12x14(board);
+	}
+
+
+	int colPlacement = prevCol - 1;
+
+	//if statement to determine if the left move is available
+	if (board->_grid[0][colPlacement] == EMPTY_DISC)
+	{
+		return colPlacement;
+	}
+
+	return getRandomColumn_12x14(board);
 }

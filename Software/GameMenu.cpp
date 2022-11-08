@@ -56,8 +56,8 @@ void GameMenuState::HandleInput()
 void GameMenuState::Update(float dt)
 {
 
-	this->_data->player1 = std::make_unique<PlayerRandom>(this->_data, PLAYER_ONE_DISC);
-	this->_data->player2 = std::make_unique<PlayerRandom>(this->_data, PLAYER_TWO_DISC);
+	this->_data->player1 = std::make_unique<PlayerUser>(this->_data, PLAYER_ONE_DISC);
+	this->_data->player2 = std::make_unique<PlayerRight>(this->_data, PLAYER_TWO_DISC);
 
 	this->_data->machine.AddState(StateRef(new GameState_12x14(_data)), true);
 	//for (int i = 0; i < 2; i++)
