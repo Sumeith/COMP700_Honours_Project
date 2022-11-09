@@ -3,13 +3,13 @@
 #include <SFML/Graphics.hpp>
 #include "DEFINITIONS.hpp"
 #include "Player.hpp"
-#include "NaiveRowEvalMoveInC.h"
+#include "NaiveRowWeight2EvalMoveInC.h"
 #include "GameManager.hpp"
 
-class PlayerNaiveRowEval : public Player
+class PlayerNaiveRowWeight2Eval : public Player
 {
 public:
-	PlayerNaiveRowEval(GameDataRef data, Discs playerDisc);
+	PlayerNaiveRowWeight2Eval(GameDataRef data, Discs playerDisc);
 
 	void nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4]);
 	void nextMove(Board_7x4* board, sf::Sprite boardPieces[HEIGHT_7x4][WIDTH_7x4]);
@@ -19,6 +19,7 @@ public:
 	void nextMove(Board_8x8* board, sf::Sprite boardPieces[HEIGHT_8x8][WIDTH_8x8]);
 	void nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12]);
 	void nextMove(Board_12x14* board, sf::Sprite boardPieces[HEIGHT_12x14][WIDTH_12x14]);
+
 
 	void updateGameState(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4]);
 	void updateGameState(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6]);

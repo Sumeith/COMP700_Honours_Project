@@ -10,6 +10,12 @@
 #include "PlayerLeft.hpp"
 #include "PlayerRight.hpp"
 #include "PlayerNaiveRowEval.hpp"
+#include "PlayerNaiveWeight1Eval.hpp"
+#include "PlayerNaiveWeight2Eval.hpp"
+#include "PlayerNaiveWeight3Eval.hpp"
+#include "PlayerNaiveRowWeight1Eval.hpp"
+#include "PlayerNaiveRowWeight2Eval.hpp"
+#include "PlayerNaiveRowWeight3Eval.hpp"
 #include "PlayerMiniMaxRowEval.hpp"
 #include "PlayerMiniMaxRowEvalDepth5.hpp"
 #include "PlayerMiniMaxRowEvalDepth10.hpp"
@@ -42,24 +48,24 @@ void GameMenuState::HandleInput()
 			this->_data->window.close();
 		}
 
-		if(sf::Event::MouseButtonPressed == event.type)
+		/*if(sf::Event::MouseButtonPressed == event.type)
 		{
 			if (event.key.code == sf::Mouse::Left)
 			{
 				pos = sf::Mouse::getPosition(this->_data->window);
 				std::cout << pos.x << ";" << pos.y << std::endl;
 			}
-		}
+		}*/
 	}
 }
 
 void GameMenuState::Update(float dt)
 {
 
-	this->_data->player1 = std::make_unique<PlayerUser>(this->_data, PLAYER_ONE_DISC);
-	this->_data->player2 = std::make_unique<PlayerRight>(this->_data, PLAYER_TWO_DISC);
+	this->_data->player1 = std::make_unique<PlayerNaiveRowWeight3Eval>(this->_data, PLAYER_ONE_DISC);
+	this->_data->player2 = std::make_unique<PlayerUser>(this->_data, PLAYER_TWO_DISC);
 
-	this->_data->machine.AddState(StateRef(new GameState_12x14(_data)), true);
+	this->_data->machine.AddState(StateRef(new GameState_14x12(_data)), true);
 	//for (int i = 0; i < 2; i++)
 	//{
 

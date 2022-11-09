@@ -100,6 +100,8 @@ void PlayerMiniMaxRowEvalDepth10::nextMove(Board_7x6* board, sf::Sprite boardPie
 
 void PlayerMiniMaxRowEvalDepth10::nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12])
 {
+	std::cout << "start" << std::endl;
+	auto start = std::chrono::high_resolution_clock::now();
 	int colPlacement;
 	int depth = 10;
 	int eval;
@@ -139,6 +141,9 @@ void PlayerMiniMaxRowEvalDepth10::nextMove(Board_14x12* board, sf::Sprite boardP
 	{
 		this->_data->_gameOver = true;
 	}
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(start - end);
+	std::cout << "end: " << duration.count() << typeid(duration).name() << typeid(duration.count()).name() << std::endl;
 }
 
 int PlayerMiniMaxRowEvalDepth10::calcEvaluation(Board_4x4* board)

@@ -1,7 +1,7 @@
-#include "NaiveRowEvalMoveInC.h"
+#include "NaiveRowWeight2EvalMoveInC.h"
 #include <limits.h>
 
-int getNaiveRowEvalColumn_4x4(Board_4x4* board, Discs playerDisc)
+int getNaiveRowWeight2EvalColumn_4x4(Board_4x4* board, Discs playerDisc)
 {
 	int score;
 	int bestScore;
@@ -22,7 +22,7 @@ int getNaiveRowEvalColumn_4x4(Board_4x4* board, Discs playerDisc)
 		copyBoard_4x4(board, &tempBoard);
 		Dripdisc_4x4(&tempBoard, col, playerDisc);
 		if (!isValidLoc_4x4(board, col)) { continue; }
-		score = rowEval_4x4(&tempBoard);
+		score = rowWeight2_4x4(&tempBoard);
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			if (score > bestScore) {
@@ -41,7 +41,7 @@ int getNaiveRowEvalColumn_4x4(Board_4x4* board, Discs playerDisc)
 	return bestCol;
 }
 
-int getNaiveRowEvalColumn_7x4(Board_7x4* board, Discs playerDisc)
+int getNaiveRowWeight2EvalColumn_7x4(Board_7x4* board, Discs playerDisc)
 {
 	int score;
 	int bestScore;
@@ -62,7 +62,7 @@ int getNaiveRowEvalColumn_7x4(Board_7x4* board, Discs playerDisc)
 		copyBoard_7x4(board, &tempBoard);
 		Dripdisc_7x4(&tempBoard, col, playerDisc);
 		if (!isValidLoc_7x4(board, col)) { continue; }
-		score = rowEval_7x4(&tempBoard);
+		score = rowWeight2_7x4(&tempBoard);
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			if (score > bestScore) {
@@ -81,7 +81,7 @@ int getNaiveRowEvalColumn_7x4(Board_7x4* board, Discs playerDisc)
 	return bestCol;
 }
 
-int getNaiveRowEvalColumn_4x7(Board_4x7* board, Discs playerDisc)
+int getNaiveRowWeight2EvalColumn_4x7(Board_4x7* board, Discs playerDisc)
 {
 	int score;
 	int bestScore;
@@ -102,7 +102,7 @@ int getNaiveRowEvalColumn_4x7(Board_4x7* board, Discs playerDisc)
 		copyBoard_4x7(board, &tempBoard);
 		Dripdisc_4x7(&tempBoard, col, playerDisc);
 		if (!isValidLoc_4x7(board, col)) { continue; }
-		score = rowEval_4x7(&tempBoard);
+		score = rowWeight2_4x7(&tempBoard);
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			if (score > bestScore) {
@@ -121,7 +121,7 @@ int getNaiveRowEvalColumn_4x7(Board_4x7* board, Discs playerDisc)
 	return bestCol;
 }
 
-int getNaiveRowEvalColumn_7x6(Board_7x6* board, Discs playerDisc)
+int getNaiveRowWeight2EvalColumn_7x6(Board_7x6* board, Discs playerDisc)
 {
 	int score;
 	int bestScore;
@@ -142,7 +142,7 @@ int getNaiveRowEvalColumn_7x6(Board_7x6* board, Discs playerDisc)
 		copyBoard_7x6(board, &tempBoard);
 		Dripdisc_7x6(&tempBoard, col, playerDisc);
 		if (!isValidLoc_7x6(board, col)) { continue; }
-		score = rowEval_7x6(&tempBoard);
+		score = rowWeight2_7x6(&tempBoard);
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			if (score > bestScore) {
@@ -161,7 +161,7 @@ int getNaiveRowEvalColumn_7x6(Board_7x6* board, Discs playerDisc)
 	return bestCol;
 }
 
-int getNaiveRowEvalColumn_6x7(Board_6x7* board, Discs playerDisc)
+int getNaiveRowWeight2EvalColumn_6x7(Board_6x7* board, Discs playerDisc)
 {
 	int score;
 	int bestScore;
@@ -182,7 +182,7 @@ int getNaiveRowEvalColumn_6x7(Board_6x7* board, Discs playerDisc)
 		copyBoard_6x7(board, &tempBoard);
 		Dripdisc_6x7(&tempBoard, col, playerDisc);
 		if (!isValidLoc_6x7(board, col)) { continue; }
-		score = rowEval_6x7(&tempBoard);
+		score = rowWeight2_6x7(&tempBoard);
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			if (score > bestScore) {
@@ -201,7 +201,7 @@ int getNaiveRowEvalColumn_6x7(Board_6x7* board, Discs playerDisc)
 	return bestCol;
 }
 
-int getNaiveRowEvalColumn_8x8(Board_8x8* board, Discs playerDisc)
+int getNaiveRowWeight2EvalColumn_8x8(Board_8x8* board, Discs playerDisc)
 {
 	int score;
 	int bestScore;
@@ -222,7 +222,7 @@ int getNaiveRowEvalColumn_8x8(Board_8x8* board, Discs playerDisc)
 		copyBoard_8x8(board, &tempBoard);
 		Dripdisc_8x8(&tempBoard, col, playerDisc);
 		if (!isValidLoc_8x8(board, col)) { continue; }
-		score = rowEval_8x8(&tempBoard);
+		score = rowWeight2_8x8(&tempBoard);
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			if (score > bestScore) {
@@ -241,7 +241,7 @@ int getNaiveRowEvalColumn_8x8(Board_8x8* board, Discs playerDisc)
 	return bestCol;
 }
 
-int getNaiveRowEvalColumn_14x12(Board_14x12* board, Discs playerDisc)
+int getNaiveRowWeight2EvalColumn_14x12(Board_14x12* board, Discs playerDisc)
 {
 	int score;
 	int bestScore;
@@ -262,7 +262,7 @@ int getNaiveRowEvalColumn_14x12(Board_14x12* board, Discs playerDisc)
 		copyBoard_14x12(board, &tempBoard);
 		Dripdisc_14x12(&tempBoard, col, playerDisc);
 		if (!isValidLoc_14x12(board, col)) { continue; }
-		score = rowEval_14x12(&tempBoard);
+		score = rowWeight2_14x12(&tempBoard);
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			if (score > bestScore) {
@@ -281,7 +281,7 @@ int getNaiveRowEvalColumn_14x12(Board_14x12* board, Discs playerDisc)
 	return bestCol;
 }
 
-int getNaiveRowEvalColumn_12x14(Board_12x14* board, Discs playerDisc)
+int getNaiveRowWeight2EvalColumn_12x14(Board_12x14* board, Discs playerDisc)
 {
 	int score;
 	int bestScore;
@@ -302,7 +302,7 @@ int getNaiveRowEvalColumn_12x14(Board_12x14* board, Discs playerDisc)
 		copyBoard_12x14(board, &tempBoard);
 		Dripdisc_12x14(&tempBoard, col, playerDisc);
 		if (!isValidLoc_12x14(board, col)) { continue; }
-		score = rowEval_12x14(&tempBoard);
+		score = rowWeight2_12x14(&tempBoard);
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			if (score > bestScore) {

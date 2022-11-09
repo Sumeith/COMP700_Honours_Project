@@ -1,4 +1,4 @@
-#include "PlayerMiniMaxRowEval.hpp"
+#include "PlayerNaiveWeight1Eval.hpp"
 #include "RowEvalInC.h"
 #include "Weight1EvalInC.h"
 #include "Weight2EvalInC.h"
@@ -7,17 +7,14 @@
 #include "RowWithWeight2Eval.h"
 #include "RowWithWeight3Eval.h"
 
-PlayerMiniMaxRowEval::PlayerMiniMaxRowEval(GameDataRef data, Discs playerDisc) : _data { data }, _playerDisc{ playerDisc }
+PlayerNaiveWeight1Eval::PlayerNaiveWeight1Eval(GameDataRef data, Discs playerDisc) : _data{ data }, _playerDisc{ playerDisc }
 {
 
 }
 
-void PlayerMiniMaxRowEval::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4])
+void PlayerNaiveWeight1Eval::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4])
 {
-	int colPlacement;
-	int depth = INT_MAX;
-	int eval; 
-	minimaxRowEval_4x4(board, depth, _playerDisc, &colPlacement, &eval);
+	int colPlacement = getNaiveWeight1EvalColumn_4x4(board, _playerDisc);
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_4x4;
 	int height = HEIGHT_4x4;
@@ -55,12 +52,9 @@ void PlayerMiniMaxRowEval::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEI
 	}
 }
 
-void PlayerMiniMaxRowEval::nextMove(Board_7x4* board, sf::Sprite boardPieces[HEIGHT_7x4][WIDTH_7x4])
+void PlayerNaiveWeight1Eval::nextMove(Board_7x4* board, sf::Sprite boardPieces[HEIGHT_7x4][WIDTH_7x4])
 {
-	int colPlacement;
-	int depth = INT_MAX;
-	int eval;
-	minimaxRowEval_7x4(board, depth, _playerDisc, &colPlacement, &eval);
+	int colPlacement = getNaiveWeight1EvalColumn_7x4(board, _playerDisc);
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_7x4;
 	int height = HEIGHT_7x4;
@@ -98,12 +92,10 @@ void PlayerMiniMaxRowEval::nextMove(Board_7x4* board, sf::Sprite boardPieces[HEI
 	}
 }
 
-void PlayerMiniMaxRowEval::nextMove(Board_4x7* board, sf::Sprite boardPieces[HEIGHT_4x7][WIDTH_4x7])
+void PlayerNaiveWeight1Eval::nextMove(Board_4x7* board, sf::Sprite boardPieces[HEIGHT_4x7][WIDTH_4x7])
+
 {
-	int colPlacement;
-	int depth = INT_MAX;
-	int eval;
-	minimaxRowEval_4x7(board, depth, _playerDisc, &colPlacement, &eval);
+	int colPlacement = getNaiveWeight1EvalColumn_4x7(board, _playerDisc);
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_4x7;
 	int height = HEIGHT_4x7;
@@ -141,12 +133,9 @@ void PlayerMiniMaxRowEval::nextMove(Board_4x7* board, sf::Sprite boardPieces[HEI
 	}
 }
 
-void PlayerMiniMaxRowEval::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6])
+void PlayerNaiveWeight1Eval::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6])
 {
-	int colPlacement;
-	int depth = INT_MAX;
-	int eval;
-	minimaxRowEval_7x6(board, depth, _playerDisc, &colPlacement, &eval);
+	int colPlacement = getNaiveWeight1EvalColumn_7x6(board, _playerDisc);
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_7x6;
 	int height = HEIGHT_7x6;
@@ -184,12 +173,9 @@ void PlayerMiniMaxRowEval::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEI
 	}
 }
 
-void PlayerMiniMaxRowEval::nextMove(Board_6x7* board, sf::Sprite boardPieces[HEIGHT_6x7][WIDTH_6x7])
+void PlayerNaiveWeight1Eval::nextMove(Board_6x7* board, sf::Sprite boardPieces[HEIGHT_6x7][WIDTH_6x7])
 {
-	int colPlacement;
-	int depth = INT_MAX;
-	int eval;
-	minimaxRowEval_6x7(board, depth, _playerDisc, &colPlacement, &eval);
+	int colPlacement = getNaiveWeight1EvalColumn_6x7(board, _playerDisc);
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_6x7;
 	int height = HEIGHT_6x7;
@@ -227,12 +213,9 @@ void PlayerMiniMaxRowEval::nextMove(Board_6x7* board, sf::Sprite boardPieces[HEI
 	}
 }
 
-void PlayerMiniMaxRowEval::nextMove(Board_8x8* board, sf::Sprite boardPieces[HEIGHT_8x8][WIDTH_8x8])
+void PlayerNaiveWeight1Eval::nextMove(Board_8x8* board, sf::Sprite boardPieces[HEIGHT_8x8][WIDTH_8x8])
 {
-	int colPlacement;
-	int depth = INT_MAX;
-	int eval;
-	minimaxRowEval_8x8(board, depth, _playerDisc, &colPlacement, &eval);
+	int colPlacement = getNaiveWeight1EvalColumn_8x8(board, _playerDisc);
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_8x8;
 	int height = HEIGHT_8x8;
@@ -270,12 +253,9 @@ void PlayerMiniMaxRowEval::nextMove(Board_8x8* board, sf::Sprite boardPieces[HEI
 	}
 }
 
-void PlayerMiniMaxRowEval::nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12])
+void PlayerNaiveWeight1Eval::nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12])
 {
-	int colPlacement;
-	int depth = INT_MAX;
-	int eval;
-	minimaxRowEval_14x12(board, depth, _playerDisc, &colPlacement, &eval);
+	int colPlacement = getNaiveWeight1EvalColumn_14x12(board, _playerDisc);
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_14x12;
 	int height = HEIGHT_14x12;
@@ -313,12 +293,9 @@ void PlayerMiniMaxRowEval::nextMove(Board_14x12* board, sf::Sprite boardPieces[H
 	}
 }
 
-void PlayerMiniMaxRowEval::nextMove(Board_12x14* board, sf::Sprite boardPieces[HEIGHT_12x14][WIDTH_12x14])
+void PlayerNaiveWeight1Eval::nextMove(Board_12x14* board, sf::Sprite boardPieces[HEIGHT_12x14][WIDTH_12x14])
 {
-	int colPlacement;
-	int depth = INT_MAX;
-	int eval;
-	minimaxRowEval_12x14(board, depth, _playerDisc, &colPlacement, &eval);
+	int colPlacement = getNaiveWeight1EvalColumn_12x14(board, _playerDisc);
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_12x14;
 	int height = HEIGHT_12x14;
@@ -356,17 +333,35 @@ void PlayerMiniMaxRowEval::nextMove(Board_12x14* board, sf::Sprite boardPieces[H
 	}
 }
 
-void PlayerMiniMaxRowEval::updateGameState(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4])
+//int PlayerNaiveWeight1Eval::calcEvaluation(Board_4x4* board)
+//{
+//	eval = rowEval_4x4(board);
+//	return eval;
+//}
+//
+//int PlayerNaiveWeight1Eval::calcEvaluation(Board_7x6* board)
+//{
+//	eval = rowEval_7x6(board);
+//	return eval;
+//}
+//
+//int PlayerNaiveWeight1Eval::calcEvaluation(Board_14x12* board)
+//{
+//	eval = rowEval_14x12(board);
+//	return eval;
+//}
+
+void PlayerNaiveWeight1Eval::updateGameState(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4])
 {
 
 }
 
-void PlayerMiniMaxRowEval::updateGameState(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6])
+void PlayerNaiveWeight1Eval::updateGameState(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6])
 {
 
 }
 
-void PlayerMiniMaxRowEval::updateGameState(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12])
+void PlayerNaiveWeight1Eval::updateGameState(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12])
 {
 
 }

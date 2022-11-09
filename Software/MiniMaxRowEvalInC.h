@@ -11,10 +11,13 @@ extern "C" {
 #endif // __cplusplus
 
 	void minimaxRowEval_4x4(Board_4x4* board, int depth, Discs playerDisc, int* move, int* eval);
-
+	void minimaxRowEval_7x4(Board_7x4* board, int depth, Discs playerDisc, int* move, int* eval);
+	void minimaxRowEval_4x7(Board_4x7* board, int depth, Discs playerDisc, int* move, int* eval);
 	void minimaxRowEval_7x6(Board_7x6* board, int depth, Discs playerDisc, int* move, int* eval);
-
+	void minimaxRowEval_6x7(Board_6x7* board, int depth, Discs playerDisc, int* move, int* eval);
+	void minimaxRowEval_8x8(Board_8x8* board, int depth, Discs playerDisc, int* move, int* eval);
 	void minimaxRowEval_14x12(Board_14x12* board, int depth, Discs playerDisc, int* move, int* eval);
+	void minimaxRowEval_12x14(Board_12x14* board, int depth, Discs playerDisc, int* move, int* eval);
 
 #ifdef __cplusplus
 }
