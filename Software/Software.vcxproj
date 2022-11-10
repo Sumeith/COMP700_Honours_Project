@@ -149,6 +149,9 @@
     <ClCompile Include="PlayerMiniMaxABWeight2Eval.cpp" />
     <ClCompile Include="PlayerMiniMaxABWeight2EvalDepth10.cpp" />
     <ClCompile Include="PlayerMiniMaxABWeight2EvalDepth5.cpp" />
+    <ClCompile Include="PlayerMiniMaxABWeight3Eval.cpp" />
+    <ClCompile Include="PlayerMiniMaxABWeight3EvalDepth10.cpp" />
+    <ClCompile Include="PlayerMiniMaxABWeight3EvalDepth5.cpp" />
     <ClCompile Include="PlayerMiniMaxRowEval.cpp" />
     <ClCompile Include="PlayerMiniMaxRowEvalDepth10.cpp" />
     <ClCompile Include="PlayerMiniMaxRowEvalDepth5.cpp" />
@@ -239,6 +242,9 @@
     <ClInclude Include="PlayerMiniMaxABWeight2Eval.hpp" />
     <ClInclude Include="PlayerMiniMaxABWeight2EvalDepth10.hpp" />
     <ClInclude Include="PlayerMiniMaxABWeight2EvalDepth5.hpp" />
+    <ClInclude Include="PlayerMiniMaxABWeight3Eval.hpp" />
+    <ClInclude Include="PlayerMiniMaxABWeight3EvalDepth10.hpp" />
+    <ClInclude Include="PlayerMiniMaxABWeight3EvalDepth5.hpp" />
     <ClInclude Include="PlayerMiniMaxRowWeight1Eval.hpp" />
     <ClInclude Include="PlayerMiniMaxRowWeight1EvalDepth10.hpp" />
     <ClInclude Include="PlayerMiniMaxRowWeight1EvalDepth5.hpp" />

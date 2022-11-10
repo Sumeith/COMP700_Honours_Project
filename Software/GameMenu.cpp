@@ -60,7 +60,9 @@
 #include "PlayerMiniMaxABWeight2EvalDepth5.hpp"
 #include "PlayerMiniMaxABWeight2EvalDepth10.hpp"
 
-
+#include "PlayerMiniMaxABWeight3Eval.hpp"
+#include "PlayerMiniMaxABWeight3EvalDepth5.hpp"
+#include "PlayerMiniMaxABWeight3EvalDepth10.hpp"
 
 #include "PlayerMiniMaxABRowWeight1Eval.hpp"
 #include "PlayerMiniMaxABRowWeight1EvalDepth5.hpp"
@@ -112,7 +114,7 @@ void GameMenuState::HandleInput()
 void GameMenuState::Update(float dt)
 {
 
-	this->_data->player1 = std::make_unique<PlayerMiniMaxABWeight2EvalDepth10>(this->_data, PLAYER_ONE_DISC);
+	this->_data->player1 = std::make_unique<PlayerMiniMaxABWeight3EvalDepth10>(this->_data, PLAYER_ONE_DISC);
 	this->_data->player2 = std::make_unique<PlayerUser>(this->_data, PLAYER_TWO_DISC);
 
 	this->_data->machine.AddState(StateRef(new GameState_4x4(_data)), true);
