@@ -304,6 +304,24 @@
     <ClCompile Include="PlayerMiniMaxABRowWeight3EvalDepth10.cpp">
       <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MiniMaxABWeight1EvalInC.c">
+      <Filter>Source Files\Gameplay Source Files\C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMaxABWeight2EvalInC.c">
+      <Filter>Source Files\Gameplay Source Files\C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMaxABWeight3EvalInC.c">
+      <Filter>Source Files\Gameplay Source Files\C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMiniMaxABWeight1Eval.cpp">
+      <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMiniMaxABWeight1EvalDepth5.cpp">
+      <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMiniMaxABWeight1EvalDepth10.cpp">
+      <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -615,6 +633,27 @@
       <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerMiniMaxABRowWeight3EvalDepth10.hpp">
+      <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NegaMaxABWeight1EvalInC.h">
+      <Filter>Header Files\Gameplay Header FIles\C Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniMaxABWeight1EvalInC.h">
+      <Filter>Header Files\Gameplay Header FIles\C Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniMaxABWeight2EvalInC.h">
+      <Filter>Header Files\Gameplay Header FIles\C Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniMaxABWeight3EvalInC.h">
+      <Filter>Header Files\Gameplay Header FIles\C Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMiniMaxABWeight1Eval.hpp">
+      <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMiniMaxABWeight1EvalDepth5.hpp">
+      <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMiniMaxABWeight1EvalDepth10.hpp">
       <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
     </ClInclude>
   </ItemGroup>
