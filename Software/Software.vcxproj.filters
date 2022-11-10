@@ -295,6 +295,15 @@
     <ClCompile Include="PlayerMiniMaxABRowWeight2EvalDepth10.cpp">
       <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerMiniMaxABRowWeight3Eval.cpp">
+      <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMiniMaxABRowWeight3EvalDepth5.cpp">
+      <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMiniMaxABRowWeight3EvalDepth10.cpp">
+      <Filter>Source Files\Gameplay Source Files\C++ Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -597,6 +606,15 @@
       <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerMiniMaxABRowWeight2EvalDepth10.hpp">
+      <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMiniMaxABRowWeight3Eval.hpp">
+      <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMiniMaxABRowWeight3EvalDepth5.hpp">
+      <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMiniMaxABRowWeight3EvalDepth10.hpp">
       <Filter>Header Files\Gameplay Header FIles\C++ Header Files</Filter>
     </ClInclude>
   </ItemGroup>
