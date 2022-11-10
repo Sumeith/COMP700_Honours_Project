@@ -105,6 +105,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameState_4x4.cpp" />
     <ClCompile Include="MiniMaxABRowEvalInC.c" />
+    <ClCompile Include="MiniMaxABRowWeight1EvalInC.c" />
+    <ClCompile Include="MiniMaxABRowWeight2EvalInC.c" />
+    <ClCompile Include="MiniMaxABRowWeight3EvalInC.c" />
     <ClCompile Include="MiniMaxOpenMPRowEvalInC.c" />
     <ClCompile Include="MiniMaxRowEvalInC.c" />
     <ClCompile Include="MiniMaxRowWeight1EvalInC.c" />
@@ -128,6 +131,12 @@
     <ClCompile Include="PlayerMiniMaxABRowEval.cpp" />
     <ClCompile Include="PlayerMiniMaxABRowEvalDepth10.cpp" />
     <ClCompile Include="PlayerMiniMaxABRowEvalDepth5.cpp" />
+    <ClCompile Include="PlayerMiniMaxABRowWeight1Eval.cpp" />
+    <ClCompile Include="PlayerMiniMaxABRowWeight1EvalDepth10.cpp" />
+    <ClCompile Include="PlayerMiniMaxABRowWeight1EvalDepth5.cpp" />
+    <ClCompile Include="PlayerMiniMaxABRowWeight2Eval.cpp" />
+    <ClCompile Include="PlayerMiniMaxABRowWeight2EvalDepth10.cpp" />
+    <ClCompile Include="PlayerMiniMaxABRowWeight2EvalDepth5.cpp" />
     <ClCompile Include="PlayerMiniMaxRowEval.cpp" />
     <ClCompile Include="PlayerMiniMaxRowEvalDepth10.cpp" />
     <ClCompile Include="PlayerMiniMaxRowEvalDepth5.cpp" />
@@ -183,6 +192,9 @@
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="GameMenuState.hpp" />
     <ClInclude Include="GameState.hpp" />
+    <ClInclude Include="MiniMaxABRowWeight1EvalInC.h" />
+    <ClInclude Include="MiniMaxABRowWeight2EvalInC.h" />
+    <ClInclude Include="MiniMaxABRowWeight3EvalInC.h" />
     <ClInclude Include="MiniMaxRowWeight1EvalInC.h" />
     <ClInclude Include="MiniMaxRowWeight2EvalInC.h" />
     <ClInclude Include="MiniMaxRowWeight3EvalInC.h" />
@@ -196,6 +208,12 @@
     <ClInclude Include="NaiveWeight2EvalMoveInC.h" />
     <ClInclude Include="NaiveWeight3EvalMoveInC.h" />
     <ClInclude Include="NegaMaxABRowEvalInC.h" />
+    <ClInclude Include="PlayerMiniMaxABRowWeight1Eval.hpp" />
+    <ClInclude Include="PlayerMiniMaxABRowWeight1EvalDepth10.hpp" />
+    <ClInclude Include="PlayerMiniMaxABRowWeight1EvalDepth5.hpp" />
+    <ClInclude Include="PlayerMiniMaxABRowWeight2Eval.hpp" />
+    <ClInclude Include="PlayerMiniMaxABRowWeight2EvalDepth10.hpp" />
+    <ClInclude Include="PlayerMiniMaxABRowWeight2EvalDepth5.hpp" />
     <ClInclude Include="PlayerMiniMaxRowWeight1Eval.hpp" />
     <ClInclude Include="PlayerMiniMaxRowWeight1EvalDepth10.hpp" />
     <ClInclude Include="PlayerMiniMaxRowWeight1EvalDepth5.hpp" />

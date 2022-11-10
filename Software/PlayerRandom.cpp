@@ -16,8 +16,12 @@ PlayerRandom::PlayerRandom(GameDataRef data, Discs playerDisc) : _data{ data }, 
 void PlayerRandom::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4])
 {
 	int colPlacement = getRandomColumn_4x4(board);
-	this->_data->_prevCol = colPlacement;
 
+	auto start = std::chrono::high_resolution_clock::now();
+	this->_data->_prevCol = colPlacement;
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	std::cout << "time: " << duration.count() << std::endl;
 	int width = WIDTH_4x4;
 	int height = HEIGHT_4x4;
 

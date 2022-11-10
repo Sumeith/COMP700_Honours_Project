@@ -17,7 +17,13 @@ void PlayerMiniMaxRowEval::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEI
 	int colPlacement;
 	int depth = INT_MAX;
 	int eval; 
+	auto start = std::chrono::high_resolution_clock::now();
 	minimaxRowEval_4x4(board, depth, _playerDisc, &colPlacement, &eval);
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	std::cout << "time: " << duration.count() << std::endl;
+
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_4x4;
 	int height = HEIGHT_4x4;

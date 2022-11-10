@@ -12,7 +12,9 @@
 #include "RowWithWeight1Eval.h"
 #include "RowWithWeight2Eval.h"
 #include "RowWithWeight3Eval.h"
+#include <vector>
 #include <chrono>
+
 class Player
 {
 protected:

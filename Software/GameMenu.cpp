@@ -34,6 +34,10 @@
 #include "PlayerMiniMaxRowWeight2EvalDepth10.hpp"
 
 
+#include "PlayerMiniMaxABRowWeight2Eval.hpp"
+#include "PlayerMiniMaxABRowWeight2EvalDepth5.hpp"
+#include "PlayerMiniMaxABRowWeight2EvalDepth10.hpp"
+
 #include "PlayerMiniMaxRowWeight3Eval.hpp"
 #include "PlayerMiniMaxRowWeight3EvalDepth5.hpp"
 #include "PlayerMiniMaxRowWeight3EvalDepth10.hpp"
@@ -47,6 +51,11 @@
 #include "PlayerMiniMaxABRowEval.hpp"
 #include "PlayerMiniMaxABRowEvalDepth5.hpp"
 #include "PlayerMiniMaxABRowEvalDepth10.hpp"
+
+#include "PlayerMiniMaxABRowWeight1Eval.hpp"
+#include "PlayerMiniMaxABRowWeight1EvalDepth5.hpp"
+#include "PlayerMiniMaxABRowWeight1EvalDepth10.hpp"
+
 #include "PlayerNegaMaxRowEval.hpp"
 #include "PlayerNegaMaxABRowEval.hpp"
 
@@ -88,8 +97,8 @@ void GameMenuState::HandleInput()
 void GameMenuState::Update(float dt)
 {
 
-	this->_data->player1 = std::make_unique<PlayerUser>(this->_data, PLAYER_ONE_DISC);
-	this->_data->player2 = std::make_unique<PlayerMiniMaxRowWeight3EvalDepth10>(this->_data, PLAYER_TWO_DISC);
+	this->_data->player1 = std::make_unique<PlayerMiniMaxABRowWeight2EvalDepth10>(this->_data, PLAYER_ONE_DISC);
+	this->_data->player2 = std::make_unique<PlayerUser>(this->_data, PLAYER_TWO_DISC);
 
 	this->_data->machine.AddState(StateRef(new GameState_4x4(_data)), true);
 	//for (int i = 0; i < 2; i++)

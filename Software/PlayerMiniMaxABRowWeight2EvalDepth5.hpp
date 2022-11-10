@@ -4,12 +4,12 @@
 #include "DEFINITIONS.hpp"
 #include "Player.hpp"
 #include "GameManager.hpp"
-#include "MiniMaxABRowEvalInC.h"
+#include "MiniMaxABRowWeight2EvalInC.h"
 
-class PlayerMiniMaxABRowEvalDepth5 : public Player
+class PlayerMiniMaxABRowWeight2EvalDepth5 : public Player
 {
 public:
-	PlayerMiniMaxABRowEvalDepth5(GameDataRef data, Discs playerDisc);
+	PlayerMiniMaxABRowWeight2EvalDepth5(GameDataRef data, Discs playerDisc);
 
 	void nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4]);
 	void nextMove(Board_7x4* board, sf::Sprite boardPieces[HEIGHT_7x4][WIDTH_7x4]);

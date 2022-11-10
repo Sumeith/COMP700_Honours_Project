@@ -1,11 +1,11 @@
-#include "minimaxABRowEvalInC.h"
+#include "minimaxABRowWeight2EvalInC.h"
 
-void minimaxABRowEval_4x4(Board_4x4* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
+void minimaxABRowWeight2Eval_4x4(Board_4x4* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
 {
 	if (isGameOver_4x4(board) ||
 		depth == 0)
 	{
-		*eval = rowEval_4x4(board);
+		*eval = rowWeight2_4x4(board);
 		return;
 	}
 
@@ -26,7 +26,7 @@ void minimaxABRowEval_4x4(Board_4x4* board, int depth, int alpha, int beta, Disc
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			Dripdisc_4x4(&tempBoard, col, PLAYER_ONE_DISC);
-			minimaxABRowEval_4x4(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_4x4(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
 			if (tempEval > bestEval)
 			{
 				bestMove = col;
@@ -41,7 +41,7 @@ void minimaxABRowEval_4x4(Board_4x4* board, int depth, int alpha, int beta, Disc
 		else if (playerDisc == PLAYER_TWO_DISC)
 		{
 			Dripdisc_4x4(&tempBoard, col, PLAYER_TWO_DISC);
-			minimaxABRowEval_4x4(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_4x4(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
 			if (tempEval < bestEval)
 			{
 				bestMove = col;
@@ -63,12 +63,12 @@ void minimaxABRowEval_4x4(Board_4x4* board, int depth, int alpha, int beta, Disc
 	return;
 }
 
-void minimaxABRowEval_7x4(Board_7x4* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
+void minimaxABRowWeight2Eval_7x4(Board_7x4* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
 {
 	if (isGameOver_7x4(board) ||
 		depth == 0)
 	{
-		*eval = rowEval_7x4(board);
+		*eval = rowWeight2_7x4(board);
 		return;
 	}
 
@@ -89,7 +89,7 @@ void minimaxABRowEval_7x4(Board_7x4* board, int depth, int alpha, int beta, Disc
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			Dripdisc_7x4(&tempBoard, col, PLAYER_ONE_DISC);
-			minimaxABRowEval_7x4(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_7x4(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
 			if (tempEval > bestEval)
 			{
 				bestMove = col;
@@ -104,7 +104,7 @@ void minimaxABRowEval_7x4(Board_7x4* board, int depth, int alpha, int beta, Disc
 		else if (playerDisc == PLAYER_TWO_DISC)
 		{
 			Dripdisc_7x4(&tempBoard, col, PLAYER_TWO_DISC);
-			minimaxABRowEval_7x4(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_7x4(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
 			if (tempEval < bestEval)
 			{
 				bestMove = col;
@@ -126,12 +126,12 @@ void minimaxABRowEval_7x4(Board_7x4* board, int depth, int alpha, int beta, Disc
 	return;
 }
 
-void minimaxABRowEval_4x7(Board_4x7* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
+void minimaxABRowWeight2Eval_4x7(Board_4x7* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
 {
 	if (isGameOver_4x7(board) ||
 		depth == 0)
 	{
-		*eval = rowEval_4x7(board);
+		*eval = rowWeight2_4x7(board);
 		return;
 	}
 
@@ -152,7 +152,7 @@ void minimaxABRowEval_4x7(Board_4x7* board, int depth, int alpha, int beta, Disc
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			Dripdisc_4x7(&tempBoard, col, PLAYER_ONE_DISC);
-			minimaxABRowEval_4x7(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_4x7(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
 			if (tempEval > bestEval)
 			{
 				bestMove = col;
@@ -167,7 +167,7 @@ void minimaxABRowEval_4x7(Board_4x7* board, int depth, int alpha, int beta, Disc
 		else if (playerDisc == PLAYER_TWO_DISC)
 		{
 			Dripdisc_4x7(&tempBoard, col, PLAYER_TWO_DISC);
-			minimaxABRowEval_4x7(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_4x7(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
 			if (tempEval < bestEval)
 			{
 				bestMove = col;
@@ -189,12 +189,12 @@ void minimaxABRowEval_4x7(Board_4x7* board, int depth, int alpha, int beta, Disc
 	return;
 }
 
-void minimaxABRowEval_7x6(Board_7x6* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
+void minimaxABRowWeight2Eval_7x6(Board_7x6* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
 {
 	if (isGameOver_7x6(board) ||
 		depth == 0)
 	{
-		*eval = rowEval_7x6(board);
+		*eval = rowWeight2_7x6(board);
 		return;
 	}
 
@@ -215,7 +215,7 @@ void minimaxABRowEval_7x6(Board_7x6* board, int depth, int alpha, int beta, Disc
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			Dripdisc_7x6(&tempBoard, col, PLAYER_ONE_DISC);
-			minimaxABRowEval_7x6(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_7x6(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
 			if (tempEval > bestEval)
 			{
 				bestMove = col;
@@ -230,7 +230,7 @@ void minimaxABRowEval_7x6(Board_7x6* board, int depth, int alpha, int beta, Disc
 		else if (playerDisc == PLAYER_TWO_DISC)
 		{
 			Dripdisc_7x6(&tempBoard, col, PLAYER_TWO_DISC);
-			minimaxABRowEval_7x6(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_7x6(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
 			if (tempEval < bestEval)
 			{
 				bestMove = col;
@@ -252,12 +252,12 @@ void minimaxABRowEval_7x6(Board_7x6* board, int depth, int alpha, int beta, Disc
 	return;
 }
 
-void minimaxABRowEval_6x7(Board_6x7* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
+void minimaxABRowWeight2Eval_6x7(Board_6x7* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
 {
 	if (isGameOver_6x7(board) ||
 		depth == 0)
 	{
-		*eval = rowEval_6x7(board);
+		*eval = rowWeight2_6x7(board);
 		return;
 	}
 
@@ -278,7 +278,7 @@ void minimaxABRowEval_6x7(Board_6x7* board, int depth, int alpha, int beta, Disc
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			Dripdisc_6x7(&tempBoard, col, PLAYER_ONE_DISC);
-			minimaxABRowEval_6x7(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_6x7(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
 			if (tempEval > bestEval)
 			{
 				bestMove = col;
@@ -293,7 +293,7 @@ void minimaxABRowEval_6x7(Board_6x7* board, int depth, int alpha, int beta, Disc
 		else if (playerDisc == PLAYER_TWO_DISC)
 		{
 			Dripdisc_6x7(&tempBoard, col, PLAYER_TWO_DISC);
-			minimaxABRowEval_6x7(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_6x7(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
 			if (tempEval < bestEval)
 			{
 				bestMove = col;
@@ -315,12 +315,12 @@ void minimaxABRowEval_6x7(Board_6x7* board, int depth, int alpha, int beta, Disc
 	return;
 }
 
-void minimaxABRowEval_8x8(Board_8x8* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
+void minimaxABRowWeight2Eval_8x8(Board_8x8* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
 {
 	if (isGameOver_8x8(board) ||
 		depth == 0)
 	{
-		*eval = rowEval_8x8(board);
+		*eval = rowWeight2_8x8(board);
 		return;
 	}
 
@@ -341,7 +341,7 @@ void minimaxABRowEval_8x8(Board_8x8* board, int depth, int alpha, int beta, Disc
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			Dripdisc_8x8(&tempBoard, col, PLAYER_ONE_DISC);
-			minimaxABRowEval_8x8(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_8x8(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
 			if (tempEval > bestEval)
 			{
 				bestMove = col;
@@ -356,7 +356,7 @@ void minimaxABRowEval_8x8(Board_8x8* board, int depth, int alpha, int beta, Disc
 		else if (playerDisc == PLAYER_TWO_DISC)
 		{
 			Dripdisc_8x8(&tempBoard, col, PLAYER_TWO_DISC);
-			minimaxABRowEval_8x8(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_8x8(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
 			if (tempEval < bestEval)
 			{
 				bestMove = col;
@@ -378,12 +378,12 @@ void minimaxABRowEval_8x8(Board_8x8* board, int depth, int alpha, int beta, Disc
 	return;
 }
 
-void minimaxABRowEval_14x12(Board_14x12* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
+void minimaxABRowWeight2Eval_14x12(Board_14x12* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
 {
 	if (isGameOver_14x12(board) ||
 		depth == 0)
 	{
-		*eval = rowEval_14x12(board);
+		*eval = rowWeight2_14x12(board);
 		return;
 	}
 
@@ -404,7 +404,7 @@ void minimaxABRowEval_14x12(Board_14x12* board, int depth, int alpha, int beta, 
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			Dripdisc_14x12(&tempBoard, col, PLAYER_ONE_DISC);
-			minimaxABRowEval_14x12(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_14x12(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
 			if (tempEval > bestEval)
 			{
 				bestMove = col;
@@ -419,7 +419,7 @@ void minimaxABRowEval_14x12(Board_14x12* board, int depth, int alpha, int beta, 
 		else if (playerDisc == PLAYER_TWO_DISC)
 		{
 			Dripdisc_14x12(&tempBoard, col, PLAYER_TWO_DISC);
-			minimaxABRowEval_14x12(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_14x12(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
 			if (tempEval < bestEval)
 			{
 				bestMove = col;
@@ -440,12 +440,12 @@ void minimaxABRowEval_14x12(Board_14x12* board, int depth, int alpha, int beta, 
 	return;
 }
 
-void minimaxABRowEval_12x14(Board_12x14* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
+void minimaxABRowWeight2Eval_12x14(Board_12x14* board, int depth, int alpha, int beta, Discs playerDisc, int* move, int* eval)
 {
 	if (isGameOver_12x14(board) ||
 		depth == 0)
 	{
-		*eval = rowEval_12x14(board);
+		*eval = rowWeight2_12x14(board);
 		return;
 	}
 
@@ -466,7 +466,7 @@ void minimaxABRowEval_12x14(Board_12x14* board, int depth, int alpha, int beta, 
 		if (playerDisc == PLAYER_ONE_DISC)
 		{
 			Dripdisc_12x14(&tempBoard, col, PLAYER_ONE_DISC);
-			minimaxABRowEval_12x14(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_12x14(&tempBoard, depth - 1, alpha, beta, PLAYER_TWO_DISC, &tempMove, &tempEval);
 			if (tempEval > bestEval)
 			{
 				bestMove = col;
@@ -481,7 +481,7 @@ void minimaxABRowEval_12x14(Board_12x14* board, int depth, int alpha, int beta, 
 		else if (playerDisc == PLAYER_TWO_DISC)
 		{
 			Dripdisc_12x14(&tempBoard, col, PLAYER_TWO_DISC);
-			minimaxABRowEval_12x14(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
+			minimaxABRowWeight2Eval_12x14(&tempBoard, depth - 1, alpha, beta, PLAYER_ONE_DISC, &tempMove, &tempEval);
 			if (tempEval < bestEval)
 			{
 				bestMove = col;
