@@ -36,7 +36,7 @@
 #define SCREEN_HEIGHT_12x14 700
 #define TITLE_12x14 "Connet 4 on a 12x14 board"
 
-#define TRANSITION_TIME 100
+#define TRANSITION_TIME 0
 
 //#define MAIN_MENU_BACKGROUND_PATH "Resourses\\grid.png"
 //#define GAME_BOARD_PATH "Resourses\\grid.png"

@@ -19,6 +19,7 @@ struct GameData
 	bool _gameOver;
 	int _turn;
 	int _prevCol;
+	int numReported{ 0 };
 };
 
 typedef std::shared_ptr<GameData> GameDataRef;

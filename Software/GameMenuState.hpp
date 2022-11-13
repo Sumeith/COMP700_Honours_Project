@@ -13,7 +13,6 @@ public:
 	void Update(float dt);
 	void Draw(float dt);
 
-	void setPlayer(int player, int choice);
 private:
 	GameDataRef _data;
 	sf::Clock _clock;

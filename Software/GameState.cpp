@@ -40,7 +40,7 @@ void GameState::printBoard(Board_4x4* board)
 	}
 	Colour(7, " ");
 	std::cout << std::endl;
-	std::cout << "The evaluation is : " << eval << std::endl;
+	
 }
 
 void GameState::printBoard(Board_7x4* board)
@@ -77,7 +77,7 @@ void GameState::printBoard(Board_7x4* board)
 	}
 	Colour(7, " ");
 	std::cout << std::endl;
-	std::cout << "The evaluation is : " << eval << std::endl;
+	
 }
 
 void GameState::printBoard(Board_4x7* board)
@@ -114,7 +114,7 @@ void GameState::printBoard(Board_4x7* board)
 	}
 	Colour(7, " ");
 	std::cout << std::endl;
-	std::cout << "The evaluation is : " << eval << std::endl;
+	
 }
 
 void GameState::printBoard(Board_7x6* board)
@@ -151,7 +151,7 @@ void GameState::printBoard(Board_7x6* board)
 	}
 	Colour(7, " ");
 	std::cout << std::endl;
-	std::cout << "The evaluation is : " << eval << std::endl;
+	
 }
 
 void GameState::printBoard(Board_6x7* board)
@@ -188,7 +188,7 @@ void GameState::printBoard(Board_6x7* board)
 	}
 	Colour(7, " ");
 	std::cout << std::endl;
-	std::cout << "The evaluation is : " << eval << std::endl;
+	
 }
 
 void GameState::printBoard(Board_8x8* board)
@@ -225,7 +225,7 @@ void GameState::printBoard(Board_8x8* board)
 	}
 	Colour(7, " ");
 	std::cout << std::endl;
-	std::cout << "The evaluation is : " << eval << std::endl;
+	
 }
 
 void GameState::printBoard(Board_14x12* board)
@@ -262,7 +262,7 @@ void GameState::printBoard(Board_14x12* board)
 	}
 	Colour(7, " ");
 	std::cout << std::endl;
-	std::cout << "The evaluation is : " << eval << std::endl;
+	
 }
 
 void GameState::printBoard(Board_12x14* board)
@@ -299,5 +299,5 @@ void GameState::printBoard(Board_12x14* board)
 	}
 	Colour(7, " ");
 	std::cout << std::endl;
-	std::cout << "The evaluation is : " << eval << std::endl;
+	
 }

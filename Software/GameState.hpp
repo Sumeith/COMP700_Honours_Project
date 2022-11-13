@@ -4,13 +4,13 @@
 #include "State.hpp"
 #include "GameManager.hpp"
 #include "DEFINITIONS.hpp"
-
-
+#include <fstream>
+#include <string.h>
 class GameState : public State
 {
 protected:
 	virtual void InitGridPieces() = 0;
-	
+	bool reported = false;
 	std::string Colour(int colour, std::string message);
 	void printBoard(Board_4x4* board);
 	void printBoard(Board_7x4* board);

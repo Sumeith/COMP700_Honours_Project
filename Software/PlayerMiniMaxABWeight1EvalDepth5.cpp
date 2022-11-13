@@ -9,15 +9,30 @@
 
 PlayerMiniMaxABWeight1EvalDepth5::PlayerMiniMaxABWeight1EvalDepth5(GameDataRef data, Discs playerDisc) : _data{ data }, _playerDisc{ playerDisc }
 {
-
+	playerName = "PlayerMiniMaxABWeight1EvalDepth5";
 }
 
 void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4])
 {
+	calcEvaluation_4x4(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
 	int colPlacement;
 	int depth = 5;
 	int eval;
+	auto start = std::chrono::high_resolution_clock::now();
 	minimaxABWeight1Eval_4x4(board, depth, INT_MIN, INT_MAX, _playerDisc, &colPlacement, &eval);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0){firstColumn = colPlacement;} if (firstColumn < 0){firstColumn = colPlacement;}
+
+
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_4x4;
 	int height = HEIGHT_4x4;
@@ -45,6 +60,24 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_4x4* board, sf::Sprite boa
 	}
 
 	calcEvaluation_4x4(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
 		this->_data->_gameOver = true;
@@ -57,10 +90,25 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_4x4* board, sf::Sprite boa
 
 void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_7x4* board, sf::Sprite boardPieces[HEIGHT_7x4][WIDTH_7x4])
 {
+	calcEvaluation_7x4(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
 	int colPlacement;
 	int depth = 5;
 	int eval;
+	auto start = std::chrono::high_resolution_clock::now();
 	minimaxABWeight1Eval_7x4(board, depth, INT_MIN, INT_MAX, _playerDisc, &colPlacement, &eval);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0){firstColumn = colPlacement;} if (firstColumn < 0){firstColumn = colPlacement;}
+
+
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_7x4;
 	int height = HEIGHT_7x4;
@@ -88,6 +136,24 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_7x4* board, sf::Sprite boa
 	}
 
 	calcEvaluation_7x4(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
 		this->_data->_gameOver = true;
@@ -100,10 +166,25 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_7x4* board, sf::Sprite boa
 
 void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_4x7* board, sf::Sprite boardPieces[HEIGHT_4x7][WIDTH_4x7])
 {
+	calcEvaluation_4x7(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
 	int colPlacement;
 	int depth = 5;
 	int eval;
+	auto start = std::chrono::high_resolution_clock::now();
 	minimaxABWeight1Eval_4x7(board, depth, INT_MIN, INT_MAX, _playerDisc, &colPlacement, &eval);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0){firstColumn = colPlacement;} if (firstColumn < 0){firstColumn = colPlacement;}
+
+
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_4x7;
 	int height = HEIGHT_4x7;
@@ -131,6 +212,24 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_4x7* board, sf::Sprite boa
 	}
 
 	calcEvaluation_4x7(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
 		this->_data->_gameOver = true;
@@ -143,10 +242,25 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_4x7* board, sf::Sprite boa
 
 void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6])
 {
+	calcEvaluation_7x6(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
 	int colPlacement;
 	int depth = 5;
 	int eval;
+	auto start = std::chrono::high_resolution_clock::now();
 	minimaxABWeight1Eval_7x6(board, depth, INT_MIN, INT_MAX, _playerDisc, &colPlacement, &eval);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0){firstColumn = colPlacement;} if (firstColumn < 0){firstColumn = colPlacement;}
+
+
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_7x6;
 	int height = HEIGHT_7x6;
@@ -174,6 +288,24 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_7x6* board, sf::Sprite boa
 	}
 
 	calcEvaluation_7x6(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
 		this->_data->_gameOver = true;
@@ -186,10 +318,25 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_7x6* board, sf::Sprite boa
 
 void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_6x7* board, sf::Sprite boardPieces[HEIGHT_6x7][WIDTH_6x7])
 {
+	calcEvaluation_6x7(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
 	int colPlacement;
 	int depth = 5;
 	int eval;
+	auto start = std::chrono::high_resolution_clock::now();
 	minimaxABWeight1Eval_6x7(board, depth, INT_MIN, INT_MAX, _playerDisc, &colPlacement, &eval);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0){firstColumn = colPlacement;} if (firstColumn < 0){firstColumn = colPlacement;}
+
+
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_6x7;
 	int height = HEIGHT_6x7;
@@ -217,6 +364,24 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_6x7* board, sf::Sprite boa
 	}
 
 	calcEvaluation_6x7(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
 		this->_data->_gameOver = true;
@@ -229,10 +394,25 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_6x7* board, sf::Sprite boa
 
 void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_8x8* board, sf::Sprite boardPieces[HEIGHT_8x8][WIDTH_8x8])
 {
+	calcEvaluation_8x8(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
 	int colPlacement;
 	int depth = 5;
 	int eval;
+	auto start = std::chrono::high_resolution_clock::now();
 	minimaxABWeight1Eval_8x8(board, depth, INT_MIN, INT_MAX, _playerDisc, &colPlacement, &eval);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0){firstColumn = colPlacement;} if (firstColumn < 0){firstColumn = colPlacement;}
+
+
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_8x8;
 	int height = HEIGHT_8x8;
@@ -260,6 +440,24 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_8x8* board, sf::Sprite boa
 	}
 
 	calcEvaluation_8x8(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
 		this->_data->_gameOver = true;
@@ -272,10 +470,25 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_8x8* board, sf::Sprite boa
 
 void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12])
 {
+	calcEvaluation_14x12(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
 	int colPlacement;
 	int depth = 5;
 	int eval;
+	auto start = std::chrono::high_resolution_clock::now();
 	minimaxABWeight1Eval_14x12(board, depth, INT_MIN, INT_MAX, _playerDisc, &colPlacement, &eval);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0){firstColumn = colPlacement;} if (firstColumn < 0){firstColumn = colPlacement;}
+
+
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_14x12;
 	int height = HEIGHT_14x12;
@@ -303,6 +516,24 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_14x12* board, sf::Sprite b
 	}
 
 	calcEvaluation_14x12(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
 		this->_data->_gameOver = true;
@@ -315,10 +546,25 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_14x12* board, sf::Sprite b
 
 void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_12x14* board, sf::Sprite boardPieces[HEIGHT_12x14][WIDTH_12x14])
 {
+	calcEvaluation_12x14(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
 	int colPlacement;
 	int depth = 5;
 	int eval;
+	auto start = std::chrono::high_resolution_clock::now();
 	minimaxABWeight1Eval_12x14(board, depth, INT_MIN, INT_MAX, _playerDisc, &colPlacement, &eval);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0){firstColumn = colPlacement;} if (firstColumn < 0){firstColumn = colPlacement;}
+
+
 	this->_data->_prevCol = colPlacement;
 	int width = WIDTH_12x14;
 	int height = HEIGHT_12x14;
@@ -346,6 +592,24 @@ void PlayerMiniMaxABWeight1EvalDepth5::nextMove(Board_12x14* board, sf::Sprite b
 	}
 
 	calcEvaluation_12x14(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
 		this->_data->_gameOver = true;

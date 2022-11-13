@@ -1,5 +1,10 @@
 #include "Player.hpp"
 
+//std::string Player::getSummary()
+//{
+//	return std::to_string(getAverageRowWeight2EvalDiff());
+//}
+
 void Player::calcEvaluation_4x4(Board_4x4* board)
 {
 	this->rowEval = rowEval_4x4(board); this->eval = rowEval;
@@ -126,4 +131,245 @@ int Player::getRowWeight2Eval()
 int Player::getRowWeight3Eval()
 {
 	return rowWeight3Eval;
+}
+
+long long Player::getAverageTime()
+{
+	return 1.0 * std::accumulate(timeVector.begin(), timeVector.end(), 0LL) / timeVector.size();
+}
+
+double Player::getAverageRowEval()
+{
+	return 1.0 * std::accumulate(rowEvalVector.begin(), rowEvalVector.end(), 0LL) / rowEvalVector.size();
+}
+
+double Player::getAverageWeight1Eval()
+{
+	return 1.0 * std::accumulate(weight1EvalVector.begin(), weight1EvalVector.end(), 0LL) / weight1EvalVector.size();
+}
+
+double Player::getAverageWeight2Eval()
+{
+	return 1.0 * std::accumulate(weight2EvalVector.begin(), weight2EvalVector.end(), 0LL) / weight2EvalVector.size();
+}
+
+double Player::getAverageWeight3Eval()
+{
+	return 1.0 * std::accumulate(weight3EvalVector.begin(), weight3EvalVector.end(), 0LL) / weight3EvalVector.size();
+}
+
+double Player::getAverageRowWeight1Eval()
+{
+	return 1.0 * std::accumulate(rowWeight1EvalVector.begin(), rowWeight1EvalVector.end(), 0LL) / rowWeight1EvalVector.size();
+}
+
+double Player::getAverageRowWeight2Eval()
+{
+	return 1.0 * std::accumulate(rowWeight2EvalVector.begin(), rowWeight2EvalVector.end(), 0LL) / rowWeight2EvalVector.size();
+}
+
+double Player::getAverageRowWeight3Eval()
+{
+	return 1.0 * std::accumulate(rowWeight3EvalVector.begin(), rowWeight3EvalVector.end(), 0LL) / rowWeight3EvalVector.size();
+}
+
+
+long long Player::getMaxTime()
+{
+	return *std::max_element(timeVector.begin(), timeVector.end());
+}
+
+int Player::getMaxRowEval()
+{
+	return *std::max_element(rowEvalVector.begin(), rowEvalVector.end());
+}
+
+int Player::getMaxWeight1Eval()
+{
+	return *std::max_element(weight1EvalVector.begin(), weight1EvalVector.end());
+}
+
+int Player::getMaxWeight2Eval()
+{
+	return *std::max_element(weight2EvalVector.begin(), weight2EvalVector.end());
+}
+
+int Player::getMaxWeight3Eval()
+{
+	return *std::max_element(weight3EvalVector.begin(), weight3EvalVector.end());
+}
+
+int Player::getMaxRowWeight1Eval()
+{
+	return *std::max_element(rowWeight1EvalVector.begin(), rowWeight1EvalVector.end());
+}
+
+int Player::getMaxRowWeight2Eval()
+{
+	return *std::max_element(rowWeight2EvalVector.begin(), rowWeight2EvalVector.end());
+}
+
+int Player::getMaxRowWeight3Eval()
+{
+	return *std::max_element(rowWeight3EvalVector.begin(), rowWeight3EvalVector.end());
+}
+
+long long Player::getMinTime()
+{
+	return *std::min_element(timeVector.begin(), timeVector.end());
+}
+
+int Player::getMinRowEval()
+{
+	return *std::min_element(rowEvalVector.begin(), rowEvalVector.end());
+}
+
+int Player::getMinWeight1Eval()
+{
+	return *std::min_element(weight1EvalVector.begin(), weight1EvalVector.end());
+}
+
+int Player::getMinWeight2Eval()
+{
+	return *std::min_element(weight2EvalVector.begin(), weight2EvalVector.end());
+}
+
+int Player::getMinWeight3Eval()
+{
+	return *std::min_element(weight3EvalVector.begin(), weight3EvalVector.end());
+}
+
+int Player::getMinRowWeight1Eval()
+{
+	return *std::min_element(rowWeight1EvalVector.begin(), rowWeight1EvalVector.end());
+}
+
+int Player::getMinRowWeight2Eval()
+{
+	return *std::min_element(rowWeight2EvalVector.begin(), rowWeight2EvalVector.end());
+}
+
+int Player::getMinRowWeight3Eval()
+{
+	return *std::min_element(rowWeight3EvalVector.begin(), rowWeight3EvalVector.end());
+}
+
+double Player::getAverageRowEvalDiff()
+{
+	return 1.0 * std::accumulate(rowEvalDiff.begin(), rowEvalDiff.end(), 0LL) / timeVector.size();
+}
+
+double Player::getAverageWeight1EvalDiff()
+{
+	return 1.0 * std::accumulate(weight1EvalDiff.begin(), weight1EvalDiff.end(), 0LL) / weight1EvalDiff.size();
+}
+
+double Player::getAverageWeight2EvalDiff()
+{
+	return 1.0 * std::accumulate(weight2EvalDiff.begin(), weight2EvalDiff.end(), 0LL) / weight2EvalDiff.size();
+}
+
+double Player::getAverageWeight3EvalDiff()
+{
+	return 1.0 * std::accumulate(weight3EvalDiff.begin(), weight3EvalDiff.end(), 0LL) / weight3EvalDiff.size();
+}
+
+double Player::getAverageRowWeight1EvalDiff()
+{
+	return 1.0 * std::accumulate(rowWeight1EvalDiff.begin(), rowWeight1EvalDiff.end(), 0LL) / rowWeight1EvalDiff.size();
+}
+
+double Player::getAverageRowWeight2EvalDiff()
+{
+	return 1.0 * std::accumulate(rowWeight2EvalDiff.begin(), rowWeight2EvalDiff.end(), 0LL) / rowWeight2EvalDiff.size();
+}
+
+double Player::getAverageRowWeight3EvalDiff()
+{
+	return 1.0 * std::accumulate(rowWeight3EvalDiff.begin(), rowWeight3EvalDiff.end(), 0LL) / rowWeight3EvalDiff.size();
+}
+
+
+double Player::getMaxRowEvalDiff() 
+{
+	return *std::max_element(rowEvalDiff.begin(), rowEvalDiff.end());
+}
+
+double Player::getMaxWeight1EvalDiff()
+{
+	return *std::max_element(weight1EvalDiff.begin(), weight1EvalDiff.end());
+}
+
+double Player::getMaxWeight2EvalDiff()
+{
+	return *std::max_element(weight2EvalDiff.begin(), weight2EvalDiff.end());
+}
+
+double Player::getMaxWeight3EvalDiff()
+{
+	return *std::max_element(weight3EvalDiff.begin(), weight3EvalDiff.end());
+}
+
+double Player::getMaxRowWeight1EvalDiff()
+{
+	return *std::max_element(rowWeight1EvalDiff.begin(), rowWeight1EvalDiff.end());
+}
+
+double Player::getMaxRowWeight2EvalDiff()
+{
+	return *std::max_element(rowWeight2EvalDiff.begin(), rowWeight2EvalDiff.end());
+}
+
+double Player::getMaxRowWeight3EvalDiff()
+{
+	return *std::max_element(rowWeight3EvalDiff.begin(), rowWeight3EvalDiff.end());
+}
+
+
+
+double Player::getMinRowEvalDiff()
+{
+	return *std::min_element(rowEvalDiff.begin(), rowEvalDiff.end());
+}
+
+double Player::getMinWeight1EvalDiff()
+{
+	return *std::min_element(weight1EvalDiff.begin(), weight1EvalDiff.end());
+}
+
+double Player::getMinWeight2EvalDiff()
+{
+	return *std::min_element(weight2EvalDiff.begin(), weight2EvalDiff.end());
+}
+
+double Player::getMinWeight3EvalDiff()
+{
+	return *std::min_element(weight3EvalDiff.begin(), weight3EvalDiff.end());
+}
+
+double Player::getMinRowWeight1EvalDiff()
+{
+	return *std::min_element(rowWeight1EvalDiff.begin(), rowWeight1EvalDiff.end());
+}
+
+double Player::getMinRowWeight2EvalDiff()
+{
+	return *std::min_element(rowWeight2EvalDiff.begin(), rowWeight2EvalDiff.end());
+}
+
+double Player::getMinRowWeight3EvalDiff()
+{
+	return *std::min_element(rowWeight3EvalDiff.begin(), rowWeight3EvalDiff.end());
+}
+
+void Player::displayResult()
+{
+	std::cout << "Time taken: " << timeVector.back() << std::endl;
+	std::cout << "The rowEval: " << rowEval << std::endl;
+	std::cout << "The weight1Eval: " << weight1Eval << std::endl;
+	std::cout << "The weight2Eval: " << weight2Eval << std::endl;
+	std::cout << "The weight3Eval: " << weight3Eval << std::endl;
+	std::cout << "The rowWeight1Eval: " << rowWeight1Eval << std::endl;
+	std::cout << "The rowWeight2Eval: " << rowWeight2Eval << std::endl;
+	std::cout << "The rowWeight3Eval: " << rowWeight3Eval << std::endl;
 }

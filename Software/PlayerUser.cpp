@@ -10,11 +10,22 @@
 
 PlayerUser::PlayerUser(GameDataRef data, Discs playerDisc) : _data{ data }, _playerDisc { playerDisc }
 {
-	
+	playerName = "PlayerUser";
 }
 
 void PlayerUser::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4])
 {
+	calcEvaluation_4x4(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
 	int width = WIDTH_4x4;
 	int height = HEIGHT_4x4;
 	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
@@ -60,19 +71,55 @@ void PlayerUser::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][W
 	{
 		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
 	}
-	calcEvaluation(board);
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_4x4(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 	if (eval == PLAYER_TWO_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 }
 
 void PlayerUser::nextMove(Board_7x4* board, sf::Sprite boardPieces[HEIGHT_7x4][WIDTH_7x4])
 {
+	calcEvaluation_7x4(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
 	int width = WIDTH_7x4;
 	int height = HEIGHT_7x4;
 	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
@@ -118,19 +165,55 @@ void PlayerUser::nextMove(Board_7x4* board, sf::Sprite boardPieces[HEIGHT_7x4][W
 	{
 		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
 	}
-	calcEvaluation(board);
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_7x4(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 	if (eval == PLAYER_TWO_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 }
 
 void PlayerUser::nextMove(Board_4x7* board, sf::Sprite boardPieces[HEIGHT_4x7][WIDTH_4x7])
 {
+	calcEvaluation_4x7(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
 	int width = WIDTH_4x7;
 	int height = HEIGHT_4x7;
 	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
@@ -176,19 +259,55 @@ void PlayerUser::nextMove(Board_4x7* board, sf::Sprite boardPieces[HEIGHT_4x7][W
 	{
 		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
 	}
-	calcEvaluation(board);
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_4x7(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 	if (eval == PLAYER_TWO_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 }
 
 void PlayerUser::nextMove(Board_8x8* board, sf::Sprite boardPieces[HEIGHT_8x8][WIDTH_8x8])
 {
+	calcEvaluation_8x8(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
 	int width = WIDTH_8x8;
 	int height = HEIGHT_8x8;
 	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
@@ -234,26 +353,55 @@ void PlayerUser::nextMove(Board_8x8* board, sf::Sprite boardPieces[HEIGHT_8x8][W
 	{
 		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
 	}
-	calcEvaluation(board);
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_8x8(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 	if (eval == PLAYER_TWO_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 }
 
 void PlayerUser::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6])
 {
-	rowEval = rowEval_7x6(board);
-	weight1Eval = weight1Eval_7x6(board);
-	weight2Eval = weight2Eval_7x6(board);
-	weight3Eval = weight3Eval_7x6(board);
-	rowWeight1Eval = rowWeight1_7x6(board);
-	rowWeight2Eval = rowWeight2_7x6(board);
-	rowWeight3Eval = rowWeight3_7x6(board);
+	calcEvaluation_7x6(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
 	int width = WIDTH_7x6;
 	int height = HEIGHT_7x6;
 	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
@@ -299,26 +447,55 @@ void PlayerUser::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][W
 	{
 		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
 	}
-	calcEvaluation(board);
-	rowEval = rowEval_7x6(board);
-	weight1Eval = weight1Eval_7x6(board);
-	weight2Eval = weight2Eval_7x6(board);
-	weight3Eval = weight3Eval_7x6(board);
-	rowWeight1Eval = rowWeight1_7x6(board);
-	rowWeight2Eval = rowWeight2_7x6(board);
-	rowWeight3Eval = rowWeight3_7x6(board);
-	
-	std::cout << "rowEval: " << rowEval << std::endl;
-	std::cout << "weight1Eval: " << weight1Eval << std::endl;
-	std::cout << "weight2Eval: " << weight2Eval << std::endl;
-	std::cout << "weight3Eval: " << weight3Eval << std::endl;
-	std::cout << "rowWeight1Eval: " << rowWeight1Eval << std::endl;
-	std::cout << "rowWeight2Eval: " << rowWeight2Eval << std::endl;
-	std::cout << "rowWeight3Eval: " << rowWeight3Eval << std::endl;
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_7x6(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
+	if (eval == PLAYER_ONE_WINS)
+	{
+		result = 1;
+		this->_data->_gameOver = true;
+	}
+	if (eval == PLAYER_TWO_WINS)
+	{
+		result = 1;
+		this->_data->_gameOver = true;
+	}
 }
 
 void PlayerUser::nextMove(Board_6x7* board, sf::Sprite boardPieces[HEIGHT_6x7][WIDTH_6x7])
 {
+	calcEvaluation_6x7(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
 	int width = WIDTH_6x7;
 	int height = HEIGHT_6x7;
 	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
@@ -364,19 +541,55 @@ void PlayerUser::nextMove(Board_6x7* board, sf::Sprite boardPieces[HEIGHT_6x7][W
 	{
 		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
 	}
-	calcEvaluation(board);
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_6x7(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 	if (eval == PLAYER_TWO_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 }
 
 void PlayerUser::nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12])
 {
+	calcEvaluation_14x12(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
 	int width = WIDTH_14x12;
 	int height = HEIGHT_14x12;
 	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
@@ -422,19 +635,55 @@ void PlayerUser::nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x1
 	{
 		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
 	}
-	calcEvaluation(board);
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_14x12(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 	if (eval == PLAYER_TWO_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 }
 
 void PlayerUser::nextMove(Board_12x14* board, sf::Sprite boardPieces[HEIGHT_12x14][WIDTH_12x14])
 {
+	calcEvaluation_12x14(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
 	int width = WIDTH_12x14;
 	int height = HEIGHT_12x14;
 	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
@@ -480,67 +729,38 @@ void PlayerUser::nextMove(Board_12x14* board, sf::Sprite boardPieces[HEIGHT_12x1
 	{
 		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
 	}
-	calcEvaluation(board);
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_12x14(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 	if (eval == PLAYER_TWO_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
-}
-
-int PlayerUser::calcEvaluation(Board_4x4* board)  
-{
-	eval = rowEval_4x4(board);
-	return eval;
-}
-
-int PlayerUser::calcEvaluation(Board_7x4* board)
-{
-	eval = 0;
-	return eval;
-}
-
-int PlayerUser::calcEvaluation(Board_4x7* board)
-{
-	eval = 0;
-	return eval;
-}
-
-int PlayerUser::calcEvaluation(Board_8x8* board)
-{
-	eval = 0;
-	return eval;
-}
-
-int PlayerUser::calcEvaluation(Board_7x6* board)
-{
-	rowEval = rowEval_7x6(board);
-	weight1Eval = weight1Eval_7x6(board);
-	weight2Eval = weight2Eval_7x6(board);
-	weight3Eval = weight3Eval_7x6(board);
-	rowWeight1Eval = rowWeight1_7x6(board);
-	rowWeight2Eval = rowWeight2_7x6(board);
-	rowWeight3Eval = rowWeight3_7x6(board);
-	return eval;
-}
-
-int PlayerUser::calcEvaluation(Board_6x7* board)
-{
-	eval = 0;
-	return eval;
-}
-
-int PlayerUser::calcEvaluation(Board_14x12* board)
-{
-	eval = rowEval_14x12(board);
-	return eval;
-}
-
-int PlayerUser::calcEvaluation(Board_12x14* board)
-{
-	eval = 0;
-	return eval;
 }

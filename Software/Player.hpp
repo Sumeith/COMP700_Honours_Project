@@ -14,12 +14,10 @@
 #include "RowWithWeight3Eval.h"
 #include <vector>
 #include <chrono>
-
+#include <numeric>
 class Player
 {
 protected:
-
-	std::string playerName;
 	int eval;
 	int rowEval;
 	int weight1Eval;
@@ -28,8 +26,30 @@ protected:
 	int rowWeight1Eval;
 	int rowWeight2Eval;
 	int rowWeight3Eval;
+	
+	std::vector<long long> timeVector;
+
+	std::vector<int> rowEvalVector;
+	std::vector<int> weight1EvalVector;
+	std::vector<int> weight2EvalVector;
+	std::vector<int> weight3EvalVector;
+	std::vector<int> rowWeight1EvalVector;
+	std::vector<int> rowWeight2EvalVector;
+	std::vector<int> rowWeight3EvalVector;
+
+	std::vector<int> rowEvalDiff;
+	std::vector<int> weight1EvalDiff;
+	std::vector<int> weight2EvalDiff;
+	std::vector<int> weight3EvalDiff;
+	std::vector<int> rowWeight1EvalDiff;
+	std::vector<int> rowWeight2EvalDiff;
+	std::vector<int> rowWeight3EvalDiff;
 
 public:
+	std::string playerName;
+	int result{ 0 };
+	int firstColumn{ -1 };
+
 	virtual void nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4]) = 0;
 	virtual void nextMove(Board_7x4* board, sf::Sprite boardPieces[HEIGHT_7x4][WIDTH_7x4]) = 0;
 	virtual void nextMove(Board_4x7* board, sf::Sprite boardPieces[HEIGHT_4x7][WIDTH_4x7]) = 0;
@@ -61,4 +81,59 @@ public:
 	void calcEvaluation_8x8(Board_8x8* board);
 	void calcEvaluation_14x12(Board_14x12* board);
 	void calcEvaluation_12x14(Board_12x14* board);
+
+	long long getAverageTime();
+	double getAverageRowEval();
+	double getAverageWeight1Eval();
+	double getAverageWeight2Eval();
+	double getAverageWeight3Eval();
+	double getAverageRowWeight1Eval();
+	double getAverageRowWeight2Eval();
+	double getAverageRowWeight3Eval();
+
+	long long getMaxTime();
+	int getMaxRowEval();
+	int getMaxWeight1Eval();
+	int getMaxWeight2Eval();
+	int getMaxWeight3Eval();
+	int getMaxRowWeight1Eval();
+	int getMaxRowWeight2Eval();
+	int getMaxRowWeight3Eval();
+
+	long long getMinTime();
+	int getMinRowEval();
+	int getMinWeight1Eval();
+	int getMinWeight2Eval();
+	int getMinWeight3Eval();
+	int getMinRowWeight1Eval();
+	int getMinRowWeight2Eval();
+	int getMinRowWeight3Eval();
+
+	double getAverageRowEvalDiff();
+	double getAverageWeight1EvalDiff();
+	double getAverageWeight2EvalDiff();
+	double getAverageWeight3EvalDiff();
+	double getAverageRowWeight1EvalDiff();
+	double getAverageRowWeight2EvalDiff();
+	double getAverageRowWeight3EvalDiff();
+
+	
+	double getMaxRowEvalDiff();
+	double getMaxWeight1EvalDiff();
+	double getMaxWeight2EvalDiff();
+	double getMaxWeight3EvalDiff();
+	double getMaxRowWeight1EvalDiff();
+	double getMaxRowWeight2EvalDiff();
+	double getMaxRowWeight3EvalDiff();
+
+	
+	double getMinRowEvalDiff();
+	double getMinWeight1EvalDiff();
+	double getMinWeight2EvalDiff();
+	double getMinWeight3EvalDiff();
+	double getMinRowWeight1EvalDiff();
+	double getMinRowWeight2EvalDiff();
+	double getMinRowWeight3EvalDiff();
+
+	void displayResult();
 };

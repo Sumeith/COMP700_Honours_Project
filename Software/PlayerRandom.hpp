@@ -20,18 +20,10 @@ public:
 	void nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12]);
 	void nextMove(Board_12x14* board, sf::Sprite boardPieces[HEIGHT_12x14][WIDTH_12x14]);
 
-	int calcEvaluation(Board_4x4* board);
-	int calcEvaluation(Board_7x4* board) { return 0; }
-	int calcEvaluation(Board_4x7* board) { return 0; }
-	int calcEvaluation(Board_7x6* board);
-	int calcEvaluation(Board_6x7* board) { return 0; }
-	int calcEvaluation(Board_8x8* board) { return 0; }
-	int calcEvaluation(Board_14x12* board);
-	int calcEvaluation(Board_12x14* board) { return 0; }
-
 	void updateGameState(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4]);
 	void updateGameState(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6]);
 	void updateGameState(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12]);
+
 
 private:
 	GameDataRef _data;

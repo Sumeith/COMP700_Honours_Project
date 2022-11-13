@@ -11,6 +11,7 @@ class PlayerNegaMaxRowEval : public Player
 {
 public:
 	PlayerNegaMaxRowEval(GameDataRef data, Discs playerDisc);
+	
 
 	void nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4]);
 	void nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6]);

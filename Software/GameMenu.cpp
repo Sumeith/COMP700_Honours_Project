@@ -100,83 +100,26 @@ void GameMenuState::HandleInput()
 			this->_data->window.close();
 		}
 
-		/*if(sf::Event::MouseButtonPressed == event.type)
-		{
-			if (event.key.code == sf::Mouse::Left)
-			{
-				pos = sf::Mouse::getPosition(this->_data->window);
-				std::cout << pos.x << ";" << pos.y << std::endl;
-			}
-		}*/
 	}
 }
 
 void GameMenuState::Update(float dt)
 {
 
-	this->_data->player1 = std::make_unique<PlayerMiniMaxABWeight3EvalDepth10>(this->_data, PLAYER_ONE_DISC);
-	this->_data->player2 = std::make_unique<PlayerUser>(this->_data, PLAYER_TWO_DISC);
+	/*this->_data->player1 = std::make_unique<PlayerMiniMaxRowWeight3EvalDepth5>(this->_data, PLAYER_ONE_DISC);
+	this->_data->player2 = std::make_unique<PlayerMiniMaxRowWeight3EvalDepth5>(this->_data, PLAYER_TWO_DISC);
 
-	this->_data->machine.AddState(StateRef(new GameState_4x4(_data)), true);
-	//for (int i = 0; i < 2; i++)
-	//{
-
-
-	//	if (!playerSet)
-	//	{
-	//		int player1_choice = 0;
-	//		int player2_choice = 0;
-
-	//		std::cout << "Welcome to Connect 4" << std::endl;
-	//		std::cout << "Please select 1 of the following players: " << std::endl;
-	//		std::cout << "[1] Player User" << std::endl;
-	//		std::cin >> player1_choice;
-	//		std::cin >> player2_choice;
-	//		playerSet = true;
-	//		/*this->_data->player1 = std::make_unique<PlayerUser>(this->_data , PLAYER_ONE_DISC);
-	//		this->_data->player2 = std::make_unique<PlayerUser>(this->_data, PLAYER_TWO_DISC);*/
-
-	//		//PlayerUser
-	//		//PlayerRandom PlayerSymmetric PlayerCopy PlayerLeft PlayerRight
-	//		// PlayerNaiveRowEval 
-	//		// PlayerMiniMaxRowEval PlayerMiniMaxRowEvalDepth5	PlayerMiniMaxRowEvalDepth10
-	//		// PlayerMiniMaxABRowEval PlayerMiniMaxABRowEvalDepth5	PlayerMiniMaxABRowEvalDepth10
-	//		// 
-	//		// PlayerNegaMaxRowEval
-
-	//		//PlayerNegaMaxABRowEval
-
-	//		setPlayer(1, player1_choice);
-	//		setPlayer(2, player2_choice);
-	//		this->_data->machine.AddState(StateRef(new GameState_7x6(_data)), true);
-
-	//	}
-	//}
-}
-
-void GameMenuState::setPlayer(int playerNum, int choice)
-{
-	switch (playerNum)
+	this->_data->machine.AddState(StateRef(new GameState_4x4(_data)), true);*/
+	
+	if (this->_data->numReported < 5)
 	{
-	case 1:
-		switch (choice)
-		{
-		case 1:
-			this->_data->player1 = std::make_unique<PlayerUser>(this->_data, PLAYER_ONE_DISC);
-		default:
-			break;
-		}
-		break;
-	case 2:
-		switch (choice)
-		{
-		case 1:
-			this->_data->player2 = std::make_unique<PlayerUser>(this->_data, PLAYER_TWO_DISC);
-		default:
-			break;
-		}
-	default:
-		break;
+		this->_data->player1 = std::make_unique<PlayerMiniMaxWeight1EvalDepth5>(this->_data, PLAYER_ONE_DISC);
+		this->_data->player2 = std::make_unique<PlayerMiniMaxABRowWeight1EvalDepth5>(this->_data, PLAYER_TWO_DISC);
+		this->_data->machine.AddState(StateRef(new GameState_4x4(_data)), true);
+	}
+	else 
+	{
+		exit(EXIT_SUCCESS);
 	}
 }
 

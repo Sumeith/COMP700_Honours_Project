@@ -10,6 +10,7 @@ class PlayerMiniMaxWeight1EvalDepth10 : public Player
 {
 public:
 	PlayerMiniMaxWeight1EvalDepth10(GameDataRef data, Discs playerDisc);
+	
 
 	void nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4]);
 	void nextMove(Board_7x4* board, sf::Sprite boardPieces[HEIGHT_7x4][WIDTH_7x4]);

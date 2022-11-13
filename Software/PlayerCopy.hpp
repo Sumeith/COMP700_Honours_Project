@@ -6,6 +6,7 @@
 #include "RandomMoveinC.h" 
 #include "SameColumnMoveInC.h"
 #include "GameManager.hpp"
+#include <string>
 
 class PlayerCopy : public Player
 {
@@ -20,10 +21,6 @@ public:
 	void nextMove(Board_8x8* board, sf::Sprite boardPieces[HEIGHT_8x8][WIDTH_8x8]);
 	void nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12]);
 	void nextMove(Board_12x14* board, sf::Sprite boardPieces[HEIGHT_12x14][WIDTH_12x14]);
-
-	//int calcEvaluation(Board_4x4* board);
-	//int calcEvaluation(Board_7x6* board);
-	//int calcEvaluation(Board_14x12* board);
 
 	void updateGameState(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4]);
 	void updateGameState(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6]);
