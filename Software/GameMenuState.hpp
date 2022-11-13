@@ -12,8 +12,11 @@ public:
 	void HandleInput();
 	void Update(float dt);
 	void Draw(float dt);
+
 private:
 	GameDataRef _data;
 	sf::Clock _clock;
 	sf::Sprite _background;
+
+	bool playerSet;
 };

@@ -18,7 +18,6 @@ public:
 
 	void LoadSound(std::string name, std::string fileName);
 	sf::Sound& GetSound(std::string name);;
-	
 
 private:
 	std::map<std::string, sf::Texture> _textureMap;

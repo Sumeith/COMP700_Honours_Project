@@ -1,9 +1,12 @@
 #include "GameManager.hpp"
 #include "GameMenuState.hpp"
+#include <stdlib.h>
+#include<time.h>
 GameManager::GameManager(int width, int height, std::string title)
 {
 	_data -> window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
 	_data->machine.AddState(StateRef(new GameMenuState(this -> _data)));
+	srand(time(0));
 	this->Run();
 }
 

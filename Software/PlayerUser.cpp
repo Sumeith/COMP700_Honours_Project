@@ -1,13 +1,31 @@
 #include <iostream>
 #include "PlayerUser.hpp"
+#include "RowEvalInC.h"
+#include "Weight1EvalInC.h"
+#include "Weight2EvalInC.h"
+#include "Weight3EvalInC.h"
+#include "RowWithWeight1Eval.h"
+#include "RowWithWeight2Eval.h"
+#include "RowWithWeight3Eval.h"
 
 PlayerUser::PlayerUser(GameDataRef data, Discs playerDisc) : _data{ data }, _playerDisc { playerDisc }
 {
-	
+	playerName = "PlayerUser";
 }
 
 void PlayerUser::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][WIDTH_4x4])
 {
+	calcEvaluation_4x4(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
 	int width = WIDTH_4x4;
 	int height = HEIGHT_4x4;
 	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
@@ -31,6 +49,7 @@ void PlayerUser::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][W
 			if (board->_grid[row][column] == EMPTY_DISC)
 			{
 				board->_grid[row][column] = _playerDisc;
+				this->_data->_prevCol = column;
 
 				if (_playerDisc == PLAYER_ONE_DISC)
 				{
@@ -52,19 +71,337 @@ void PlayerUser::nextMove(Board_4x4* board, sf::Sprite boardPieces[HEIGHT_4x4][W
 	{
 		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
 	}
-	calcEvaluation(board);
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_4x4(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 	if (eval == PLAYER_TWO_WINS)
 	{
+		result = 1;
+		this->_data->_gameOver = true;
+	}
+}
+
+void PlayerUser::nextMove(Board_7x4* board, sf::Sprite boardPieces[HEIGHT_7x4][WIDTH_7x4])
+{
+	calcEvaluation_7x4(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
+	int width = WIDTH_7x4;
+	int height = HEIGHT_7x4;
+	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
+	int column = 0;
+	int tempWidth = this->_data->assets.GetTexture("Empty Disc").getSize().x;
+	for (int colNum = 0; colNum < width; colNum++)
+	{
+		if ((mousePoint.x >= colNum * tempWidth) && (mousePoint.x < (colNum + 1) * (tempWidth))) {
+			column = colNum;
+		}
+	}
+
+	if (board->_grid[0][column] != EMPTY_DISC)
+	{
+		std::cout << "Column " << column + 1 << " is Full" << std::endl;
+	}
+	else if (0 <= column && column <= width)
+	{
+		for (int row = height - 1; row >= 0; row--)
+		{
+			if (board->_grid[row][column] == EMPTY_DISC)
+			{
+				board->_grid[row][column] = _playerDisc;
+				this->_data->_prevCol = column;
+
+				if (_playerDisc == PLAYER_ONE_DISC)
+				{
+					boardPieces[row][column].setTexture(this->_data->assets.GetTexture("Player One Disc"));
+				}
+				else if (_playerDisc == PLAYER_TWO_DISC)
+				{
+					boardPieces[row][column].setTexture(this->_data->assets.GetTexture("Player Two Disc"));
+				}
+				else
+				{
+					std::cout << "Invalid Disc" << std::endl;
+				}
+				break;
+			}
+		}
+	}
+	else
+	{
+		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
+	}
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_7x4(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
+	if (eval == PLAYER_ONE_WINS)
+	{
+		result = 1;
+		this->_data->_gameOver = true;
+	}
+	if (eval == PLAYER_TWO_WINS)
+	{
+		result = 1;
+		this->_data->_gameOver = true;
+	}
+}
+
+void PlayerUser::nextMove(Board_4x7* board, sf::Sprite boardPieces[HEIGHT_4x7][WIDTH_4x7])
+{
+	calcEvaluation_4x7(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
+	int width = WIDTH_4x7;
+	int height = HEIGHT_4x7;
+	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
+	int column = 0;
+	int tempWidth = this->_data->assets.GetTexture("Empty Disc").getSize().x;
+	for (int colNum = 0; colNum < width; colNum++)
+	{
+		if ((mousePoint.x >= colNum * tempWidth) && (mousePoint.x < (colNum + 1) * (tempWidth))) {
+			column = colNum;
+		}
+	}
+
+	if (board->_grid[0][column] != EMPTY_DISC)
+	{
+		std::cout << "Column " << column + 1 << " is Full" << std::endl;
+	}
+	else if (0 <= column && column <= width)
+	{
+		for (int row = height - 1; row >= 0; row--)
+		{
+			if (board->_grid[row][column] == EMPTY_DISC)
+			{
+				board->_grid[row][column] = _playerDisc;
+				this->_data->_prevCol = column;
+
+				if (_playerDisc == PLAYER_ONE_DISC)
+				{
+					boardPieces[row][column].setTexture(this->_data->assets.GetTexture("Player One Disc"));
+				}
+				else if (_playerDisc == PLAYER_TWO_DISC)
+				{
+					boardPieces[row][column].setTexture(this->_data->assets.GetTexture("Player Two Disc"));
+				}
+				else
+				{
+					std::cout << "Invalid Disc" << std::endl;
+				}
+				break;
+			}
+		}
+	}
+	else
+	{
+		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
+	}
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_4x7(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
+	if (eval == PLAYER_ONE_WINS)
+	{
+		result = 1;
+		this->_data->_gameOver = true;
+	}
+	if (eval == PLAYER_TWO_WINS)
+	{
+		result = 1;
+		this->_data->_gameOver = true;
+	}
+}
+
+void PlayerUser::nextMove(Board_8x8* board, sf::Sprite boardPieces[HEIGHT_8x8][WIDTH_8x8])
+{
+	calcEvaluation_8x8(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
+	int width = WIDTH_8x8;
+	int height = HEIGHT_8x8;
+	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
+	int column = 0;
+	int tempWidth = this->_data->assets.GetTexture("Empty Disc").getSize().x;
+	for (int colNum = 0; colNum < width; colNum++)
+	{
+		if ((mousePoint.x >= colNum * tempWidth) && (mousePoint.x < (colNum + 1) * (tempWidth))) {
+			column = colNum;
+		}
+	}
+
+	if (board->_grid[0][column] != EMPTY_DISC)
+	{
+		std::cout << "Column " << column + 1 << " is Full" << std::endl;
+	}
+	else if (0 <= column && column <= width)
+	{
+		for (int row = height - 1; row >= 0; row--)
+		{
+			if (board->_grid[row][column] == EMPTY_DISC)
+			{
+				board->_grid[row][column] = _playerDisc;
+				this->_data->_prevCol = column;
+
+				if (_playerDisc == PLAYER_ONE_DISC)
+				{
+					boardPieces[row][column].setTexture(this->_data->assets.GetTexture("Player One Disc"));
+				}
+				else if (_playerDisc == PLAYER_TWO_DISC)
+				{
+					boardPieces[row][column].setTexture(this->_data->assets.GetTexture("Player Two Disc"));
+				}
+				else
+				{
+					std::cout << "Invalid Disc" << std::endl;
+				}
+				break;
+			}
+		}
+	}
+	else
+	{
+		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
+	}
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_8x8(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
+	if (eval == PLAYER_ONE_WINS)
+	{
+		result = 1;
+		this->_data->_gameOver = true;
+	}
+	if (eval == PLAYER_TWO_WINS)
+	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 }
 
 void PlayerUser::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][WIDTH_7x6])
 {
+	calcEvaluation_7x6(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
 	int width = WIDTH_7x6;
 	int height = HEIGHT_7x6;
 	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
@@ -88,6 +425,7 @@ void PlayerUser::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][W
 			if (board->_grid[row][column] == EMPTY_DISC)
 			{
 				board->_grid[row][column] = _playerDisc;
+				this->_data->_prevCol = column;
 
 				if (_playerDisc == PLAYER_ONE_DISC)
 				{
@@ -109,19 +447,149 @@ void PlayerUser::nextMove(Board_7x6* board, sf::Sprite boardPieces[HEIGHT_7x6][W
 	{
 		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
 	}
-	calcEvaluation(board);
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_7x6(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 	if (eval == PLAYER_TWO_WINS)
 	{
+		result = 1;
+		this->_data->_gameOver = true;
+	}
+}
+
+void PlayerUser::nextMove(Board_6x7* board, sf::Sprite boardPieces[HEIGHT_6x7][WIDTH_6x7])
+{
+	calcEvaluation_6x7(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
+	int width = WIDTH_6x7;
+	int height = HEIGHT_6x7;
+	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
+	int column = 0;
+	int tempWidth = this->_data->assets.GetTexture("Empty Disc").getSize().x;
+	for (int colNum = 0; colNum < width; colNum++)
+	{
+		if ((mousePoint.x >= colNum * tempWidth) && (mousePoint.x < (colNum + 1) * (tempWidth))) {
+			column = colNum;
+		}
+	}
+
+	if (board->_grid[0][column] != EMPTY_DISC)
+	{
+		std::cout << "Column " << column + 1 << " is Full" << std::endl;
+	}
+	else if (0 <= column && column <= width)
+	{
+		for (int row = height - 1; row >= 0; row--)
+		{
+			if (board->_grid[row][column] == EMPTY_DISC)
+			{
+				board->_grid[row][column] = _playerDisc;
+				this->_data->_prevCol = column;
+
+				if (_playerDisc == PLAYER_ONE_DISC)
+				{
+					boardPieces[row][column].setTexture(this->_data->assets.GetTexture("Player One Disc"));
+				}
+				else if (_playerDisc == PLAYER_TWO_DISC)
+				{
+					boardPieces[row][column].setTexture(this->_data->assets.GetTexture("Player Two Disc"));
+				}
+				else
+				{
+					std::cout << "Invalid Disc" << std::endl;
+				}
+				break;
+			}
+		}
+	}
+	else
+	{
+		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
+	}
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_6x7(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
+	if (eval == PLAYER_ONE_WINS)
+	{
+		result = 1;
+		this->_data->_gameOver = true;
+	}
+	if (eval == PLAYER_TWO_WINS)
+	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 }
 
 void PlayerUser::nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x12][WIDTH_14x12])
 {
+	calcEvaluation_14x12(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
 	int width = WIDTH_14x12;
 	int height = HEIGHT_14x12;
 	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
@@ -145,6 +613,7 @@ void PlayerUser::nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x1
 			if (board->_grid[row][column] == EMPTY_DISC)
 			{
 				board->_grid[row][column] = _playerDisc;
+				this->_data->_prevCol = column;
 
 				if (_playerDisc == PLAYER_ONE_DISC)
 				{
@@ -166,526 +635,132 @@ void PlayerUser::nextMove(Board_14x12* board, sf::Sprite boardPieces[HEIGHT_14x1
 	{
 		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
 	}
-	calcEvaluation(board);
+
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_14x12(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
 	if (eval == PLAYER_ONE_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 	if (eval == PLAYER_TWO_WINS)
 	{
+		result = 1;
 		this->_data->_gameOver = true;
 	}
 }
 
-int PlayerUser::calcEvaluation(Board_4x4* board)  
+void PlayerUser::nextMove(Board_12x14* board, sf::Sprite boardPieces[HEIGHT_12x14][WIDTH_12x14])
 {
-	int height = HEIGHT_4x4;
-	int width = WIDTH_4x4;
-	int evalArr[6] = { 0,0,0,0,0,0 };
-	for (int col = 0; col < width; col++)
+	calcEvaluation_12x14(board);
+	int initialRowEval = rowEval;
+	int initialWeight1Eval = weight1Eval;
+	int initialWeight2Eval = weight2Eval;
+	int initialWeight3Eval = weight3Eval;
+	int initialRowWeight1Eval = rowWeight1Eval;
+	int initialRowWeight2Eval = rowWeight2Eval;
+	int initialRowWeight3Eval = rowWeight3Eval;
+
+	auto start = std::chrono::high_resolution_clock::now();
+
+	int width = WIDTH_12x14;
+	int height = HEIGHT_12x14;
+	sf::Vector2i mousePoint = this->_data->input.GetMousePosition(this->_data->window);
+	int column = 0;
+	int tempWidth = this->_data->assets.GetTexture("Empty Disc").getSize().x;
+	for (int colNum = 0; colNum < width; colNum++)
 	{
-		for (int row = 0; row < height; row++)
+		if ((mousePoint.x >= colNum * tempWidth) && (mousePoint.x < (colNum + 1) * (tempWidth))) {
+			column = colNum;
+		}
+	}
+
+	if (board->_grid[0][column] != EMPTY_DISC)
+	{
+		std::cout << "Column " << column + 1 << " is Full" << std::endl;
+	}
+	else if (0 <= column && column <= width)
+	{
+		for (int row = height - 1; row >= 0; row--)
 		{
-			//check Horizontal
-			if (checkConditionHorizontal(col, width)) {
-				//check four in a row
-				if (board->_grid[row][col] == PLAYER_ONE_DISC &&
-					board->_grid[row][col + 1] == PLAYER_ONE_DISC &&
-					board->_grid[row][col + 2] == PLAYER_ONE_DISC &&
-					board->_grid[row][col + 3] == PLAYER_ONE_DISC)
-				{
-					eval = INT_MAX;
-					return eval;
-				}
-				else if (board->_grid[row][col] == PLAYER_TWO_DISC &&
-					board->_grid[row][col + 1] == PLAYER_TWO_DISC &&
-					board->_grid[row][col + 2] == PLAYER_TWO_DISC &&
-					board->_grid[row][col + 3] == PLAYER_TWO_DISC)
-				{
-					eval = INT_MIN;
-					return eval;
-				}
-
-				checkThreeInARow(board->_grid[row][col],
-					board->_grid[row][col + 1],
-					board->_grid[row][col + 2],
-					board->_grid[row][col + 3],
-					evalArr);
-
-				checkTwoInARow(board->_grid[row][col],
-					board->_grid[row][col + 1],
-					board->_grid[row][col + 2],
-					board->_grid[row][col + 3],
-					evalArr);
-
-				checkOneInARow(board->_grid[row][col],
-					board->_grid[row][col + 1],
-					board->_grid[row][col + 2],
-					board->_grid[row][col + 3],
-					evalArr);
-			}
-
-			if (checkConditionVertical(row, height))
+			if (board->_grid[row][column] == EMPTY_DISC)
 			{
-				if (board->_grid[row][col] == PLAYER_ONE_DISC &&
-					board->_grid[row + 1][col] == PLAYER_ONE_DISC &&
-					board->_grid[row + 2][col] == PLAYER_ONE_DISC &&
-					board->_grid[row + 3][col] == PLAYER_ONE_DISC)
+				board->_grid[row][column] = _playerDisc;
+				this->_data->_prevCol = column;
+
+				if (_playerDisc == PLAYER_ONE_DISC)
 				{
-					eval = INT_MAX;
-					return eval;
+					boardPieces[row][column].setTexture(this->_data->assets.GetTexture("Player One Disc"));
 				}
-
-				else if (board->_grid[row][col] == PLAYER_TWO_DISC &&
-					board->_grid[row + 1][col] == PLAYER_TWO_DISC &&
-					board->_grid[row + 2][col] == PLAYER_TWO_DISC &&
-					board->_grid[row + 3][col] == PLAYER_TWO_DISC)
+				else if (_playerDisc == PLAYER_TWO_DISC)
 				{
-					eval = INT_MIN;
-					return eval;
+					boardPieces[row][column].setTexture(this->_data->assets.GetTexture("Player Two Disc"));
 				}
-
-				checkThreeInARow(board->_grid[row][col],
-					board->_grid[row + 1][col],
-					board->_grid[row + 2][col],
-					board->_grid[row + 3][col],
-					evalArr);
-
-				checkTwoInARow(board->_grid[row][col],
-					board->_grid[row + 1][col],
-					board->_grid[row + 2][col],
-					board->_grid[row + 3][col],
-					evalArr);
-
-				checkOneInARow(board->_grid[row][col],
-					board->_grid[row + 1][col],
-					board->_grid[row + 2][col],
-					board->_grid[row + 3][col],
-					evalArr);
-			}
-
-			if (checkConditionPosDiag(row, col, width))
-			{
-				if (board->_grid[row][col] == PLAYER_ONE_DISC &&
-					board->_grid[row - 1][col + 1] == PLAYER_ONE_DISC &&
-					board->_grid[row - 2][col + 2] == PLAYER_ONE_DISC &&
-					board->_grid[row - 3][col + 3] == PLAYER_ONE_DISC)
+				else
 				{
-					eval = INT_MAX;
-					return eval;
+					std::cout << "Invalid Disc" << std::endl;
 				}
-
-				else if (board->_grid[row][col] == PLAYER_TWO_DISC &&
-					board->_grid[row - 1][col + 1] == PLAYER_TWO_DISC &&
-					board->_grid[row - 2][col + 2] == PLAYER_TWO_DISC &&
-					board->_grid[row - 3][col + 3] == PLAYER_TWO_DISC)
-				{
-					eval = INT_MIN;
-					return eval;
-				}
-
-				checkThreeInARow(board->_grid[row][col],
-					board->_grid[row - 1][col + 1],
-					board->_grid[row - 2][col + 2],
-					board->_grid[row - 3][col + 3],
-					evalArr);
-
-				checkTwoInARow(board->_grid[row][col],
-					board->_grid[row - 1][col + 1],
-					board->_grid[row - 2][col + 2],
-					board->_grid[row - 3][col + 3],
-					evalArr);
-
-				checkOneInARow(board->_grid[row][col],
-					board->_grid[row - 1][col + 1],
-					board->_grid[row - 2][col + 2],
-					board->_grid[row - 3][col + 3],
-					evalArr);
-			}
-
-			if (checkConditionNegDiag(row, col, height, width))
-			{
-				if (board->_grid[row][col] == PLAYER_ONE_DISC &&
-					board->_grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
-					board->_grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
-					board->_grid[row + 3][col + 3] == PLAYER_ONE_DISC)
-				{
-					eval = INT_MAX;
-					return eval;
-				}
-
-				else if (board->_grid[row][col] == PLAYER_TWO_DISC &&
-					board->_grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
-					board->_grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
-					board->_grid[row + 3][col + 3] == PLAYER_TWO_DISC)
-				{
-					eval = INT_MIN;
-					return eval;
-				}
-
-				checkThreeInARow(board->_grid[row][col],
-					board->_grid[row + 1][col + 1],
-					board->_grid[row + 2][col + 2],
-					board->_grid[row + 3][col + 3],
-					evalArr);
-
-				checkTwoInARow(board->_grid[row][col],
-					board->_grid[row + 1][col + 1],
-					board->_grid[row + 2][col + 2],
-					board->_grid[row + 3][col + 3],
-					evalArr);
-
-				checkOneInARow(board->_grid[row][col],
-					board->_grid[row + 1][col + 1],
-					board->_grid[row + 2][col + 2],
-					board->_grid[row + 3][col + 3],
-					evalArr);
+				break;
 			}
 		}
 	}
-	eval = THREE_IN_A_ROW_VALUE * evalArr[0] + TWO_IN_A_ROW_VALUE * evalArr[1] + evalArr[2] -
-		THREE_IN_A_ROW_VALUE * evalArr[5] - TWO_IN_A_ROW_VALUE * evalArr[4] - evalArr[3];
-	return eval;
-}
-
-int PlayerUser::calcEvaluation(Board_7x6* board)
-{
-	int height = HEIGHT_7x6;
-	int width = WIDTH_7x6;
-	int evalArr[6] = { 0,0,0,0,0,0 };
-	for (int col = 0; col < width; col++)
+	else
 	{
-		for (int row = 0; row < height; row++)
-		{
-			//check Horizontal
-			if (checkConditionHorizontal(col, width)) {
-				//check four in a row
-				if (board->_grid[row][col] == PLAYER_ONE_DISC &&
-					board->_grid[row][col + 1] == PLAYER_ONE_DISC &&
-					board->_grid[row][col + 2] == PLAYER_ONE_DISC &&
-					board->_grid[row][col + 3] == PLAYER_ONE_DISC)
-				{
-					eval = INT_MAX;
-					return eval;
-				}
-				else if (board->_grid[row][col] == PLAYER_TWO_DISC &&
-					board->_grid[row][col + 1] == PLAYER_TWO_DISC &&
-					board->_grid[row][col + 2] == PLAYER_TWO_DISC &&
-					board->_grid[row][col + 3] == PLAYER_TWO_DISC)
-				{
-					eval = INT_MIN;
-					return eval;
-				}
-
-				checkThreeInARow(board->_grid[row][col],
-					board->_grid[row][col + 1],
-					board->_grid[row][col + 2],
-					board->_grid[row][col + 3],
-					evalArr);
-
-				checkTwoInARow(board->_grid[row][col],
-					board->_grid[row][col + 1],
-					board->_grid[row][col + 2],
-					board->_grid[row][col + 3],
-					evalArr);
-
-				checkOneInARow(board->_grid[row][col],
-					board->_grid[row][col + 1],
-					board->_grid[row][col + 2],
-					board->_grid[row][col + 3],
-					evalArr);
-			}
-
-			if (checkConditionVertical(row, height))
-			{
-				if (board->_grid[row][col] == PLAYER_ONE_DISC &&
-					board->_grid[row + 1][col] == PLAYER_ONE_DISC &&
-					board->_grid[row + 2][col] == PLAYER_ONE_DISC &&
-					board->_grid[row + 3][col] == PLAYER_ONE_DISC)
-				{
-					eval = INT_MAX;
-					return eval;
-				}
-
-				else if (board->_grid[row][col] == PLAYER_TWO_DISC &&
-					board->_grid[row + 1][col] == PLAYER_TWO_DISC &&
-					board->_grid[row + 2][col] == PLAYER_TWO_DISC &&
-					board->_grid[row + 3][col] == PLAYER_TWO_DISC)
-				{
-					eval = INT_MIN;
-					return eval;
-				}
-
-				checkThreeInARow(board->_grid[row][col],
-					board->_grid[row + 1][col],
-					board->_grid[row + 2][col],
-					board->_grid[row + 3][col],
-					evalArr);
-
-				checkTwoInARow(board->_grid[row][col],
-					board->_grid[row + 1][col],
-					board->_grid[row + 2][col],
-					board->_grid[row + 3][col],
-					evalArr);
-
-				checkOneInARow(board->_grid[row][col],
-					board->_grid[row + 1][col],
-					board->_grid[row + 2][col],
-					board->_grid[row + 3][col],
-					evalArr);
-			}
-
-			if (checkConditionPosDiag(row, col, width))
-			{
-				if (board->_grid[row][col] == PLAYER_ONE_DISC &&
-					board->_grid[row - 1][col + 1] == PLAYER_ONE_DISC &&
-					board->_grid[row - 2][col + 2] == PLAYER_ONE_DISC &&
-					board->_grid[row - 3][col + 3] == PLAYER_ONE_DISC)
-				{
-					eval = INT_MAX;
-					return eval;
-				}
-
-				else if (board->_grid[row][col] == PLAYER_TWO_DISC &&
-					board->_grid[row - 1][col + 1] == PLAYER_TWO_DISC &&
-					board->_grid[row - 2][col + 2] == PLAYER_TWO_DISC &&
-					board->_grid[row - 3][col + 3] == PLAYER_TWO_DISC)
-				{
-					eval = INT_MIN;
-					return eval;
-				}
-
-				checkThreeInARow(board->_grid[row][col],
-					board->_grid[row - 1][col + 1],
-					board->_grid[row - 2][col + 2],
-					board->_grid[row - 3][col + 3],
-					evalArr);
-
-				checkTwoInARow(board->_grid[row][col],
-					board->_grid[row - 1][col + 1],
-					board->_grid[row - 2][col + 2],
-					board->_grid[row - 3][col + 3],
-					evalArr);
-
-				checkOneInARow(board->_grid[row][col],
-					board->_grid[row - 1][col + 1],
-					board->_grid[row - 2][col + 2],
-					board->_grid[row - 3][col + 3],
-					evalArr);
-			}
-
-			if (checkConditionNegDiag(row, col, height, width))
-			{
-				if (board->_grid[row][col] == PLAYER_ONE_DISC &&
-					board->_grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
-					board->_grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
-					board->_grid[row + 3][col + 3] == PLAYER_ONE_DISC)
-				{
-					eval = INT_MAX;
-					return eval;
-				}
-
-				else if (board->_grid[row][col] == PLAYER_TWO_DISC &&
-					board->_grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
-					board->_grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
-					board->_grid[row + 3][col + 3] == PLAYER_TWO_DISC)
-				{
-					eval = INT_MIN;
-					return eval;
-				}
-
-				checkThreeInARow(board->_grid[row][col],
-					board->_grid[row + 1][col + 1],
-					board->_grid[row + 2][col + 2],
-					board->_grid[row + 3][col + 3],
-					evalArr);
-
-				checkTwoInARow(board->_grid[row][col],
-					board->_grid[row + 1][col + 1],
-					board->_grid[row + 2][col + 2],
-					board->_grid[row + 3][col + 3],
-					evalArr);
-
-				checkOneInARow(board->_grid[row][col],
-					board->_grid[row + 1][col + 1],
-					board->_grid[row + 2][col + 2],
-					board->_grid[row + 3][col + 3],
-					evalArr);
-			}
-		}
+		std::cout << "Column (" << column + 1 << ") Invalid" << std::endl;
 	}
-	eval = THREE_IN_A_ROW_VALUE * evalArr[0] + TWO_IN_A_ROW_VALUE * evalArr[1] + evalArr[2] -
-		THREE_IN_A_ROW_VALUE * evalArr[5] - TWO_IN_A_ROW_VALUE * evalArr[4] - evalArr[3];
-	return eval;
-}
 
-int PlayerUser::calcEvaluation(Board_14x12* board)
-{
-	int height = HEIGHT_14x12;
-	int width = WIDTH_14x12;
-	int evalArr[6] = { 0,0,0,0,0,0 };
-	for (int col = 0; col < width; col++)
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+	timeVector.push_back(duration.count()); if (firstColumn < 0) { firstColumn = column; }
+
+	calcEvaluation_12x14(board);
+
+	rowEvalVector.push_back(rowEval);
+	weight1EvalVector.push_back(weight1Eval);
+	weight2EvalVector.push_back(weight2Eval);
+	weight3EvalVector.push_back(weight3Eval);
+	rowWeight1EvalVector.push_back(rowWeight1Eval);
+	rowWeight2EvalVector.push_back(rowWeight2Eval);
+	rowWeight3EvalVector.push_back(rowWeight3Eval);
+
+	rowEvalDiff.push_back(rowEval - initialRowEval);
+	weight1EvalDiff.push_back(weight1Eval - initialWeight1Eval);
+	weight2EvalDiff.push_back(weight2Eval - initialWeight2Eval);
+	weight3EvalDiff.push_back(weight3Eval - initialWeight3Eval);
+	rowWeight1EvalDiff.push_back(rowWeight1Eval - initialRowWeight1Eval);
+	rowWeight2EvalDiff.push_back(rowWeight2Eval - initialRowWeight2Eval);
+	rowWeight3EvalDiff.push_back(rowWeight3Eval - initialRowWeight3Eval);
+
+	displayResult();
+	if (eval == PLAYER_ONE_WINS)
 	{
-		for (int row = 0; row < height; row++)
-		{
-			//check Horizontal
-			if (checkConditionHorizontal(col, width)) {
-				//check four in a row
-				if (board->_grid[row][col] == PLAYER_ONE_DISC &&
-					board->_grid[row][col + 1] == PLAYER_ONE_DISC &&
-					board->_grid[row][col + 2] == PLAYER_ONE_DISC &&
-					board->_grid[row][col + 3] == PLAYER_ONE_DISC)
-				{
-					eval = INT_MAX;
-					return eval;
-				}
-				else if (board->_grid[row][col] == PLAYER_TWO_DISC &&
-					board->_grid[row][col + 1] == PLAYER_TWO_DISC &&
-					board->_grid[row][col + 2] == PLAYER_TWO_DISC &&
-					board->_grid[row][col + 3] == PLAYER_TWO_DISC)
-				{
-					eval = INT_MIN;
-					return eval;
-				}
-
-				checkThreeInARow(board->_grid[row][col],
-					board->_grid[row][col + 1],
-					board->_grid[row][col + 2],
-					board->_grid[row][col + 3],
-					evalArr);
-
-				checkTwoInARow(board->_grid[row][col],
-					board->_grid[row][col + 1],
-					board->_grid[row][col + 2],
-					board->_grid[row][col + 3],
-					evalArr);
-
-				checkOneInARow(board->_grid[row][col],
-					board->_grid[row][col + 1],
-					board->_grid[row][col + 2],
-					board->_grid[row][col + 3],
-					evalArr);
-			}
-
-			if (checkConditionVertical(row, height))
-			{
-				if (board->_grid[row][col] == PLAYER_ONE_DISC &&
-					board->_grid[row + 1][col] == PLAYER_ONE_DISC &&
-					board->_grid[row + 2][col] == PLAYER_ONE_DISC &&
-					board->_grid[row + 3][col] == PLAYER_ONE_DISC)
-				{
-					eval = INT_MAX;
-					return eval;
-				}
-
-				else if (board->_grid[row][col] == PLAYER_TWO_DISC &&
-					board->_grid[row + 1][col] == PLAYER_TWO_DISC &&
-					board->_grid[row + 2][col] == PLAYER_TWO_DISC &&
-					board->_grid[row + 3][col] == PLAYER_TWO_DISC)
-				{
-					eval = INT_MIN;
-					return eval;
-				}
-
-				checkThreeInARow(board->_grid[row][col],
-					board->_grid[row + 1][col],
-					board->_grid[row + 2][col],
-					board->_grid[row + 3][col],
-					evalArr);
-
-				checkTwoInARow(board->_grid[row][col],
-					board->_grid[row + 1][col],
-					board->_grid[row + 2][col],
-					board->_grid[row + 3][col],
-					evalArr);
-
-				checkOneInARow(board->_grid[row][col],
-					board->_grid[row + 1][col],
-					board->_grid[row + 2][col],
-					board->_grid[row + 3][col],
-					evalArr);
-			}
-
-			if (checkConditionPosDiag(row, col, width))
-			{
-				if (board->_grid[row][col] == PLAYER_ONE_DISC &&
-					board->_grid[row - 1][col + 1] == PLAYER_ONE_DISC &&
-					board->_grid[row - 2][col + 2] == PLAYER_ONE_DISC &&
-					board->_grid[row - 3][col + 3] == PLAYER_ONE_DISC)
-				{
-					eval = INT_MAX;
-					return eval;
-				}
-
-				else if (board->_grid[row][col] == PLAYER_TWO_DISC &&
-					board->_grid[row - 1][col + 1] == PLAYER_TWO_DISC &&
-					board->_grid[row - 2][col + 2] == PLAYER_TWO_DISC &&
-					board->_grid[row - 3][col + 3] == PLAYER_TWO_DISC)
-				{
-					eval = INT_MIN;
-					return eval;
-				}
-
-				checkThreeInARow(board->_grid[row][col],
-					board->_grid[row - 1][col + 1],
-					board->_grid[row - 2][col + 2],
-					board->_grid[row - 3][col + 3],
-					evalArr);
-
-				checkTwoInARow(board->_grid[row][col],
-					board->_grid[row - 1][col + 1],
-					board->_grid[row - 2][col + 2],
-					board->_grid[row - 3][col + 3],
-					evalArr);
-
-				checkOneInARow(board->_grid[row][col],
-					board->_grid[row - 1][col + 1],
-					board->_grid[row - 2][col + 2],
-					board->_grid[row - 3][col + 3],
-					evalArr);
-			}
-
-			if (checkConditionNegDiag(row, col, height, width))
-			{
-				if (board->_grid[row][col] == PLAYER_ONE_DISC &&
-					board->_grid[row + 1][col + 1] == PLAYER_ONE_DISC &&
-					board->_grid[row + 2][col + 2] == PLAYER_ONE_DISC &&
-					board->_grid[row + 3][col + 3] == PLAYER_ONE_DISC)
-				{
-					eval = INT_MAX;
-					return eval;
-				}
-
-				else if (board->_grid[row][col] == PLAYER_TWO_DISC &&
-					board->_grid[row + 1][col + 1] == PLAYER_TWO_DISC &&
-					board->_grid[row + 2][col + 2] == PLAYER_TWO_DISC &&
-					board->_grid[row + 3][col + 3] == PLAYER_TWO_DISC)
-				{
-					eval = INT_MIN;
-					return eval;
-				}
-
-				checkThreeInARow(board->_grid[row][col],
-					board->_grid[row + 1][col + 1],
-					board->_grid[row + 2][col + 2],
-					board->_grid[row + 3][col + 3],
-					evalArr);
-
-				checkTwoInARow(board->_grid[row][col],
-					board->_grid[row + 1][col + 1],
-					board->_grid[row + 2][col + 2],
-					board->_grid[row + 3][col + 3],
-					evalArr);
-
-				checkOneInARow(board->_grid[row][col],
-					board->_grid[row + 1][col + 1],
-					board->_grid[row + 2][col + 2],
-					board->_grid[row + 3][col + 3],
-					evalArr);
-			}
-		}
+		result = 1;
+		this->_data->_gameOver = true;
 	}
-	eval = THREE_IN_A_ROW_VALUE * evalArr[0] + TWO_IN_A_ROW_VALUE * evalArr[1] + evalArr[2] -
-		THREE_IN_A_ROW_VALUE * evalArr[5] - TWO_IN_A_ROW_VALUE * evalArr[4] - evalArr[3];
-	return eval;
+	if (eval == PLAYER_TWO_WINS)
+	{
+		result = 1;
+		this->_data->_gameOver = true;
+	}
 }
